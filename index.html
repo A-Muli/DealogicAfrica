@@ -146,13 +146,13 @@
             
             <!-- Desktop Navigation Links -->
             <nav class="hidden lg:flex space-x-8 text-lg font-medium h-full items-center ml-auto">
-                <!-- Added Active class to Home for initial load -->
-                <button onclick="navigate('home')" class="nav-link py-1 hover:text-accent transition duration-150 active text-primary" data-page="home">Home</button>
-                <button onclick="navigate('about')" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="about">About Us</button>
-                <button onclick="navigate('services')" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="services">Services</button>
-                <button onclick="navigate('blog')" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="blog">Insights</button>
-                <button onclick="navigate('contact')" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="contact">Contact</button>
+                <a href="index.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Home</a>
+                <a href="about.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">About Us</a>
+                <a href="services/services.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Services</a>
+                <a href="blog/blog.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Insights</a>
+                <a href="contact.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Contact</a>
             </nav>
+
 
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-btn" class="lg:hidden text-primary focus:outline-none p-2 rounded-lg hover:bg-slate-100 transition duration-200">
@@ -162,15 +162,16 @@
 
         <!-- Mobile Menu Drawer Content -->
         <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl transition-all duration-300 ease-in-out">
-            <nav class="flex flex-col space-y-1 p-4 text-center text-lg font-medium">
-                <button onclick="navigate('home')" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="home">Home</button>
-                <button onclick="navigate('about')" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="about">About Us</button>
-                <button onclick="navigate('services')" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="services">Services</button>
-                <button onclick="navigate('blog')" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="blog">Insights/Blog</button>
-                <button onclick="navigate('contact')" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="contact">Contact Us</button>
-                <!-- NOTE: "Book a Consult" button remains removed as requested. -->
-            </nav>
+        <nav class="flex flex-col space-y-1 p-4 text-center text-lg font-medium">
+            <a href="index.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Home</a>
+            <a href="about.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">About Us</a>
+            <a href="services/services.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Services</a>
+            <a href="blog/blog.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Insights</a>
+            <a href="contact.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Contact</a>
+
+        </nav>
         </div>
+
     </header>
 
     <!-- --- 5. MAIN CONTENT AREA & TOAST CONTAINER --- -->
@@ -181,19 +182,13 @@
     <!-- Toast Notification Container (Fixed position for user feedback) -->
     <div id="toast-container"></div>
 
-    <!-- --- 6. FOOTER --- -->
-    <footer class="bg-primary text-white py-12 mt-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center text-sm text-slate-400">
-                &copy; 2024 Dealogic Microfinance. All rights reserved.
-            </div>
-        </div>
-    </footer>
+   
+
 
 
     <!-- --- 7. PAGE TEMPLATES (Hidden HTML content injected by JS Router) --- -->
 
-    <!-- 7.1. HOME PAGE TEMPLATE (Figma Redesign) -->
+   
     <div id="template-home" class="hidden">
         
         <!-- FRAME: HERO SECTION (Animated Background - Dynamic Flow Graphic) -->
@@ -224,82 +219,66 @@
                 </div>
             </div>
         </section>
-
-        <!-- FRAME 5: ABOUT US / BRAND STORY (NEW LAYOUT based on User's image) -->
-        <section class="py-20 bg-white">
+       <!--About us section -->
+        <section class="py-20 bg-light-bg relative overflow-hidden">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                    
-                    <!-- COLUMN 1 (LEFT) - Brand Intro & Image -->
-                    <div class="lg:col-span-1 space-y-6">
-                        
-                        <!-- Learn More About Brand Container -->
-                        <div class="p-8 bg-primary/10 rounded-3xl-custom border-2 border-primary/20 shadow-md" data-aos="fade-up">
-                            <h3 class="text-2xl font-bold text-primary mb-3">Learn More About Brand</h3>
-                            <p class="text-gray-700 mb-4">
-                                Dealogic is built on the philosophy that robust finance is the bedrock of micro-enterprise resilience. We are committed to fueling ambition with engineered capital solutions, moving beyond mere lending to true partnership.
-                            </p>
-                            <!-- Learn More button navigates to the 'about' page/template -->
-                            <button onclick="navigate('about')" class="bg-accent text-white font-semibold py-2 px-6 rounded-xl hover:bg-accent/80 transition duration-300">
-                                Read Our Full Story &rarr;
-                            </button>
-                        </div>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
 
-                        <!-- Image Relating to Brand (Large Container) -->
-                        <div class="rounded-3xl-custom h-96 bg-gray-200 overflow-hidden shadow-xl" data-aos="fade-up" data-aos-delay="100">
-                            <!-- Placeholder Image -->
-                            <img src="https://placehold.co/400x500/20175D/ffffff?text=Company+Photo" alt="Image relating to brand" class="w-full h-full object-cover opacity-90">
+                    <div class="lg:col-span-2 lg:mr-[-100px] relative z-20">
+                        
+                        <div class="p-8 lg:p-12 bg-white rounded-3xl-custom shadow-xl border border-gray-100 
+                                    bg-gradient-to-br from-white via-white to-indigo-50/70" 
+                            data-aos="fade-right" 
+                            data-aos-delay="50">
+                            
+                            <p class="text-sm font-semibold text-accent uppercase mb-3">Who We Are</p>
+                            <h2 class="text-3xl lg:text-4xl font-extrabold text-primary mb-5">
+                                Beyond Loans: The Architects of MSME Scale-Up.
+                            </h2>
+                            
+                            <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                                In a world where capital often comes with rigid, limiting terms, Dealogic Microfinance is the **strategic anomaly**. We don't just lend; we **engineer capital structures**—aligning bespoke financing with your most ambitious growth objectives. If you've been overlooked by big banks but have a resilient, scalable business model, **you need to talk to us.** We turn potential into engineered performance.
+                            </p>
+                            
+                            <div class="flex space-x-8 mt-8">
+                                <div class="text-left">
+                                    <p class="text-4xl font-extrabold text-accent">
+                                        <span class="counter" data-target="10" data-is-years="true">0+</span>
+                                    </p>
+                                    <p class="text-sm text-gray-500">Years in Service</p>
+                                </div>
+                                
+                                <a href="about.html" class="btn-primary flex items-center justify-center sm:w-auto self-end">
+                                    Learn More &rarr;
+                                </a>
+                            </div>
+
+                            <div class="mt-10 pt-6 border-t border-gray-200">
+                                <h3 class="text-xl font-bold text-primary mb-4">Our Core Values</h3>
+                                <div class="grid grid-cols-2 gap-4 text-sm font-medium text-gray-700">
+                                    <p class="flex items-center space-x-2">${getIcon('checkCircle', 'w-5 h-5', '#B60C1E')}<span>Structural Integrity</span></p>
+                                    <p class="flex items-center space-x-2">${getIcon('checkCircle', 'w-5 h-5', '#B60C1E')}<span>Engineered Growth</span></p>
+                                    <p class="flex items-center space-x-2">${getIcon('checkCircle', 'w-5 h-5', '#B60C1E')}<span>Entrepreneur Focus</span></p>
+                                    <p class="flex items-center space-x-2">${getIcon('checkCircle', 'w-5 h-5', '#B60C1E')}<span>Transparent Dealings</span></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- COLUMN 2 & 3 (RIGHT) - Company Details, Values, Experience -->
-                    <div class="lg:col-span-2 space-y-8">
-                        
-                        <!-- About Our Company Title and Founding Story -->
-                        <div class="p-0" data-aos="fade-left">
-                            <h2 class="text-4xl font-extrabold text-primary mb-4">About Our Company</h2>
-                            <p class="text-lg text-gray-700 leading-relaxed">
-                                Dealogic Microfinance was founded in 20XX out of the conviction that **MSMEs deserve Tier-1 financial strategy**, not just standard loan products. Our inspiration came from witnessing countless resilient small businesses failing not due to lack of effort, but due to misaligned capital structures. We set out to change that, structuring financing that truly supports long-term growth and market entry for the ambitious entrepreneur.
-                            </p>
-                        </div>
-
-                        <!-- Core Values & Experience Grid -->
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="lg:col-span-1 relative z-10 mt-10 lg:mt-0 lg:-ml-12" data-aos="fade-left" data-aos-delay="200">
+                        <div class="rounded-3xl-custom h-96 lg:h-full bg-primary overflow-hidden shadow-2xl relative">
+                            <img src="images/meeting.jpg" 
+                                onerror="this.onerror=null; this.src='https://placehold.co/400x600/20175D/ffffff?text=Company+meeting';" 
+                                alt="Dealogic Microfinance meeting" 
+                                class="w-full h-full object-cover object-center opacity-80" 
+                                style="filter: grayscale(10%) contrast(1.1); transform: scale(1.05);">
                             
-                            <!-- Core Values Container -->
-                            <div class="p-8 bg-gray-100 rounded-3xl-custom shadow-inner" data-aos="fade-left" data-aos-delay="100">
-                                <h3 class="text-2xl font-bold text-primary mb-4">Core Values</h3>
-                                <ul class="space-y-3 text-gray-700">
-                                    <li class="flex items-start">
-                                        <span class="text-accent mr-3 mt-1">&#x2713;</span>
-                                        <p><strong class="text-primary">Precision:</strong> Engineered solutions, not generalized advice.</p>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="text-accent mr-3 mt-1">&#x2713;</span>
-                                        <p><strong class="text-primary">Partnership:</strong> Aligning our success with yours.</p>
-                                    </li>
-                                    <li class="flex items-start">
-                                        <span class="text-accent mr-3 mt-1">&#x2713;</span>
-                                        <p><strong class="text-primary">Resilience:</strong> Building capital structures that withstand volatility.</p>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <!-- 10+ Years of Experience Container (Animated Counter) -->
-                            <div class="p-8 bg-primary rounded-3xl-custom text-white shadow-xl flex flex-col justify-center" data-aos="fade-left" data-aos-delay="200">
-                                <h3 class="text-lg font-semibold text-slate-200 mb-2">Since Inception</h3>
-                                <!-- Counter for Years of Experience -->
-                                <div class="text-6xl font-extrabold mb-3 counter" data-target="10" data-is-years="true">0+</div>
-                                <p class="text-sm text-slate-300 font-medium">
-                                    <strong class="text-white">Years of Existence</strong> providing specialized, market-leading financial strategy to MSMEs globally.
-                                </p>
-                            </div>
-
+                            <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+</section>
 
 
         <!-- FRAME 6: OUR SERVICES (Renamed to match previous structure) -->
@@ -447,12 +426,13 @@
         </section>
     </div>
 
-    <!-- 7.2. OTHER PAGE TEMPLATES (Simplified for routing integrity) -->
-    <div id="template-about" class="hidden"><section class="py-40 container mx-auto text-center"><h2 class="text-4xl font-bold text-primary">About Us Page</h2><p>Our mission and team details go here.</p></section></div>
-    <div id="template-services" class="hidden"><section class="py-40 container mx-auto text-center"><h2 class="text-4xl font-bold text-primary">Services Page</h2><p>Detailed service offerings here.</p></section></div>
-    <div id="template-blog" class="hidden"><section class="py-40 container mx-auto text-center"><h2 class="text-4xl font-bold text-primary">Insights & Blog</h2><p>Market articles and news here.</p></section></div>
-    <div id="template-contact" class="hidden"><section class="py-40 container mx-auto text-center"><h2 class="text-4xl font-bold text-primary">Contact Page</h2><p>Contact form and details here.</p></section></div>
-
+    <footer class="bg-primary text-white py-12 mt-16">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-sm text-slate-400">
+                &copy; 2024 Dealogic Microfinance. All rights reserved.
+            </div>
+        </div>
+    </footer>
 
     <!-- --- 8. MAIN JAVASCRIPT LOGIC --- -->
     <script>
@@ -713,7 +693,7 @@
                 mesh.geometry.attributes.position.needsUpdate = true;
                 
                 // Subtle rotation on the Z axis to enhance dynamism
-                mesh.rotation.z += 0.0002;
+                mesh.rotation.z += 0.0006;
             }
 
             renderer.render(scene, camera);
