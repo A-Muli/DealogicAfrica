@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dealogic Microfinance - Empowering Growth</title>
+    <title>Dealogic Africa - Strategic Financial Advisory</title>
 
-    <!-- --- 1. GLOBAL SETUP: TAILWIND, AOS, THREE.JS, AND CUSTOM CSS STYLES --- -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     
     <style>
-        /* Define color palette using CSS variables for easy updates */
+        
         :root {
+            /* Brand Colors */
             --color-primary: #20175D; /* Deep Navy Blue (Brand Blue) */
             --color-accent: #B60C1E; /* Rich Red/Maroon (Brand Red) */
             --color-light-bg: #f8f8fa; /* Subtle off-white background */
+            --color-text-dark: #20175D; 
+            --color-text-light: #ffffff;
+            --color-primary-blue: #20175D; 
+            --color-primary-red: #B60C1E; 
+            --font-family-main: 'Inter', sans-serif; 
+            
+            /* Colors for the Sphere/Wireframe effect in the Hero */
+            --wireframe-color-white: #ffffff;
+            --sphere-body-color: #B60C1E;
         }
         
         /* Utility classes using variables */
@@ -24,6 +34,7 @@
         .text-primary { color: var(--color-primary); }
         .bg-accent { background-color: var(--color-accent); }
         .text-accent { color: var(--color-accent); }
+        .bg-color-light-bg { background-color: var(--color-light-bg); } 
         
         body { font-family: 'Inter', sans-serif; background-color: var(--color-light-bg); }
 
@@ -50,39 +61,60 @@
             border-bottom: 3px solid var(--color-accent); 
             padding-bottom: 4px; 
         }
-
-        /* Hero Canvas Styling - Full screen, low opacity for background effect */
-        #hero-canvas { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: 1; 
-            opacity: 0.4; /* Slightly increased opacity for visibility */
-        }
-        /* UPDATED: Changed alignment logic for centered text on mobile, right on desktop */
-        .hero-content { 
-            position: relative; 
-            z-index: 10; 
-            padding-top: 15vh; 
-            padding-bottom: 15vh; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
-        } 
         
-        /* Specific rounded corners for the Figma design */
+        /* --- Mission Section Specific CSS (Retained) --- */
+        #our-mission {
+            padding: 50px 20px;
+            background-color: #ffffff;
+        }
+
+        .mission-container {
+            max-width: 1427px;
+            margin: 0 auto;
+            grid-template-columns: 733fr 617fr; 
+            gap: 77px; 
+            align-items: start;
+        }
+
+        @media (min-width: 1024px) {
+             .mission-container {
+                 display: grid;
+             }
+             .lg\:text-left { text-align: left; }
+             .lg\:justify-start { justify-content: flex-start; }
+             .lg\:mx-0 { margin-left: 0; margin-right: 0; }
+        }
+        
+        .mission-features { display: flex; flex-direction: column; gap: 58px; }
+        .feature-card { position: relative; width: 100%; max-width: 733px; height: 400px; }
+        .feature-card__bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+        .feature-card__bg .bg-shape { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 30px; object-fit: cover; }
+        .card-1 .feature-card__content, .card-2 .feature-card__content, .card-3 .feature-card__content { padding: 22px 40px 0 204px; }
+        .feature-card__content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; padding: 40px 20px !important; }
+        .feature-card__title { margin: 0 0 10px 0; color: var(--color-text-dark); font-weight: 800; font-size: 40px; line-height: 48px; }
+        .feature-card__description { margin: 0; max-width: 529px; color: var(--color-text-dark); font-weight: 600; font-size: 24px; line-height: 29px; }
+        .feature-card__link { margin-top: auto; padding-bottom: 24px; color: var(--color-text-dark); font-weight: 700; font-size: 24px; line-height: 29px; }
+        .mission-main-content { display: flex; flex-direction: column; }
+        .mission-intro { position: relative; padding-left: 6px; }
+        .mission-intro__icon { position: absolute; top: -102px; left: -6px; width: 59px; height: 59px; border: 10px solid var(--color-text-dark); border-radius: 50%; }
+        .mission-intro__title { margin: 0 0 52px 0; color: var(--color-text-dark); font-weight: 800; font-size: 64px; line-height: 77px; }
+        .mission-intro__text { margin: 0; color: var(--color-text-dark); font-weight: 600; font-size: 30px; line-height: 36px; }
+        .mission-image-section { position: relative; margin-top: 51px; width: 100%; max-width: 611px; height: 697px; }
+        .mission-image { width: 100%; height: 100%; object-fit: cover; border-radius: 30px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); transform: rotate(180deg); }
+        .image-overlay-card { position: absolute; right: 0px; bottom: 0px; width: 299px; height: 203px; padding: 16px 29px 22px 26px; background-color: var(--color-primary-blue); border-radius: 30px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); color: var(--color-text-light); display: flex; flex-direction: column; justify-content: space-between; }
+        .image-overlay-card__text { margin: 0; font-weight: 800; font-size: 23px; line-height: 28px; }
+        .image-overlay-card__link { color: var(--color-primary-red); font-weight: 600; font-size: 24px; line-height: 29px; }
         .rounded-3xl-custom { border-radius: 1.5rem; }
+
+        /* REMOVED .hero-section CUSTOM CSS TO USE TAILWIND UTILITIES */
 
     </style>
 </head>
 <body class="text-gray-800">
 
-    <!-- --- 2. JAVASCRIPT UTILITY FUNCTIONS: ICON HELPER --- -->
     <script>
-        // Helper function to easily inject SVG icons (like Lucide icons)
+        // --- Utility Functions (Icons & Navigation) ---
+
         function getIcon(name, classes = "w-6 h-6", stroke = "currentColor") {
             const icons = {
                 home: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
@@ -97,628 +129,530 @@
             };
             return icons[name] || '';
         }
-    </script>
 
-    <!-- --- 3. FIREBASE/AUTH/FIRESTORE SETUP (Minimal for demonstration) --- -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // NOTE: Changed ASSET_PATH from 'assets' to 'images' for consistency with previous responses/code
+        const ASSET_PATH = 'images'; 
 
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        let app, db, auth;
-
-        async function initializeFirebase() {
-            try {
-                if (firebaseConfig) {
-                    app = initializeApp(firebaseConfig);
-                    db = getFirestore(app);
-                    setLogLevel('Debug');
-                    auth = getAuth(app);
-
-                    if (initialAuthToken) {
-                        await signInWithCustomToken(auth, initialAuthToken);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } else {
-                    console.warn("Firebase config not found. Running application without persistent storage.");
-                }
-            } catch (error) {
-                console.error("Firebase initialization failed:", error);
-            }
+        // Placeholder Navigation Function
+        function navigate(path) {
+            console.log(`Navigating to: ${path}`);
         }
-        initializeFirebase();
-        window.getFirestore = getFirestore;
-    </script>
-
-    <!-- --- 4. HEADER & NAVIGATION (Sticky) --- -->
-    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg transition-all duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            
-            <!-- Logo (Resized to h-14) -->
-            <div class="flex items-center space-x-2">
-                <img src="images/logo.jpeg" onerror="this.onerror=null; this.src='https://placehold.co/150x40/20175D/ffffff?text=LOGO';" alt="Dealogic Microfinance Logo" class="h-14 w-auto">
-                <span class="text-xl font-light text-accent hidden sm:inline">Microfinance</span>
-            </div>
-            
-            <!-- Desktop Navigation Links -->
-            <nav class="hidden lg:flex space-x-8 text-lg font-medium h-full items-center ml-auto">
-                <a href="index.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Home</a>
-                <a href="about.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">About Us</a>
-                <a href="services/services.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Services</a>
-                <a href="blog/blog.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Insights</a>
-                <a href="contact.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Contact</a>
-            </nav>
-
-
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="lg:hidden text-primary focus:outline-none p-2 rounded-lg hover:bg-slate-100 transition duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Drawer Content -->
-        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl transition-all duration-300 ease-in-out">
-        <nav class="flex flex-col space-y-1 p-4 text-center text-lg font-medium">
-            <a href="index.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Home</a>
-            <a href="about.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">About Us</a>
-            <a href="services/services.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Services</a>
-            <a href="blog/blog.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Insights</a>
-            <a href="contact.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Contact</a>
-
-        </nav>
-        </div>
-
-    </header>
-
-    <!-- --- 5. MAIN CONTENT AREA & TOAST CONTAINER --- -->
-    <main id="content-area" class="pt-24 min-h-screen">
-        <!-- Content will be dynamically injected here by the JavaScript router -->
-    </main>
-
-    <!-- Toast Notification Container (Fixed position for user feedback) -->
-    <div id="toast-container"></div>
-
-   
-
-
-
-    <!-- --- 7. PAGE TEMPLATES (Hidden HTML content injected by JS Router) --- -->
-
-   
-    <div id="template-home" class="hidden">
         
-        <!-- FRAME: HERO SECTION (Animated Background - Dynamic Flow Graphic) -->
-        <section class="relative bg-primary overflow-hidden h-screen -mt-24">
-            <!-- Three.js Canvas for Animated Background -->
-            <canvas id="hero-canvas"></canvas>
-
-            <!-- Hero Content: UPDATED for Right-Aligned CTAs and adjusted font size -->
-            <div class="hero-content flex flex-col justify-center h-full relative z-10 container mx-auto px-4 text-center lg:text-right">
-                <div class="max-w-4xl mx-auto lg:ml-auto lg:mr-0">
-                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-snug tracking-tighter" data-aos="fade-left">
-                        <span class="text-accent block text-4xl lg:text-5xl">STRATEGIC FINANCE PARTNER</span>
-                        WE ENGINEER YOUR NEXT GROWTH STAGE.
-                    </h1>
-                    
-                    <!-- Subtitle and Separator Block -->
-                    <div class="mt-8 pt-4 border-t border-white/20">
-                        <p class="max-w-3xl text-lg sm:text-xl text-slate-200 lg:ml-auto" data-aos="fade-left" data-aos-delay="200">
-                            If you're looking for expert **capital structuring** and advisory for your MSME, **you've found the market leader.**
-                        </p>
-                    </div>
-
-                    <!-- CTA Buttons (Right Aligned on Desktop) -->
-                    <div class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center lg:justify-end" data-aos="fade-left" data-aos-delay="400">
-                        <button onclick="navigate('contact')" class="btn-primary text-lg px-8 py-3 shadow-xl">Get a Free Valuation</button>
-                        <button onclick="navigate('services')" class="bg-white/10 text-white border border-white/30 hover:bg-white/20 transition duration-300 text-lg px-8 py-3 rounded-xl font-semibold shadow-md">Our Expertise &rarr;</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-       <!--About us section -->
-        <section class="py-20 bg-light-bg relative overflow-hidden">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
-
-                    <div class="lg:col-span-2 lg:mr-[-100px] relative z-20">
-                        
-                        <div class="p-8 lg:p-12 bg-white rounded-3xl-custom shadow-xl border border-gray-100 
-                                    bg-gradient-to-br from-white via-white to-indigo-50/70" 
-                            data-aos="fade-right" 
-                            data-aos-delay="50">
-                            
-                            <p class="text-sm font-semibold text-accent uppercase mb-3">Who We Are</p>
-                            <h2 class="text-3xl lg:text-4xl font-extrabold text-primary mb-5">
-                                Beyond Loans: The Architects of MSME Scale-Up.
-                            </h2>
-                            
-                            <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                                In a world where capital often comes with rigid, limiting terms, Dealogic Microfinance is the **strategic anomaly**. We don't just lend; we **engineer capital structures**—aligning bespoke financing with your most ambitious growth objectives. If you've been overlooked by big banks but have a resilient, scalable business model, **you need to talk to us.** We turn potential into engineered performance.
-                            </p>
-                            
-                            <div class="flex space-x-8 mt-8">
-                                <div class="text-left">
-                                    <p class="text-4xl font-extrabold text-accent">
-                                        <span class="counter" data-target="10" data-is-years="true">0+</span>
-                                    </p>
-                                    <p class="text-sm text-gray-500">Years in Service</p>
-                                </div>
-                                
-                                <a href="about.html" class="btn-primary flex items-center justify-center sm:w-auto self-end">
-                                    Learn More &rarr;
-                                </a>
-                            </div>
-
-                            <div class="mt-10 pt-6 border-t border-gray-200">
-                                <h3 class="text-xl font-bold text-primary mb-4">Our Core Values</h3>
-                                <div class="grid grid-cols-2 gap-4 text-sm font-medium text-gray-700">
-                                    <p class="flex items-center space-x-2">${getIcon('checkCircle', 'w-5 h-5', '#B60C1E')}<span>Structural Integrity</span></p>
-                                    <p class="flex items-center space-x-2">${getIcon('checkCircle', 'w-5 h-5', '#B60C1E')}<span>Engineered Growth</span></p>
-                                    <p class="flex items-center space-x-2">${getIcon('checkCircle', 'w-5 h-5', '#B60C1E')}<span>Entrepreneur Focus</span></p>
-                                    <p class="flex items-center space-x-2">${getIcon('checkCircle', 'w-5 h-5', '#B60C1E')}<span>Transparent Dealings</span></p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-1 relative z-10 mt-10 lg:mt-0 lg:-ml-12" data-aos="fade-left" data-aos-delay="200">
-                        <div class="rounded-3xl-custom h-96 lg:h-full bg-primary overflow-hidden shadow-2xl relative">
-                            <img src="images/meeting.jpg" 
-                                onerror="this.onerror=null; this.src='https://placehold.co/400x600/20175D/ffffff?text=Company+meeting';" 
-                                alt="Dealogic Microfinance meeting" 
-                                class="w-full h-full object-cover object-center opacity-80" 
-                                style="filter: grayscale(10%) contrast(1.1); transform: scale(1.05);">
-                            
-                            <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-</section>
-
-
-        <!-- FRAME 6: OUR SERVICES (Renamed to match previous structure) -->
-        <section class="py-20 bg-color-light-bg">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl font-bold text-center text-primary mb-12" data-aos="fade-up">Our Services</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Card 1: Capital Raising -->
-                    <div class="p-8 bg-white rounded-3xl-custom shadow-xl card-hover" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="text-accent mb-4">${getIcon('dollarSign', 'w-10 h-10')}</div>
-                        <h3 class="text-2xl font-semibold text-primary mb-3">Capital Raising</h3>
-                        <p class="text-gray-600">Accessing the right financing—debt, equity, or mezzanine—for sustainable growth.</p>
-                    </div>
-
-                    <!-- Card 2: M&A Advisory -->
-                    <div class="p-8 bg-white rounded-3xl-custom shadow-xl card-hover" data-aos="zoom-in" data-aos-delay="200">
-                        <div class="text-accent mb-4">${getIcon('users', 'w-10 h-10')}</div>
-                        <h3 class="text-2xl font-semibold text-primary mb-3">M&A Advisory</h3>
-                        <p class="text-gray-600">Expert guidance on mergers, acquisitions, and restructuring to maximize value.</p>
-                    </div>
-
-                    <!-- Card 3: Strategy & Structuring -->
-                    <div class="p-8 bg-white rounded-3xl-custom shadow-xl card-hover" data-aos="zoom-in" data-aos-delay="300">
-                        <div class="text-accent mb-4">${getIcon('target', 'w-10 h-10')}</div>
-                        <h3 class="text-2xl font-semibold text-primary mb-3">Strategy & Structuring</h3>
-                        <p class="text-gray-600">Developing robust capital structures and long-term financial strategies.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FRAME 7: DEEP DIVE: STRATEGIC SOLUTIONS (Red and Blue Blocks) -->
-        <section class="py-20 bg-primary/95">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    
-                    <!-- Left: Strategy Highlights (List) -->
-                    <div class="space-y-6" data-aos="fade-right">
-                        <h2 class="text-4xl font-bold text-white mb-6">Our Strategy in Practice</h2>
-                        <div class="p-6 bg-white/10 text-white rounded-3xl-custom">
-                            <h3 class="text-2xl font-semibold mb-2">Risk Mitigation</h3>
-                            <p class="text-slate-200">Stress-testing models to ensure capital longevity in volatile market conditions.</p>
-                        </div>
-                        <div class="p-6 bg-white/10 text-white rounded-3xl-custom">
-                            <h3 class="text-2xl font-semibold mb-2">Regulatory Compliance</h3>
-                            <p class="text-slate-200">Ensuring all financial moves are compliant with international and local frameworks.</p>
-                        </div>
-                        <div class="p-6 bg-white/10 text-white rounded-3xl-custom">
-                            <h3 class="text-2xl font-semibold mb-2">Sustainable Growth Focus</h3>
-                            <p class="text-slate-200">Prioritizing investment that offers long-term, scalable returns over quick fixes.</p>
-                        </div>
-                    </div>
-
-                    <!-- Right: Visual Blocks (Red/Blue Figma Style) -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" data-aos="fade-left">
-                        <!-- Top-Right Paragraph Block (Red) -->
-                        <div class="col-span-1 sm:col-span-2 p-6 bg-accent rounded-3xl-custom text-white">
-                            <h3 class="text-xl font-bold mb-3">Customized Deal Structuring</h3>
-                            <p class="text-sm">Every client receives a capital structure engineered precisely for their operational profile and risk tolerance. We don't believe in one-size-fits-all financing.</p>
-                        </div>
-                        
-                        <!-- Bottom-Left Image Placeholder -->
-                        <div class="bg-gray-700 rounded-3xl-custom relative overflow-hidden">
-                            <img src="https://placehold.co/400x300/ef4444/ffffff?text=Strategy+Photo" alt="Strategy" class="w-full h-full object-cover opacity-80">
-                        </div>
-                        
-                        <!-- Bottom-Right CTA Block (Primary Blue) -->
-                        <div class="p-6 bg-primary rounded-3xl-custom text-white flex flex-col justify-between">
-                            <h4 class="text-2xl font-bold mb-4">Ready to Talk Strategy?</h4>
-                            <button onclick="navigate('contact')" class="bg-accent text-white font-bold py-3 px-6 rounded-xl hover:bg-accent/80 transition duration-300">Start Project &rarr;</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FRAME 8: WHO WE HAVE WORKED WITH (Partners/Clients) -->
-        <section class="py-20 bg-white">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-gray-100 p-8 rounded-3xl-custom shadow-inner text-center" data-aos="fade-up">
-                    <h2 class="text-3xl font-bold text-primary mb-8">Who We Have Worked With</h2>
-                    <div class="flex flex-wrap justify-center items-center gap-6">
-                        <!-- Partner Tags (Figma style) -->
-                        <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">Client Name 1</div>
-                        <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">FinTech Partner</div>
-                        <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">Regional Bank X</div>
-                        <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">MSME Fund A</div>
-                        <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">Investment Firm</div>
-                        <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">Startup Z</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FRAME 9: IMPACT AND TESTIMONIALS -->
-        <section class="py-20 bg-color-light-bg">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                    
-                    <!-- Left: Stats and Title -->
-                    <div class="lg:col-span-1 space-y-6" data-aos="fade-right">
-                        <h2 class="text-5xl font-extrabold text-primary leading-tight">Hear from our clients</h2>
-                        
-                        <!-- Stat 1 (Green Box) -->
-                        <div class="p-6 bg-green-600 rounded-3xl-custom text-white shadow-xl">
-                            <div class="text-4xl font-extrabold mb-1 counter" data-target="98" data-is-years="false">0%</div>
-                            <p class="text-sm font-medium">Client Success Rate</p>
-                        </div>
-
-                        <!-- Stat 2 (Green Box) -->
-                        <div class="p-6 bg-green-700 rounded-3xl-custom text-white shadow-xl">
-                            <div class="text-4xl font-extrabold mb-1 counter" data-target="150" data-is-years="false">0+</div>
-                            <p class="text-sm font-medium">Growth Projects Funded</p>
-                        </div>
-                    </div>
-
-                    <!-- Right: Testimonials -->
-                    <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-left">
-                        <!-- Testimonial 1 -->
-                        <div class="p-6 bg-white rounded-3xl-custom shadow-xl card-hover">
-                            <p class="text-gray-600 italic mb-4">"The team's M&A advice was instrumental in our successful exit. They handled the complexity flawlessly."</p>
-                            <p class="font-bold text-primary">- Jane D., Former CEO, RetailTech</p>
-                        </div>
-                        
-                        <!-- Testimonial 2 -->
-                        <div class="p-6 bg-white rounded-3xl-custom shadow-xl card-hover">
-                            <p class="text-gray-600 italic mb-4">"We received capital faster than expected, thanks to their investor network and structured approach."</p>
-                            <p class="font-bold text-primary">- Mike R., Founder, LogiSwift</p>
-                        </div>
-                        
-                        <!-- Testimonial 3 -->
-                        <div class="p-6 bg-white rounded-3xl-custom shadow-xl card-hover">
-                            <p class="text-gray-600 italic mb-4">"Truly bespoke financial engineering. Our new capital structure is perfect for our aggressive scaling plans."</p>
-                            <p class="font-bold text-primary">- Sarah K., CFO, Innovate Corp</p>
-                        </div>
-                        
-                        <!-- Testimonial 4 -->
-                        <div class="p-6 bg-white rounded-3xl-custom shadow-xl card-hover">
-                            <p class="text-gray-600 italic mb-4">"Exceptional clarity and transparency throughout the entire fundraising process."</p>
-                            <p class="font-bold text-primary">- Ben L., Investor</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <footer class="bg-primary text-white py-12 mt-16">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center text-sm text-slate-400">
-                &copy; 2024 Dealogic Microfinance. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
-    <!-- --- 8. MAIN JAVASCRIPT LOGIC --- -->
-    <script>
-        
-        // --- 8.1. GLOBAL STATE AND ROUTING ---
-        const PAGES = ['home', 'about', 'services', 'blog', 'contact'];
+        // --- Router and Navigation Logic ---
         const contentArea = document.getElementById('content-area');
+        const navLinks = document.querySelectorAll('.nav-link');
         const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        let aosInitialized = false;
 
-        function updateActiveNav(page) {
-            document.querySelectorAll('.nav-link').forEach(link => {
+        function updateActiveLink(pageName) {
+            navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('data-page') === page) {
+                if (link.getAttribute('data-page') === pageName) {
                     link.classList.add('active');
                 }
             });
         }
 
-        function navigate(page) {
-            if (!PAGES.includes(page)) {
-                page = 'home';
+        function navigate(targetPage) {
+            let templateId;
+            let pageName = targetPage.split('/').pop().split('.')[0];
+            
+            if (pageName === 'index' || pageName === '') {
+                templateId = 'template-home';
+                pageName = 'home';
+            } else {
+                 // For external pages like 'about.html', 'services/services.html', etc.
+                 window.location.href = targetPage;
+                 return;
             }
 
-            const template = document.getElementById(`template-${page}`).innerHTML;
-            contentArea.innerHTML = template;
+            const template = document.getElementById(templateId);
 
-            updateActiveNav(page);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            if (aosInitialized) {
+            if (template) {
+                contentArea.innerHTML = template.innerHTML;
+                
+                updateActiveLink(pageName);
                 AOS.refresh();
-            } else {
-                AOS.init({ duration: 800, once: true });
-                aosInitialized = true;
-            }
-
-            if (page === 'home') {
-                initCounters();
-                // Ensure Three.js background starts when home page is navigated to
-                if (window.initFluidHeroAnimation) {
-                    window.initFluidHeroAnimation();
+                
+                if (templateId === 'template-home') {
+                    initThreeJSCanvas();
                 }
-            } else {
-                 // Stop the animation loop if we navigate away from home
-                 if (window.stopFluidHeroAnimation) {
-                    window.stopFluidHeroAnimation();
+
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                     mobileMenu.classList.add('hidden');
                 }
             }
-            
-            if (!mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-            }
         }
+    </script>
 
-        // --- 8.2. INTERACTIVE ELEMENTS: TOAST, COUNTERS ---
+    <script type="module">
+        // Firebase imports (retained from template, but logic minimized for standalone demo)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        function showToast(message, type = 'success', duration = 4000) {
-            const container = document.getElementById('toast-container');
-            if (!container) return;
+        const firebaseConfig = null; 
+        const initialAuthToken = null;
 
-            const toast = document.createElement('div');
-            let bgColor = (type === 'error') ? 'bg-red-600' : 'bg-green-600';
-            let iconSvg = (type === 'error') ? getIcon('xCircle', 'w-5 h-5 mr-2 text-white', 'white') : getIcon('checkCircle', 'w-5 h-5 mr-2 text-white', 'white');
-            
-            toast.className = `fixed bottom-4 right-4 p-4 rounded-xl shadow-2xl ${bgColor} text-white mt-3 flex items-center text-sm transition-all duration-500 transform translate-x-full`;
-            toast.innerHTML = `${iconSvg} <span>${message}</span>`;
-            container.appendChild(toast);
-            
-            // Trigger animation
-            setTimeout(() => { toast.style.transform = 'translateX(0)'; }, 10);
-
-            setTimeout(() => {
-                toast.style.transform = 'translateX(100%)';
-                setTimeout(() => toast.remove(), 500);
-            }, duration);
+        async function initializeFirebase() {
+            // Initialization logic removed for brevity in this response
         }
-        window.showToast = showToast;
+        initializeFirebase();
+        window.getFirestore = getFirestore; 
+        
+        //  --- UPDATED Three.js Implementation for Dynamic Scanning Line --- 
+        
+        let scene, camera, renderer, mainSphere, scanningLine;
+        let sphereContainer, heroCanvas;
 
-        // Animated Counters for FRAME 5 and FRAME 9
-        function initCounters() {
-            // Select all elements with class 'counter' (general stats) and 'counter-years' (years stat)
-            const counters = document.querySelectorAll('.counter');
-            
-            const animateCounter = (el) => {
-                const target = parseInt(el.getAttribute('data-target'));
-                const isPercentage = el.getAttribute('data-is-years') === 'false' && el.textContent.includes('%');
-                const isYears = el.getAttribute('data-is-years') === 'true'; // New attribute for 10+ years
-                const duration = 2000;
-                let startTime = null;
+        const ACCENT_COLOR_RED = new THREE.Color(0xB60C1E); // Red (Used for scanning line)
+        const PRIMARY_COLOR_BLUE = new THREE.Color(0x20175D); // Blue (Used for sphere body)
+        const LIGHT_COLOR = new THREE.Color(0xFFFFFF); // White (Wireframe)
+        
+        // Define the sphere radius once
+        const sphereRadius = 1.5;
+        
+        // Shader code for the scanning line (uses simple sine wave for movement)
+        const lineVertexShader = `
+            uniform float time;
+            uniform float scanSpeed;
+            uniform float lineLength;
+            attribute float linePhase;
+            attribute float lineIndex;
+            varying float vOpacity;
+            void main() {
+                // Calculate position on the line based on time and index
+                float currentPhase = mod(linePhase + time * scanSpeed, 1.0);
+                
+                // Fade effect: the center of the line is bright, fading towards the edges
+                float positionInLine = abs(currentPhase - lineIndex);
+                vOpacity = smoothstep(0.0, lineLength, positionInLine) * 0.7; // Smooth fade and max opacity 0.7
 
-                const step = (timestamp) => {
-                    if (!startTime) startTime = timestamp;
-                    const progress = timestamp - startTime;
-                    const percentage = Math.min(progress / duration, 1);
-                    const current = Math.floor(percentage * target);
-                    
-                    let text = current.toString();
-                    if (isPercentage) {
-                        text += '%';
-                    } else if (target > 100 || isYears) {
-                        // For 10+ years, show '+', and for 150+ funded projects, show '+'
-                        text += '+'; 
-                    }
-
-                    el.textContent = text;
-
-                    if (percentage < 1) {
-                        window.requestAnimationFrame(step);
-                    }
-                };
-                window.requestAnimationFrame(step);
-            };
-            
-            // Use Intersection Observer to trigger counter animation when visible
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateCounter(entry.target);
-                        observer.unobserve(entry.target); 
-                    }
-                });
-            }, { threshold: 0.5 }); 
-
-            counters.forEach(counter => {
-                observer.observe(counter);
-            });
-        }
-
-        // --- 8.3. THREE.JS DYNAMIC FLOW BACKGROUND LOGIC ---
-        let scene, camera, renderer, mesh, animationFrameId;
-        const initialPositions = []; // Store initial vertex positions for warping
-        const clock = new THREE.Clock();
-
-        function initFluidHeroAnimation() {
-            const container = document.getElementById('hero-canvas');
-            if (!container) return; 
-
-            // Clean up previous instance
-            if (renderer) {
-                if(renderer.domElement.parentNode === container) {
-                    container.removeChild(renderer.domElement);
+                // Only show a segment (the line)
+                if (currentPhase > lineIndex && currentPhase < lineIndex + lineLength) {
+                    vOpacity = 1.0 - smoothstep(0.0, lineLength, currentPhase - lineIndex);
+                } else {
+                    vOpacity = 0.0;
                 }
-                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                
+                // Base vertex calculations
+                vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+                gl_PointSize = 2.0; // Size of the dots in the line
+                gl_Position = projectionMatrix * mvPosition;
+            }
+        `;
+
+        const lineFragmentShader = `
+            uniform vec3 color;
+            varying float vOpacity;
+            void main() {
+                // Circular points for a smoother appearance
+                float r = 0.0;
+                vec2 center = gl_PointCoord - 0.5;
+                r = dot(center, center);
+                if (r > 0.25) { // Clip points outside the circle radius
+                    discard;
+                }
+                
+                // Output color with calculated fading opacity
+                gl_FragColor = vec4(color, vOpacity);
+            }
+        `;
+
+        // Function to create the continuous scanning line effect
+        function createScanningLine() {
+            const numPoints = 1000;
+            const lineGeometry = new THREE.BufferGeometry();
+            const positions = [];
+            const linePhases = [];
+            const lineIndices = [];
+
+            // Generate points on the surface of the sphere (based on polar coordinates)
+            for (let i = 0; i < numPoints; i++) {
+                // Angular coordinates
+                const phi = Math.acos(1 - 2 * i / numPoints); // Latitude
+                const theta = i * 6; // Longitude (spiraling effect)
+                
+                // Convert to Cartesian coordinates on sphere surface
+                const x = sphereRadius * Math.sin(phi) * Math.cos(theta);
+                const y = sphereRadius * Math.sin(phi) * Math.sin(theta);
+                const z = sphereRadius * Math.cos(phi);
+                
+                positions.push(x, y, z);
+                
+                // Normalize index for the line sweep effect (0 to 1)
+                lineIndices.push(i / numPoints); 
+                
+                // Use a different phase offset for spiraling scan
+                linePhases.push(i / numPoints); 
             }
 
-            // Setup Scene and Renderer
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-            renderer = new THREE.WebGLRenderer({ canvas: container, alpha: true, antialias: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setClearColor(0x20175D, 0); 
-            
-            // Responsive Handling
-            const handleResize = () => {
-                camera.aspect = container.clientWidth / container.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(container.clientWidth, container.clientHeight);
-            };
-            window.addEventListener('resize', handleResize);
-            container.resizeHandler = handleResize; 
+            lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+            lineGeometry.setAttribute('linePhase', new THREE.Float32BufferAttribute(linePhases, 1));
+            lineGeometry.setAttribute('lineIndex', new THREE.Float32BufferAttribute(lineIndices, 1));
 
-            // Lights: Brighter setup for visibility
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-            scene.add(ambientLight);
-            
-            const directionalLight1 = new THREE.DirectionalLight(0xB60C1E, 1.5); // Rich Red light
-            directionalLight1.position.set(50, 50, 50);
-            scene.add(directionalLight1);
-
-            const directionalLight2 = new THREE.DirectionalLight(0x4A6CEF, 1.2); // Brighter Blue light
-            directionalLight2.position.set(-50, -50, -50);
-            scene.add(directionalLight2);
-
-
-            // Geometry: Large, highly segmented plane for smooth waves
-            const geometry = new THREE.PlaneGeometry(300, 300, 150, 150);
-            geometry.rotateX(-Math.PI / 2); // Lay it flat
-
-            // Material: Use basic material for bright wireframe effect
-            const material = new THREE.MeshBasicMaterial({
-                color: 0x4A6CEF, // Bright blue lines
-                wireframe: true,
+            const lineMaterial = new THREE.ShaderMaterial({
+                uniforms: {
+                    color: { value: ACCENT_COLOR_RED },
+                    time: { value: 0.0 },
+                    scanSpeed: { value: 0.2 }, // How fast the line sweeps (0.1 is moderate)
+                    lineLength: { value: 0.15 }, // Length of the visible line segment (0.15 is 15% of the sphere circumference)
+                },
+                vertexShader: lineVertexShader,
+                fragmentShader: lineFragmentShader,
                 transparent: true,
-                opacity: 0.8
+                blending: THREE.AdditiveBlending, // Makes the glow effect stronger
+                depthTest: false, // Ensures the line is always visible over the sphere body
             });
+            
+            const line = new THREE.Points(lineGeometry, lineMaterial);
+            return line;
+        }
 
-            mesh = new THREE.Mesh(geometry, material);
-            scene.add(mesh);
 
-            // Store initial vertex positions for deformation
-            initialPositions.length = 0;
-            const positions = mesh.geometry.attributes.position.array;
-            for (let i = 0; i < positions.length; i += 3) {
-                initialPositions.push({
-                    x: positions[i],
-                    y: positions[i + 1],
-                    z: positions[i + 2]
-                });
+        function initThreeJSCanvas() {
+            if (renderer) {
+                renderer.dispose();
             }
-            mesh.geometry.attributes.position.original = initialPositions;
+            
+            sphereContainer = document.getElementById('sphere-container');
+            heroCanvas = document.getElementById('hero-canvas');
+            
+            if (!sphereContainer || !heroCanvas) {
+                return;
+            }
+            
+            const width = sphereContainer.clientWidth;
+            const height = sphereContainer.clientHeight;
 
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+            
+            camera.position.z = 3.5;
+            camera.position.y = 0;
+            camera.position.x = 0;
 
-            // Initial Camera Position: Angled view for "top to bottom" perspective
-            camera.position.set(0, 50, 50); 
-            camera.lookAt(0, 0, -50); 
-            camera.far = 1000;
-            camera.updateProjectionMatrix();
+            renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            
+            // Sphere Parameters
+            const sphereSegments = 32;
+
+            // 1. Main Sphere (Blue, semi-transparent body)
+            const geometry = new THREE.SphereGeometry(sphereRadius, sphereSegments, sphereSegments); 
+            
+            const material = new THREE.MeshPhongMaterial({ 
+                color: PRIMARY_COLOR_BLUE, 
+                shininess: 80,
+                transparent: true,
+                opacity: 0.85,
+            });
+            mainSphere = new THREE.Mesh(geometry, material);
+            scene.add(mainSphere);
+
+            // 2. White Lines (Static Wireframe)
+            const wireframeMaterial = new THREE.LineBasicMaterial({ color: LIGHT_COLOR, linewidth: 1, transparent: true, opacity: 0.3 }); 
+            const wireframe = new THREE.WireframeGeometry(geometry);
+            const line = new THREE.LineSegments(wireframe, wireframeMaterial);
+            mainSphere.add(line); 
+            
+            // 3. Dynamic Scanning Line (Red/Accent) - The new feature
+            scanningLine = createScanningLine();
+            mainSphere.add(scanningLine); 
+
+            // --- Lighting ---
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); 
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 5, 5); 
+            scene.add(directionalLight);
+            
+            // Save start time for uniform animation
+            const startTime = performance.now();
+
+            // --- Animation Loop ---
+            function animate(time) {
+                requestAnimationFrame(animate);
+                
+                const elapsedTime = (time - startTime) * 0.001; // Convert to seconds
+                
+                // Sphere rotation
+                mainSphere.rotation.y += 0.005; 
+                
+                // Update the time uniform for the scanning line shader
+                if (scanningLine) {
+                    scanningLine.material.uniforms.time.value = elapsedTime;
+                }
+                
+                renderer.render(scene, camera);
+            }
 
             animate();
+
+            // Handle Resize
+            window.removeEventListener('resize', onWindowResize, false);
+            window.addEventListener('resize', onWindowResize, false);
         }
 
-        // Function to stop the animation loop when navigating away
-        function stopFluidHeroAnimation() {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-            }
-            const container = document.getElementById('hero-canvas');
-            if (container && renderer && renderer.domElement) {
-                if(renderer.domElement.parentNode === container) {
-                    container.removeChild(renderer.domElement);
-                }
-                if (container.resizeHandler) {
-                    window.removeEventListener('resize', container.resizeHandler);
-                }
-            }
-            scene = null; camera = null; renderer = null; mesh = null; animationFrameId = null;
+        function onWindowResize() {
+            if (!sphereContainer || !camera || !renderer) return;
+
+            const width = sphereContainer.clientWidth;
+            const height = sphereContainer.clientHeight;
+
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
         }
 
-        function animate() {
-            animationFrameId = requestAnimationFrame(animate);
-            const time = clock.getElapsedTime();
+        // Initialize Three.js and the page once the document is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({
+                duration: 800,
+                once: true,
+            });
+
+            const mainContentArea = document.getElementById('content-area');
+            const homeTemplate = document.getElementById('template-home');
+            if (mainContentArea && homeTemplate) {
+                mainContentArea.innerHTML = homeTemplate.innerHTML;
+                document.querySelector('.nav-link[data-page="home"]').classList.add('active');
+            }
+
+            initThreeJSCanvas();
             
-            if (mesh && mesh.geometry.attributes.position.original) {
-                const positions = mesh.geometry.attributes.position.array;
-                const original = mesh.geometry.attributes.position.original;
-                const waveSpeed = 2.0;
-                const amplitude = 3;
-                const waveFrequency = 0.05;
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-                // Deform the mesh vertices for fluid motion
-                for (let i = 0; i < original.length; i++) {
-                    const i3 = i * 3;
-                    const v = original[i];
-
-                    // 1. Wave moving across X (end to end motion)
-                    let displacement = Math.sin(v.x * waveFrequency + time * waveSpeed) * amplitude;
-                    
-                    // 2. Wave shifting/propagating down Z (top to bottom/depth motion)
-                    displacement += Math.sin(v.z * waveFrequency * 1.5 + time * waveSpeed * 0.7) * amplitude * 0.5;
-
-                    // Apply displacement to the Y coordinate (vertical height)
-                    // v.y is the original y position, which is 0 since the plane is flat on XZ.
-                    positions[i3 + 1] = v.y + displacement;
-                }
-
-                mesh.geometry.attributes.position.needsUpdate = true;
-                
-                // Subtle rotation on the Z axis to enhance dynamism
-                mesh.rotation.z += 0.0006;
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
             }
 
-            renderer.render(scene, camera);
-        }
-        
-        // Expose functions globally for the router to call
-        window.initFluidHeroAnimation = initFluidHeroAnimation;
-        window.stopFluidHeroAnimation = stopFluidHeroAnimation;
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigate(link.getAttribute('href'));
+                });
+            });
 
-
-        // --- 8.4. UI INITIALIZATION & EVENT HANDLERS ---
-
-        // Mobile Menu Toggle
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+            document.querySelectorAll('button[data-target]').forEach(button => {
+                button.addEventListener('click', () => navigate(button.getAttribute('data-target')));
+            });
         });
-
-        // Expose navigation globally for button clicks
-        window.navigate = navigate;
-
-        // Ensure Three.js starts on window load for initial appearance
-        window.onload = function () {
-            navigate('home'); // Load the home page content and start the animation
-        }
-
+        
     </script>
+    
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg transition-all duration-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <img src="images/logo.jpeg" onerror="this.onerror=null; this.src='https://placehold.co/150x40/20175D/ffffff?text=LOGO';" alt="Dealogic Microfinance Logo" class="h-14 w-auto">
+                <span class="text-xl font-light text-accent hidden sm:inline">Microfinance</span>
+            </div>
+            <nav class="hidden lg:flex space-x-8 text-lg font-medium h-full items-center ml-auto">
+                <a href="index.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="home">Home</a>
+                <a href="about.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="about">About Us</a>
+                <a href="services/services.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="services">Services</a>
+                <a href="blog/blog.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="insights">Insights</a>
+                <a href="contact.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="contact">Contact</a>
+            </nav>
+            <button id="mobile-menu-btn" class="lg:hidden text-primary focus:outline-none p-2 rounded-lg hover:bg-slate-100 transition duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl transition-all duration-300 ease-in-out">
+            <nav class="flex flex-col space-y-1 p-4 text-center text-lg font-medium">
+                <a href="index.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="home">Home</a>
+                <a href="about.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="about">About Us</a>
+                <a href="services/services.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="services">Services</a>
+                <a href="blog/blog.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="insights">Insights</a>
+                <a href="contact.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="content-area" class="pt-24 min-h-screen">
+        </main>
+
+    <div id="toast-container"></div>
+    
+    <div id="template-home" class="hidden">
+            
+        <section class="relative overflow-hidden h-screen -mt-24 text-white **bg-gradient-to-br from-red-900 via-red-800 to-blue-900**">
+            <div class="absolute inset-0 bg-black opacity-40"></div>
+            
+            <div class="container mx-auto px-4 relative z-10 h-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 items-center h-full">
+                    
+                    <div class="lg:col-span-6 flex flex-col justify-center h-full py-20 lg:py-0 text-center lg:text-left">
+                        <div class="max-w-xl mx-auto lg:mx-0">
+                            
+                            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight tracking-tighter mb-6" data-aos="fade-right">
+                                Secure Capital. <span class="text-accent">Scale With Confidence</span>.
+                            </h1>
+                            
+                            <div class="mt-4">
+                                <p class="max-w-lg text-xl sm:text-2xl text-slate-200 lg:mx-0 font-medium" data-aos="fade-right" data-aos-delay="300">
+                                    We help growing businesses access the right investors through <b>data-driven capital-raising strategies</b> and deep market insight.
+                                </p>
+                            </div>
+
+                            <div class="mt-12 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center lg:justify-start" data-aos="fade-right" data-aos-delay="500">
+                                <button data-target="contact.html" class="btn-primary text-xl px-10 py-4 shadow-2xl">
+                                    Request Consultation
+                                </button>
+                                <button data-target="services/services.html" class="border-2 border-white/30 text-white hover:bg-white hover:text-red-900 transition duration-300 text-xl px-10 py-4 rounded-xl font-semibold shadow-md">
+                                    Our Services &rarr;
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="sphere-container" class="lg:col-span-6 h-full flex items-center justify-center relative w-full min-h-[400px]" data-aos="zoom-in" data-aos-delay="300">
+                        <canvas id="hero-canvas" class="w-full h-full absolute top-0 left-0"></canvas>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+            <!-- Stats Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-red-900 mb-2">50+</div>
+                    <div class="text-gray-600">Deals Closed</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-red-900 mb-2">$2B+</div>
+                    <div class="text-gray-600">Capital Raised</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-red-900 mb-2">15+</div>
+                    <div class="text-gray-600">Years Experience</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold text-red-900 mb-2">98%</div>
+                    <div class="text-gray-600">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+            <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">About Dealogic Africa</h2>
+                    <p class="text-lg text-gray-600 mb-4">
+                        Dealogic Africa is a premier financial advisory firm specializing in strategic capital solutions for businesses across the continent. With deep market expertise and a commitment to excellence, we partner with organizations to unlock growth potential and navigate complex financial landscapes.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-6">
+                        Our team combines international best practices with local market insights to deliver tailored solutions that drive sustainable value creation.
+                    </p>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="font-bold text-xl text-red-900 mb-2">Our Mission</h3>
+                            <p class="text-gray-600">To empower African businesses with world-class financial advisory services that catalyze growth and innovation.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl text-blue-900 mb-2">Our Vision</h3>
+                            <p class="text-gray-600">To be Africa's most trusted partner in strategic financial transformation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-red-100 to-blue-100 h-96 rounded-lg flex items-center justify-center">
+                    <div class="text-center p-8">
+                        <svg class="w-20 h-20 text-red-900 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                        </svg>
+                        <p class="text-2xl font-bold text-gray-900">Excellence in Financial Advisory</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Comprehensive financial solutions designed to meet your strategic objectives
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-red-900 hover-scale">
+                    <svg class="w-12 h-12 text-red-900 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Capital Raising</h3>
+                    <p class="text-gray-600">Strategic financial solutions to fuel your growth ambitions through equity, debt, and hybrid financing structures.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-red-900 hover-scale">
+                    <svg class="w-12 h-12 text-red-900 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Mergers & Acquisitions</h3>
+                    <p class="text-gray-600">Expert advisory on M&A transactions, from target identification to deal closure and post-merger integration.</p>
+                </div>
+                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-red-900 hover-scale">
+                    <svg class="w-12 h-12 text-red-900 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Capital Strategy & Structuring</h3>
+                    <p class="text-gray-600">Comprehensive capital optimization strategies tailored to your business objectives and market conditions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+        <footer class="bg-primary text-white py-12">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-white/20 pb-8 mb-8">
+                    <div>
+                        <h4 class="text-xl font-bold mb-4 text-accent">Dealogic</h4>
+                        <p class="text-sm text-slate-300">Empowering African businesses with the right capital and strategic insight.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="about.html" class="hover:text-accent transition duration-150">About Us</a></li>
+                            <li><a href="services/services.html" class="hover:text-accent transition duration-150">Services</a></li>
+                            <li><a href="blog/blog.html" class="hover:text-accent transition duration-150">Insights</a></li>
+                            <li><a href="contact.html" class="hover:text-accent transition duration-150">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
+                        <ul class="space-y-2 text-sm text-slate-300">
+                            <li>Email: info@dealogicafrica.com</li>
+                            <li>Phone: +254 (0) 700 000 000</li>
+                            <li>Address: Nairobi, Kenya</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-slate-300 hover:text-accent transition duration-150">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.564-4 0v5.604h-3v-11h3v1.765c1.395-2.618 7-2.784 7 2.476v6.759z"/></svg>
+                            </a>
+                            <a href="#" class="text-slate-300 hover:text-accent transition duration-150">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.791-1.574 2.16-2.723-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.598 0-6.53 2.93-6.53 6.53 0 .512.057 1.018.169 1.517-5.424-.274-10.279-2.864-13.51-6.845-.565.975-.882 2.115-.882 3.332 0 2.276 1.157 4.28 2.91 5.464-1.076-.034-2.083-.33-2.964-.816v.079c0 3.178 2.266 5.823 5.263 6.435-.552.152-1.137.234-1.745.234-.43 0-.84-.042-1.24-.118.835 2.618 3.266 4.52 6.131 4.56-2.257 1.77-5.086 2.812-8.201 2.812-.53 0-1.05-.031-1.562-.092 2.903 1.862 6.353 2.946 10.065 2.946 12.076 0 18.665-9.96 18.665-18.665 0-.285-.006-.568-.018-.848.809-.58 1.503-1.305 2.053-2.138z"/></svg>
+                            </a>
+                            </div>
+                    </div>
+                </div>
+                <div class="text-center pt-8 text-sm text-slate-400">
+                    &copy; 2025 Dealogic Microfinance. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
