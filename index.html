@@ -4,545 +4,164 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dealogic Africa - Strategic Financial Advisory</title>
-
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> 
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    
     <style>
-        
+        /* Custom Tailwind Configuration (optional) */
         :root {
-            /* Brand Colors */
-            --color-primary: #20175D; /* Deep Navy Blue (Brand Blue) */
-            --color-accent: #B60C1E; /* Rich Red/Maroon (Brand Red) */
-            --color-light-bg: #f8f8fa; /* Subtle off-white background */
-            --color-text-dark: #20175D; 
-            --color-text-light: #ffffff;
-            --color-primary-blue: #20175D; 
-            --color-primary-red: #B60C1E; 
-            --font-family-main: 'Inter', sans-serif; 
-            
-            /* Colors for the Sphere/Wireframe effect in the Hero */
-            --wireframe-color-white: #ffffff;
-            --sphere-body-color: #B60C1E;
-        }
-        
-        /* Utility classes using variables */
-        .bg-primary { background-color: var(--color-primary); }
-        .text-primary { color: var(--color-primary); }
-        .bg-accent { background-color: var(--color-accent); }
-        .text-accent { color: var(--color-accent); }
-        .bg-color-light-bg { background-color: var(--color-light-bg); } 
-        
-        body { font-family: 'Inter', sans-serif; background-color: var(--color-light-bg); }
-
-        /* Custom Button Styling */
-        .btn-primary {
-            background-color: var(--color-accent);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 0.75rem;
-            font-weight: 700;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 6px -1px rgba(182, 12, 30, 0.5), 0 2px 4px -2px rgba(182, 12, 30, 0.5);
-        }
-        .btn-primary:hover { background-color: #920918; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(182, 12, 30, 0.7), 0 4px 6px -4px rgba(182, 12, 30, 0.5); }
-
-        /* Custom Card Hover Effect */
-        .card-hover { transition: all 0.3s ease-in-out; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04); }
-
-        /* Navigation Active State (Accent color for active link) */
-        .nav-link.active { 
-            color: var(--color-accent) !important; 
-            font-weight: 700;
-            border-bottom: 3px solid var(--color-accent); 
-            padding-bottom: 4px; 
-        }
-        
-        /* --- Mission Section Specific CSS (Retained) --- */
-        #our-mission {
-            padding: 50px 20px;
-            background-color: #ffffff;
+            --color-primary: #851717; /* red-900 */
+            --color-secondary: #1e3a8a; /* blue-900 */
         }
 
-        .mission-container {
-            max-width: 1427px;
-            margin: 0 auto;
-            grid-template-columns: 733fr 617fr; 
-            gap: 77px; 
-            align-items: start;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
         }
 
-        @media (min-width: 1024px) {
-             .mission-container {
-                 display: grid;
-             }
-             .lg\:text-left { text-align: left; }
-             .lg\:justify-start { justify-content: flex-start; }
-             .lg\:mx-0 { margin-left: 0; margin-right: 0; }
+        /* --- Custom Styles for Canvas Background --- */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            /* Match the gradient background color for continuity */
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            opacity: 0.9; /* Slightly darker overlay for contrast */
         }
-        
-        .mission-features { display: flex; flex-direction: column; gap: 58px; }
-        .feature-card { position: relative; width: 100%; max-width: 733px; height: 400px; }
-        .feature-card__bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
-        .feature-card__bg .bg-shape { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 30px; object-fit: cover; }
-        .card-1 .feature-card__content, .card-2 .feature-card__content, .card-3 .feature-card__content { padding: 22px 40px 0 204px; }
-        .feature-card__content { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column; padding: 40px 20px !important; }
-        .feature-card__title { margin: 0 0 10px 0; color: var(--color-text-dark); font-weight: 800; font-size: 40px; line-height: 48px; }
-        .feature-card__description { margin: 0; max-width: 529px; color: var(--color-text-dark); font-weight: 600; font-size: 24px; line-height: 29px; }
-        .feature-card__link { margin-top: auto; padding-bottom: 24px; color: var(--color-text-dark); font-weight: 700; font-size: 24px; line-height: 29px; }
-        .mission-main-content { display: flex; flex-direction: column; }
-        .mission-intro { position: relative; padding-left: 6px; }
-        .mission-intro__icon { position: absolute; top: -102px; left: -6px; width: 59px; height: 59px; border: 10px solid var(--color-text-dark); border-radius: 50%; }
-        .mission-intro__title { margin: 0 0 52px 0; color: var(--color-text-dark); font-weight: 800; font-size: 64px; line-height: 77px; }
-        .mission-intro__text { margin: 0; color: var(--color-text-dark); font-weight: 600; font-size: 30px; line-height: 36px; }
-        .mission-image-section { position: relative; margin-top: 51px; width: 100%; max-width: 611px; height: 697px; }
-        .mission-image { width: 100%; height: 100%; object-fit: cover; border-radius: 30px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); transform: rotate(180deg); }
-        .image-overlay-card { position: absolute; right: 0px; bottom: 0px; width: 299px; height: 203px; padding: 16px 29px 22px 26px; background-color: var(--color-primary-blue); border-radius: 30px; box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25); color: var(--color-text-light); display: flex; flex-direction: column; justify-content: space-between; }
-        .image-overlay-card__text { margin: 0; font-weight: 800; font-size: 23px; line-height: 28px; }
-        .image-overlay-card__link { color: var(--color-primary-red); font-weight: 600; font-size: 24px; line-height: 29px; }
-        .rounded-3xl-custom { border-radius: 1.5rem; }
+            /* --- Custom Styles for Infinite Logo Carousel --- */
 
-        /* REMOVED .hero-section CUSTOM CSS TO USE TAILWIND UTILITIES */
-
+        @keyframes scroll {
+        /* This moves the entire track left by the width of one full set of logos (50% of the total track width) */
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+        }
+        .logo-marquee {
+            overflow: hidden;
+            /* Creates a fade effect on the left and right edges */
+            mask-image: linear-gradient(to right,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(0, 0, 0, 1) 15%,
+                rgba(0, 0, 0, 1) 85%,
+                rgba(0, 0, 0, 0) 100%
+                );
+            }
+        .logo-track {
+            display: flex;
+            width: 200%; /* Double the content to ensure seamless loop */
+            animation: scroll 40s linear infinite; /* 40 seconds duration for a smooth, slow scroll */
+            padding-left: 20px;
+        }
+        .logo-slide {
+            /* Ensures logos take up equal space and don't shrink */
+            width: 12.5%;
+            min-width: 180px;
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
-<body class="text-gray-800">
-
-    <script>
-        // --- Utility Functions (Icons & Navigation) ---
-
-        function getIcon(name, classes = "w-6 h-6", stroke = "currentColor") {
-            const icons = {
-                home: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
-                dollarSign: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
-                users: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-                chartLine: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m18 10-6 6-4-4-5 4"/></svg>`,
-                target: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
-                calendar: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`,
-                mail: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.83 1.83 0 0 1-2.06 0L2 7"/></svg>`,
-                checkCircle: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>`,
-                xCircle: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`,
-            };
-            return icons[name] || '';
-        }
-
-        // NOTE: Changed ASSET_PATH from 'assets' to 'images' for consistency with previous responses/code
-        const ASSET_PATH = 'images'; 
-
-        // Placeholder Navigation Function
-        function navigate(path) {
-            console.log(`Navigating to: ${path}`);
-        }
-        
-        // --- Router and Navigation Logic ---
-        const contentArea = document.getElementById('content-area');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        function updateActiveLink(pageName) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('data-page') === pageName) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        function navigate(targetPage) {
-            let templateId;
-            let pageName = targetPage.split('/').pop().split('.')[0];
-            
-            if (pageName === 'index' || pageName === '') {
-                templateId = 'template-home';
-                pageName = 'home';
-            } else {
-                 // For external pages like 'about.html', 'services/services.html', etc.
-                 window.location.href = targetPage;
-                 return;
-            }
-
-            const template = document.getElementById(templateId);
-
-            if (template) {
-                contentArea.innerHTML = template.innerHTML;
-                
-                updateActiveLink(pageName);
-                AOS.refresh();
-                
-                if (templateId === 'template-home') {
-                    initThreeJSCanvas();
-                }
-
-                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                     mobileMenu.classList.add('hidden');
-                }
-            }
-        }
-    </script>
-
-    <script type="module">
-        // Firebase imports (retained from template, but logic minimized for standalone demo)
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        const firebaseConfig = null; 
-        const initialAuthToken = null;
-
-        async function initializeFirebase() {
-            // Initialization logic removed for brevity in this response
-        }
-        initializeFirebase();
-        window.getFirestore = getFirestore; 
-        
-        //  --- UPDATED Three.js Implementation for Dynamic Scanning Line --- 
-        
-        let scene, camera, renderer, mainSphere, scanningLine;
-        let sphereContainer, heroCanvas;
-
-        const ACCENT_COLOR_RED = new THREE.Color(0xB60C1E); // Red (Used for scanning line)
-        const PRIMARY_COLOR_BLUE = new THREE.Color(0x20175D); // Blue (Used for sphere body)
-        const LIGHT_COLOR = new THREE.Color(0xFFFFFF); // White (Wireframe)
-        
-        // Define the sphere radius once
-        const sphereRadius = 1.5;
-        
-        // Shader code for the scanning line (uses simple sine wave for movement)
-        const lineVertexShader = `
-            uniform float time;
-            uniform float scanSpeed;
-            uniform float lineLength;
-            attribute float linePhase;
-            attribute float lineIndex;
-            varying float vOpacity;
-            void main() {
-                // Calculate position on the line based on time and index
-                float currentPhase = mod(linePhase + time * scanSpeed, 1.0);
-                
-                // Fade effect: the center of the line is bright, fading towards the edges
-                float positionInLine = abs(currentPhase - lineIndex);
-                vOpacity = smoothstep(0.0, lineLength, positionInLine) * 0.7; // Smooth fade and max opacity 0.7
-
-                // Only show a segment (the line)
-                if (currentPhase > lineIndex && currentPhase < lineIndex + lineLength) {
-                    vOpacity = 1.0 - smoothstep(0.0, lineLength, currentPhase - lineIndex);
-                } else {
-                    vOpacity = 0.0;
-                }
-                
-                // Base vertex calculations
-                vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-                gl_PointSize = 2.0; // Size of the dots in the line
-                gl_Position = projectionMatrix * mvPosition;
-            }
-        `;
-
-        const lineFragmentShader = `
-            uniform vec3 color;
-            varying float vOpacity;
-            void main() {
-                // Circular points for a smoother appearance
-                float r = 0.0;
-                vec2 center = gl_PointCoord - 0.5;
-                r = dot(center, center);
-                if (r > 0.25) { // Clip points outside the circle radius
-                    discard;
-                }
-                
-                // Output color with calculated fading opacity
-                gl_FragColor = vec4(color, vOpacity);
-            }
-        `;
-
-        // Function to create the continuous scanning line effect
-        function createScanningLine() {
-            const numPoints = 1000;
-            const lineGeometry = new THREE.BufferGeometry();
-            const positions = [];
-            const linePhases = [];
-            const lineIndices = [];
-
-            // Generate points on the surface of the sphere (based on polar coordinates)
-            for (let i = 0; i < numPoints; i++) {
-                // Angular coordinates
-                const phi = Math.acos(1 - 2 * i / numPoints); // Latitude
-                const theta = i * 6; // Longitude (spiraling effect)
-                
-                // Convert to Cartesian coordinates on sphere surface
-                const x = sphereRadius * Math.sin(phi) * Math.cos(theta);
-                const y = sphereRadius * Math.sin(phi) * Math.sin(theta);
-                const z = sphereRadius * Math.cos(phi);
-                
-                positions.push(x, y, z);
-                
-                // Normalize index for the line sweep effect (0 to 1)
-                lineIndices.push(i / numPoints); 
-                
-                // Use a different phase offset for spiraling scan
-                linePhases.push(i / numPoints); 
-            }
-
-            lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-            lineGeometry.setAttribute('linePhase', new THREE.Float32BufferAttribute(linePhases, 1));
-            lineGeometry.setAttribute('lineIndex', new THREE.Float32BufferAttribute(lineIndices, 1));
-
-            const lineMaterial = new THREE.ShaderMaterial({
-                uniforms: {
-                    color: { value: ACCENT_COLOR_RED },
-                    time: { value: 0.0 },
-                    scanSpeed: { value: 0.2 }, // How fast the line sweeps (0.1 is moderate)
-                    lineLength: { value: 0.15 }, // Length of the visible line segment (0.15 is 15% of the sphere circumference)
-                },
-                vertexShader: lineVertexShader,
-                fragmentShader: lineFragmentShader,
-                transparent: true,
-                blending: THREE.AdditiveBlending, // Makes the glow effect stronger
-                depthTest: false, // Ensures the line is always visible over the sphere body
-            });
-            
-            const line = new THREE.Points(lineGeometry, lineMaterial);
-            return line;
-        }
-
-
-        function initThreeJSCanvas() {
-            if (renderer) {
-                renderer.dispose();
-            }
-            
-            sphereContainer = document.getElementById('sphere-container');
-            heroCanvas = document.getElementById('hero-canvas');
-            
-            if (!sphereContainer || !heroCanvas) {
-                return;
-            }
-            
-            const width = sphereContainer.clientWidth;
-            const height = sphereContainer.clientHeight;
-
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-            
-            camera.position.z = 3.5;
-            camera.position.y = 0;
-            camera.position.x = 0;
-
-            renderer = new THREE.WebGLRenderer({ canvas: heroCanvas, antialias: true, alpha: true });
-            renderer.setSize(width, height);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            
-            // Sphere Parameters
-            const sphereSegments = 32;
-
-            // 1. Main Sphere (Blue, semi-transparent body)
-            const geometry = new THREE.SphereGeometry(sphereRadius, sphereSegments, sphereSegments); 
-            
-            const material = new THREE.MeshPhongMaterial({ 
-                color: PRIMARY_COLOR_BLUE, 
-                shininess: 80,
-                transparent: true,
-                opacity: 0.85,
-            });
-            mainSphere = new THREE.Mesh(geometry, material);
-            scene.add(mainSphere);
-
-            // 2. White Lines (Static Wireframe)
-            const wireframeMaterial = new THREE.LineBasicMaterial({ color: LIGHT_COLOR, linewidth: 1, transparent: true, opacity: 0.3 }); 
-            const wireframe = new THREE.WireframeGeometry(geometry);
-            const line = new THREE.LineSegments(wireframe, wireframeMaterial);
-            mainSphere.add(line); 
-            
-            // 3. Dynamic Scanning Line (Red/Accent) - The new feature
-            scanningLine = createScanningLine();
-            mainSphere.add(scanningLine); 
-
-            // --- Lighting ---
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); 
-            scene.add(ambientLight);
-
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(5, 5, 5); 
-            scene.add(directionalLight);
-            
-            // Save start time for uniform animation
-            const startTime = performance.now();
-
-            // --- Animation Loop ---
-            function animate(time) {
-                requestAnimationFrame(animate);
-                
-                const elapsedTime = (time - startTime) * 0.001; // Convert to seconds
-                
-                // Sphere rotation
-                mainSphere.rotation.y += 0.005; 
-                
-                // Update the time uniform for the scanning line shader
-                if (scanningLine) {
-                    scanningLine.material.uniforms.time.value = elapsedTime;
-                }
-                
-                renderer.render(scene, camera);
-            }
-
-            animate();
-
-            // Handle Resize
-            window.removeEventListener('resize', onWindowResize, false);
-            window.addEventListener('resize', onWindowResize, false);
-        }
-
-        function onWindowResize() {
-            if (!sphereContainer || !camera || !renderer) return;
-
-            const width = sphereContainer.clientWidth;
-            const height = sphereContainer.clientHeight;
-
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-        }
-
-        // Initialize Three.js and the page once the document is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            AOS.init({
-                duration: 800,
-                once: true,
-            });
-
-            const mainContentArea = document.getElementById('content-area');
-            const homeTemplate = document.getElementById('template-home');
-            if (mainContentArea && homeTemplate) {
-                mainContentArea.innerHTML = homeTemplate.innerHTML;
-                document.querySelector('.nav-link[data-page="home"]').classList.add('active');
-            }
-
-            initThreeJSCanvas();
-            
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            if (mobileMenuBtn && mobileMenu) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    navigate(link.getAttribute('href'));
-                });
-            });
-
-            document.querySelectorAll('button[data-target]').forEach(button => {
-                button.addEventListener('click', () => navigate(button.getAttribute('data-target')));
-            });
-        });
-        
-    </script>
+<body class="bg-white text-gray-900">
     
-    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg transition-all duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <img src="images/logo.jpeg" onerror="this.onerror=null; this.src='https://placehold.co/150x40/20175D/ffffff?text=LOGO';" alt="Dealogic Microfinance Logo" class="h-14 w-auto">
-                <span class="text-xl font-light text-accent hidden sm:inline">Microfinance</span>
-            </div>
-            <nav class="hidden lg:flex space-x-8 text-lg font-medium h-full items-center ml-auto">
-                <a href="index.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="home">Home</a>
-                <a href="about.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="about">About Us</a>
-                <a href="services/services.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="services">Services</a>
-                <a href="blog/blog.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="insights">Insights</a>
-                <a href="contact.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary" data-page="contact">Contact</a>
-            </nav>
-            <button id="mobile-menu-btn" class="lg:hidden text-primary focus:outline-none p-2 rounded-lg hover:bg-slate-100 transition duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
-            </button>
-        </div>
-        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl transition-all duration-300 ease-in-out">
-            <nav class="flex flex-col space-y-1 p-4 text-center text-lg font-medium">
-                <a href="index.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="home">Home</a>
-                <a href="about.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="about">About Us</a>
-                <a href="services/services.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="services">Services</a>
-                <a href="blog/blog.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="insights">Insights</a>
-                <a href="contact.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary" data-page="contact">Contact</a>
-            </nav>
-        </div>
-    </header>
-
-    <main id="content-area" class="pt-24 min-h-screen">
-        </main>
-
-    <div id="toast-container"></div>
-    
-    <div id="template-home" class="hidden">
-            
-        <section class="relative overflow-hidden h-screen -mt-24 text-white **bg-gradient-to-br from-red-900 via-red-800 to-blue-900**">
-            <div class="absolute inset-0 bg-black opacity-40"></div>
-            
-            <div class="container mx-auto px-4 relative z-10 h-full">
-                <div class="grid grid-cols-1 lg:grid-cols-12 items-center h-full">
-                    
-                    <div class="lg:col-span-6 flex flex-col justify-center h-full py-20 lg:py-0 text-center lg:text-left">
-                        <div class="max-w-xl mx-auto lg:mx-0">
-                            
-                            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-tight tracking-tighter mb-6" data-aos="fade-right">
-                                Secure Capital. <span class="text-accent">Scale With Confidence</span>.
-                            </h1>
-                            
-                            <div class="mt-4">
-                                <p class="max-w-lg text-xl sm:text-2xl text-slate-200 lg:mx-0 font-medium" data-aos="fade-right" data-aos-delay="300">
-                                    We help growing businesses access the right investors through <b>data-driven capital-raising strategies</b> and deep market insight.
-                                </p>
-                            </div>
-
-                            <div class="mt-12 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center lg:justify-start" data-aos="fade-right" data-aos-delay="500">
-                                <button data-target="contact.html" class="btn-primary text-xl px-10 py-4 shadow-2xl">
-                                    Request Consultation
-                                </button>
-                                <button data-target="services/services.html" class="border-2 border-white/30 text-white hover:bg-white hover:text-red-900 transition duration-300 text-xl px-10 py-4 rounded-xl font-semibold shadow-md">
-                                    Our Services &rarr;
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div id="sphere-container" class="lg:col-span-6 h-full flex items-center justify-center relative w-full min-h-[400px]" data-aos="zoom-in" data-aos-delay="300">
-                        <canvas id="hero-canvas" class="w-full h-full absolute top-0 left-0"></canvas>
-                    </div>
-                    
-                </div>
-            </div>
-        </section>
-
-            <!-- Stats Section -->
-    <section class="py-16 bg-gray-50">
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-red-900/90 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="text-4xl md:text-5xl font-bold text-red-900 mb-2">50+</div>
-                    <div class="text-gray-600">Deals Closed</div>
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0">
+                    <h1 id="logo" class="text-2xl font-bold text-white">DEALOGIC AFRICA</h1>
                 </div>
-                <div class="text-center">
-                    <div class="text-4xl md:text-5xl font-bold text-red-900 mb-2">$2B+</div>
-                    <div class="text-gray-600">Capital Raised</div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Home</a>
+                    <a href="about.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">About</a>
+                    <a href="services/services.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Services</a>
+                    <a href="blog/blog.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Insights</a>
+                    <a href="contact.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Contact</a>
                 </div>
-                <div class="text-center">
-                    <div class="text-4xl md:text-5xl font-bold text-red-900 mb-2">15+</div>
-                    <div class="text-gray-600">Years Experience</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl md:text-5xl font-bold text-red-900 mb-2">98%</div>
-                    <div class="text-gray-600">Client Satisfaction</div>
-                </div>
+
+                <button id="menuBtn" class="md:hidden text-white">
+                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-4 py-6 space-y-4">
+                <a href="index.html" class="block text-gray-700 hover:text-red-900 font-medium">Home</a>
+                <a href="about.html" class="block text-gray-700 hover:text-red-900 font-medium">About</a>
+                <a href="services/services.html" class="block text-gray-700 hover:text-red-900 font-medium">Services</a>
+                <a href="blog/blog.html" class="block text-gray-700 hover:text-red-900 font-medium">Insights</a>
+                <a href="contact.html" class="block text-gray-700 hover:text-red-900 font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="relative h-screen flex items-center justify-center text-white overflow-hidden">
+        
+        <canvas id="hero-canvas"></canvas>
+
+        <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 animate-fade-in drop-shadow-lg">Powering African Growth</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-4xl mx-auto font-light drop-shadow-md">
+                Strategic financial advisory and capital solutions for businesses driving Africa's economic transformation
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="contact.html" class="bg-white text-red-900 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition inline-flex items-center justify-center gap-2 shadow-xl hover:shadow-2xl">
+                    Request Consultation
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                </a>
+                <a href="services/services.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-red-900 transition shadow-xl">
+                    Our Services
+                </a>
             </div>
         </div>
     </section>
-        
-            <!-- About Section -->
+
+    <section id="stats-section" class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-extrabold text-red-900 mb-2 counter" 
+                     data-target="40" data-prefix="" data-suffix="+">0+</div>
+                <div class="text-gray-600 font-medium">Years Combined Team Experience</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-extrabold text-red-900 mb-2 counter" 
+                     data-target="300" data-prefix="$" data-suffix="M+">$0M+</div>
+                <div class="text-gray-600 font-medium">Capital Raised</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-extrabold text-red-900 mb-2 counter" 
+                     data-target="10" data-prefix="" data-suffix="+">0+</div>
+                <div class="text-gray-600 font-medium">Years since inception.</div>
+            </div>
+            <div class="text-center">
+                <div class="text-4xl md:text-5xl font-extrabold text-red-900 mb-2 counter" 
+                     data-target="9" data-prefix="" data-suffix="">0</div>
+                <div class="text-gray-600 font-medium">Countries served</div>
+            </div>
+        </div>
+    </div>
+</section>
+
     <section id="about" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -555,20 +174,20 @@
                         Our team combines international best practices with local market insights to deliver tailored solutions that drive sustainable value creation.
                     </p>
                     <div class="space-y-4">
-                        <div>
+                        <div class="p-4 rounded-lg bg-red-50">
                             <h3 class="font-bold text-xl text-red-900 mb-2">Our Mission</h3>
-                            <p class="text-gray-600">To empower African businesses with world-class financial advisory services that catalyze growth and innovation.</p>
+                            <p class="text-gray-700">To empower African businesses with world-class financial advisory services that catalyze growth and innovation.</p>
                         </div>
-                        <div>
+                        <div class="p-4 rounded-lg bg-blue-50">
                             <h3 class="font-bold text-xl text-blue-900 mb-2">Our Vision</h3>
-                            <p class="text-gray-600">To be Africa's most trusted partner in strategic financial transformation.</p>
+                            <p class="text-gray-700">To be Africa's most trusted partner in strategic financial transformation.</p>
                         </div>
                     </div>
                 </div>
-                <div class="bg-gradient-to-br from-red-100 to-blue-100 h-96 rounded-lg flex items-center justify-center">
+                <div class="bg-gradient-to-br from-red-100 to-blue-100 h-96 rounded-xl shadow-2xl flex items-center justify-center">
                     <div class="text-center p-8">
                         <svg class="w-20 h-20 text-red-900 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.513 23.513 0 0112 15c-3.18 0-6.233-.62-9-1.745M12 21c-4.97 0-9-2.239-9-5s4.03-5 9-5 9 2.239 9 5-4.03 5-9 5zM12 21V6m4-2H8m8 0a4 4 0 00-8 0"></path>
                         </svg>
                         <p class="text-2xl font-bold text-gray-900">Excellence in Financial Advisory</p>
                     </div>
@@ -576,8 +195,7 @@
             </div>
         </div>
     </section>
-        
-    <!-- Services Section -->
+
     <section id="services" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -587,21 +205,21 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-red-900 hover-scale">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-red-900 hover-scale">
                     <svg class="w-12 h-12 text-red-900 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                     </svg>
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Capital Raising</h3>
                     <p class="text-gray-600">Strategic financial solutions to fuel your growth ambitions through equity, debt, and hybrid financing structures.</p>
                 </div>
-                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-red-900 hover-scale">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-red-900 hover-scale">
                     <svg class="w-12 h-12 text-red-900 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
                     </svg>
                     <h3 class="text-2xl font-bold text-gray-900 mb-4">Mergers & Acquisitions</h3>
                     <p class="text-gray-600">Expert advisory on M&A transactions, from target identification to deal closure and post-merger integration.</p>
                 </div>
-                <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border-t-4 border-red-900 hover-scale">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-red-900 hover-scale">
                     <svg class="w-12 h-12 text-red-900 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
                     </svg>
@@ -611,48 +229,512 @@
             </div>
         </div>
     </section>
-        
-        <footer class="bg-primary text-white py-12">
-            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 border-b border-white/20 pb-8 mb-8">
+
+    <section class="py-20 bg-gradient-to-r from-red-900 to-blue-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center mb-16">What Our Clients Say</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20 shadow-xl">
+                    <svg class="w-8 h-8 text-white/70 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M11 9.9c0 .77-.28 1.48-.75 2.02l-3.3 3.63a1 1 0 000 1.35 1 1 0 001.5 0l4.3-4.74A4 4 0 0015 9.9C15 7.74 13.26 6 11.1 6H7v6.9c0 1.25.5 2.45 1.4 3.35l3.5 3.5a1 1 0 001.4 0 1 1 0 000-1.4l-3.5-3.5c-.7-.7-.9-1.6-.9-2.5V6h4.1A4.9 4.9 0 0116 11.9V18a1 1 0 002 0v-6.1c0-2.6-1.87-4.85-4.45-5.38A7 7 0 0011 3z"/></svg>
+                    <p class="text-lg mb-6 italic">"Dealogic Africa's expertise in capital raising transformed our growth trajectory. Their strategic approach delivered results beyond our expectations."</p>
                     <div>
-                        <h4 class="text-xl font-bold mb-4 text-accent">Dealogic</h4>
-                        <p class="text-sm text-slate-300">Empowering African businesses with the right capital and strategic insight.</p>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                        <ul class="space-y-2 text-sm">
-                            <li><a href="about.html" class="hover:text-accent transition duration-150">About Us</a></li>
-                            <li><a href="services/services.html" class="hover:text-accent transition duration-150">Services</a></li>
-                            <li><a href="blog/blog.html" class="hover:text-accent transition duration-150">Insights</a></li>
-                            <li><a href="contact.html" class="hover:text-accent transition duration-150">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold mb-4">Contact Info</h4>
-                        <ul class="space-y-2 text-sm text-slate-300">
-                            <li>Email: info@dealogicafrica.com</li>
-                            <li>Phone: +254 (0) 700 000 000</li>
-                            <li>Address: Nairobi, Kenya</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
-                        <div class="flex space-x-4">
-                            <a href="#" class="text-slate-300 hover:text-accent transition duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.564-4 0v5.604h-3v-11h3v1.765c1.395-2.618 7-2.784 7 2.476v6.759z"/></svg>
-                            </a>
-                            <a href="#" class="text-slate-300 hover:text-accent transition duration-150">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.791-1.574 2.16-2.723-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.598 0-6.53 2.93-6.53 6.53 0 .512.057 1.018.169 1.517-5.424-.274-10.279-2.864-13.51-6.845-.565.975-.882 2.115-.882 3.332 0 2.276 1.157 4.28 2.91 5.464-1.076-.034-2.083-.33-2.964-.816v.079c0 3.178 2.266 5.823 5.263 6.435-.552.152-1.137.234-1.745.234-.43 0-.84-.042-1.24-.118.835 2.618 3.266 4.52 6.131 4.56-2.257 1.77-5.086 2.812-8.201 2.812-.53 0-1.05-.031-1.562-.092 2.903 1.862 6.353 2.946 10.065 2.946 12.076 0 18.665-9.96 18.665-18.665 0-.285-.006-.568-.018-.848.809-.58 1.503-1.305 2.053-2.138z"/></svg>
-                            </a>
-                            </div>
+                        <p class="font-bold">Sarah Kimani</p>
+                        <p class="text-sm opacity-80">CEO, Tech Innovate Kenya</p>
                     </div>
                 </div>
-                <div class="text-center pt-8 text-sm text-slate-400">
-                    &copy; 2025 Dealogic Microfinance. All rights reserved.
+                <div class="bg-white/10 backdrop-blur-sm p-8 rounded-xl border border-white/20 shadow-xl">
+                    <svg class="w-8 h-8 text-white/70 mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M11 9.9c0 .77-.28 1.48-.75 2.02l-3.3 3.63a1 1 0 000 1.35 1 1 0 001.5 0l4.3-4.74A4 4 0 0015 9.9C15 7.74 13.26 6 11.1 6H7v6.9c0 1.25.5 2.45 1.4 3.35l3.5 3.5a1 1 0 001.4 0 1 1 0 000-1.4l-3.5-3.5c-.7-.7-.9-1.6-.9-2.5V6h4.1A4.9 4.9 0 0116 11.9V18a1 1 0 002 0v-6.1c0-2.6-1.87-4.85-4.45-5.38A7 7 0 0011 3z"/></svg>
+                    <p class="text-lg mb-6 italic">"The M&A advisory team provided invaluable guidance throughout our acquisition. Professional, insightful, and results-driven."</p>
+                    <div>
+                        <p class="font-bold">James Omondi</p>
+                        <p class="text-sm opacity-80">Managing Director, East African Holdings</p>
+                    </div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </section>
+
+    <section id="clients" class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-gray-900 text-center mb-10">Our Trusted Partners</h2>
+            
+            <div class="logo-marquee">
+                <div class="logo-track">
+                    <div class="logo-slide">
+                        <img src="images/Logo1.png" alt="Fortune Credit" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo2.png" alt="My Credit" class="h-25 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo3.png" alt="FinCredit" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo4.png" alt="LOLC" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 5.png" alt="Life Care" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 6.png" alt="Musoni" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 7.png" alt="Select Financial" class="h-20 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 8.jpg" alt="Versatile Auto" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 9.png" alt="Sumac Logo" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 10.png" alt="First Growth Ventures" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 11.png" alt="OmniBank" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo1.png" alt="Fortune Credit" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo2.png" alt="My Credit" class="h-25 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo3.png" alt="FinCredit" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo4.png" alt="LOLC" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 5.png" alt="Life Care" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 6.png" alt="Musoni" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 7.png" alt="Select Financial" class="h-20 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 8.jpg" alt="Versatile Auto" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 9.png" alt="Sumac Logo" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 10.png" alt="First Growth Ventures" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="logo-slide">
+                        <img src="images/Logo 11.png" alt="OmniBank" class="h-30 w-auto opacity-70 hover:opacity-100 transition-opacity">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="contact-cta" class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="group bg-white p-8 md:p-12 lg:p-16 rounded-3xl shadow-2xl transition-all duration-500 hover:shadow-red-900/50 hover:scale-[1.01] border-t-8 border-red-900">
+            <div class="grid md:grid-cols-3 gap-10 items-center">
+                <div class="md:col-span-2 text-center md:text-left">
+                    <h2 class="text-3xl font-extrabold text-gray-900 mb-4">
+                        Unlock Tailored Financial Solutions
+                    </h2>
+                    <p class="text-xl text-gray-600 mb-6 max-w-2xl">
+                        Your financial goals are unique. We offer a dedicated consultation process to understand your needs and align them with our bespoke capital strategies.
+                    </p>
+                    <div class="space-y-3 text-left inline-block md:block">
+                        <p class="flex items-center text-gray-700 font-medium">
+                            <svg class="w-5 h-5 mr-3 text-red-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            Personalized consultation slots
+                        </p>
+                        <p class="flex items-center text-gray-700 font-medium">
+                            <svg class="w-5 h-5 mr-3 text-red-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            Dedicated strategy discussions
+                        </p>
+                    </div>
+                </div>
+
+                <div class="md:col-span-1 flex justify-center md:justify-end">
+                    <a href="contact.html" class="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 border border-transparent text-base font-semibold rounded-xl shadow-lg text-white bg-red-900 transition-all duration-300 transform group-hover:bg-red-800 group-hover:translate-y-[-2px] hover:shadow-xl">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        </svg>
+                        Reach out now
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+</section>
+<footer class="bg-gradient-to-br from-red-900 via-red-900 to-blue-900 text-white pt-16 pb-8 border-t-8 border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+            <div class="md:col-span-1">
+                <div class="mb-4 border-b-2 border-white/50 pb-2 inline-block">
+                    <img src="images/logo.jpeg" alt="Dealogic Africa Logo" class="h-20 w-auto filter brightness-150">
+                </div>
+                <p class="text-red-100 text-sm mb-4">
+                    Strategic financial advisory and capital solutions for businesses driving Africa's economic transformation. We partner with organizations to unlock growth potential.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-white hover:text-yellow-400 transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.13-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.356 7 2.356v6.879z"/></svg>
+                    </a>
+                    <a href="#" class="text-white hover:text-yellow-400 transition-colors">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.799-1.574 2.164-2.722-.951.555-2.005.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-3.593 0-6.492 2.901-6.492 6.492 0 .511.054 1.011.161 1.493-5.409-.271-10.218-2.864-13.401-6.839-.567.973-.895 2.1-.895 3.328 0 2.251 1.149 4.249 2.895 5.421-1.001-.033-1.944-.309-2.75-.765v.083c0 3.153 2.24 5.766 5.207 6.368-.544.148-1.115.225-1.701.225-.418 0-.828-.042-1.227-.119.832 2.571 3.208 4.45 6.035 4.492-2.231 1.74-5.047 2.784-8.09 2.784-.52 0-1.036-.026-1.545-.09.117.986.386 1.944.801 2.854 3.069 5.378 7.234 8.643 12.023 8.643 13.684 0 21.142-11.391 21.142-21.142 0-.315-.011-.63-.03-.941.875-.63 1.637-1.42 2.245-2.316z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-6 border-b-2 border-white/50 pb-2">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="index.html" class="text-red-100 hover:text-yellow-400 transition-colors">Home</a></li>
+                        <li><a href="about.html" class="text-red-100 hover:text-yellow-400 transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="text-red-100 hover:text-yellow-400 transition-colors">Contact</a></li>
+                        <li><a href="#" class="text-red-100 hover:text-yellow-400 transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-red-100 hover:text-yellow-400 transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-6 border-b-2 border-white/50 pb-2">Our Core Services</h3>
+                    <ul class="space-y-3">
+                        <li><a href="services/services.html#capital" class="text-red-100 hover:text-yellow-400 transition-colors">Capital Raising</a></li>
+                        <li><a href="services/services.html#ma" class="text-red-100 hover:text-yellow-400 transition-colors">M&A Advisory</a></li>
+                        <li><a href="services/services.html#strategy" class="text-red-100 hover:text-yellow-400 transition-colors">Capital Strategy</a></li>
+                        <li><a href="services/services.html#valuation" class="text-red-100 hover:text-yellow-400 transition-colors">Valuation</a></li>
+                        <li><a href="services/services.html" class="text-red-100 hover:text-yellow-400 transition-colors">All Services</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold text-white mb-6 border-b-2 border-white/50 pb-2">Insights & Resources</h3>
+                    <ul class="space-y-3">
+                        <li><a href="blog/blog.html" class="text-red-100 hover:text-yellow-400 transition-colors">Blog</a></li>
+                        <li><a href="blog/article1.html" class="text-red-100 hover:text-yellow-400 transition-colors">Latest Article</a></li>
+                        <li><a href="#" class="text-red-100 hover:text-yellow-400 transition-colors">Reports & Data</a></li>
+                        <li><a href="#" class="text-red-100 hover:text-yellow-400 transition-colors">Case Studies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-16 border-t border-red-800 pt-8">
+                <p class="text-center text-red-100 text-sm">
+                    &copy; 2025 Dealogic Africa. All rights reserved. | Empowering African Growth.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script type="module">
+        
+        // --- 📊 STAT COUNTER LOGIC (FIXED) ---
+        
+        const counter = (element, target, prefix = '', suffix = '') => {
+            const duration = 2000; // Animation duration in ms
+            const start = 0;
+            let startTime = null;
+
+            const animate = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = timestamp - startTime;
+                const percentage = Math.min(progress / duration, 1);
+                
+                // Calculate current value, rounding the number
+                const currentValue = Math.floor(percentage * (target - start)) + start;
+
+                let displayValue = currentValue;
+
+                if (element.getAttribute('data-prefix') === '$' && element.getAttribute('data-suffix') === 'M+') {
+                    // Custom logic for $300M+: Show large numbers as X M
+                    if (target > 100) {
+                        displayValue = (currentValue / 10).toFixed(currentValue >= 100 ? 0 : 1);
+                    } else if (target > 10) {
+                        // For smaller targets like 40, just show the number
+                        displayValue = currentValue; 
+                    }
+                }
+                
+                // For "Years Combined Team Experience" and "Years since inception"
+                if (element.getAttribute('data-prefix') === '' && element.getAttribute('data-suffix') === '+') {
+                    displayValue = currentValue;
+                }
+
+                element.textContent = `${prefix}${displayValue}${suffix}`;
+
+                if (percentage < 1) {
+                    requestAnimationFrame(animate);
+                } else {
+                    // Ensure it snaps to the final target number and suffix exactly
+                    element.textContent = `${prefix}${target}${suffix}`;
+                }
+            };
+
+            requestAnimationFrame(animate);
+        };
+
+        const startCounters = () => {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counterElement => {
+                // Prevent counting multiple times if the user scrolls up and down
+                if (counterElement.hasAttribute('data-counted')) return;
+                
+                const target = parseInt(counterElement.getAttribute('data-target'));
+                const prefix = counterElement.getAttribute('data-prefix') || '';
+                const suffix = counterElement.getAttribute('data-suffix') || '';
+
+                // Set initial value to '0'
+                if (prefix === '$' && suffix === 'M+') {
+                    counterElement.textContent = '$0M+'; 
+                } else if (suffix === '+') {
+                    counterElement.textContent = '0+';
+                } else {
+                    counterElement.textContent = '0';
+                }
+
+
+                counter(counterElement, target, prefix, suffix);
+                counterElement.setAttribute('data-counted', 'true');
+            });
+        };
+
+        // Intersection Observer Setup
+        const statsSection = document.getElementById('stats-section');
+        if (statsSection) {
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // When the section comes into view, start the animation
+                        startCounters();
+                        // Stop observing once the animation has started
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                // Run when 10% of the section is visible
+                threshold: 0.1 
+            });
+
+            observer.observe(statsSection);
+        }
+        // --- END STAT COUNTER LOGIC ---
+
+
+        // --- 🌐 NAVIGATION LOGIC ---
+        const navbar = document.getElementById('navbar');
+        const logo = document.getElementById('logo');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+        const closeIcon = document.getElementById('closeIcon');
+
+        // Sticky Navbar Effect
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                // Change navbar appearance when scrolling down
+                navbar.classList.add('bg-white', 'shadow-xl');
+                navbar.classList.remove('bg-red-900/90');
+                logo.classList.remove('text-white');
+                logo.classList.add('text-red-900');
+                navLinks.forEach(link => {
+                    link.classList.remove('text-white', 'hover:text-red-200');
+                    link.classList.add('text-gray-700', 'hover:text-red-900');
+                });
+                menuBtn.classList.remove('text-white');
+                menuBtn.classList.add('text-gray-700');
+            } else {
+                // Restore original appearance at the top
+                navbar.classList.remove('bg-white', 'shadow-xl');
+                navbar.classList.add('bg-red-900/90');
+                logo.classList.remove('text-red-900');
+                logo.classList.add('text-white');
+                navLinks.forEach(link => {
+                    link.classList.remove('text-gray-700', 'hover:text-red-900');
+                    link.classList.add('text-white', 'hover:text-red-200');
+                });
+                menuBtn.classList.remove('text-gray-700');
+                menuBtn.classList.add('text-white');
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('load', handleScroll); // Check on load
+
+        // Mobile Menu Toggle
+        menuBtn.addEventListener('click', () => {
+            const isExpanded = mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden', !isExpanded);
+            closeIcon.classList.toggle('hidden', isExpanded);
+
+            // If menu is closed, re-apply the correct nav bar colors based on scroll position
+            if (isExpanded) {
+                handleScroll();
+            } else {
+                // If menu is open, force white text/icons for better visibility over the mobile menu background
+                menuBtn.classList.add('text-gray-700');
+                menuBtn.classList.remove('text-white');
+            }
+        });
+
+        // Contact Form Submission (Placeholder) - NOTE: Removed since the form HTML was removed, leaving just the CTA.
+        
+        // --- 🎨 INTERACTIVE CANVAS ANIMATION LOGIC ---
+
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+
+        // Configuration
+        const PARTICLE_COUNT = 80;
+        const PARTICLE_SIZE = 1.5;
+        const CONNECTION_DISTANCE = 150;
+        const REPEL_DISTANCE = 80;
+        const REPEL_STRENGTH = 0.5;
+        const SPEED_FACTOR = 0.05; // Base movement speed
+
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        // Event Listeners for Mouse interaction
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        window.addEventListener('resize', init);
+
+
+        // Particle Class
+        class Particle {
+            constructor(x, y, dx, dy, size, color) {
+                this.x = x;
+                this.y = y;
+                this.dx = dx;
+                this.dy = dy;
+                this.size = size;
+                this.color = color;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            update() {
+                // Bounce off edges
+                if (this.x + this.size > width || this.x - this.size < 0) this.dx = -this.dx;
+                if (this.y + this.size > height || this.y - this.size < 0) this.dy = -this.dy;
+                
+                // Repel effect from mouse
+                let distanceX = this.x - mouse.x;
+                let distanceY = this.y - mouse.y;
+                let distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+                if (mouse.x !== null && distance < mouse.radius) {
+                    let angle = Math.atan2(distanceY, distanceX);
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    let directionX = Math.cos(angle) * force * REPEL_STRENGTH;
+                    let directionY = Math.sin(angle) * force * REPEL_STRENGTH;
+
+                    this.dx += directionX;
+                    this.dy += directionY;
+                }
+
+                // Apply velocity and dampen mouse influence over time
+                this.x += this.dx;
+                this.y += this.dy;
+
+                // Simple damping for smooth movement
+                this.dx *= 0.999; 
+                this.dy *= 0.999;
+
+                this.draw();
+            }
+        }
+
+        // Initialization
+        function init() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            particles = [];
+
+            // Particle colors (white, light red, light blue)
+            const colors = ['rgba(255, 255, 255, 0.8)', 'rgba(255, 100, 100, 0.8)', 'rgba(100, 100, 255, 0.8)'];
+
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                let x = Math.random() * width;
+                let y = Math.random() * height;
+                let dx = (Math.random() - 0.5) * SPEED_FACTOR;
+                let dy = (Math.random() - 0.5) * SPEED_FACTOR;
+                let size = PARTICLE_SIZE;
+                let color = colors[Math.floor(Math.random() * colors.length)];
+                
+                particles.push(new Particle(x, y, dx, dy, size, color));
+            }
+        }
+
+        // Connect particles with lines
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a; b < particles.length; b++) {
+                    let distance = Math.sqrt(
+                        (particles[a].x - particles[b].x) ** 2 + 
+                        (particles[a].y - particles[b].y) ** 2
+                    );
+
+                    if (distance < CONNECTION_DISTANCE) {
+                        opacityValue = 1 - (distance / CONNECTION_DISTANCE);
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${opacityValue * 0.3})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        // Animation Loop
+        function animate() {
+            // Only animate if the hero section is visible (improves performance significantly)
+            if (window.scrollY < height) {
+                // Setting the background via canvas prevents flashing/re-rendering of the HTML element background
+                const gradientFill = ctx.createLinearGradient(0, 0, width, height);
+                gradientFill.addColorStop(0, '#851717'); // red-900
+                gradientFill.addColorStop(1, '#1e3a8a'); // blue-900
+                ctx.fillStyle = gradientFill;
+                ctx.fillRect(0, 0, width, height);
+
+                // Add a slight dark overlay (matches the CSS opacity: 0.9)
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; 
+                ctx.fillRect(0, 0, width, height);
+
+                connect();
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // Start the Canvas animation on load
+        init();
+        animate();
+
+
+    </script>
 </body>
 </html>
