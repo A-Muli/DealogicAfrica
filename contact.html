@@ -6,24 +6,23 @@
     <title>Contact Page</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-    <link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
  
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<style>
-        header {
-            position: fixed !important;
-            z-index: 9999 !important;
-        }
 
-        #nairobiMap,
-        #nairobiMap * {
-            position: relative !important;
-            z-index: 0 !important;
-        }
+    <style>
+    /* 1. The map container MUST have a height defined */
+    #mapid { 
+        height: 400px;
+        width: 100%;
+
+        /* Equivalent to rounded-3xl (a large radius) */
+        border-radius: 24px; 
+
+        
+    }
     </style>
 
 </head>
@@ -87,11 +86,10 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function ()
     <div class="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-10">
 
         <!-- LEFT SECTION -->
-        <div class="bg-white border border-purple-300 rounded-3xl p-10 shadow-sm">
+        <div class="bg-gradient-to-br from-white via-[#FDDDE0]/20 to-[#B60C1E]/40 border border-red-300 rounded-3xl p-10 shadow-sm">
 
             <div class="flex items-center gap-3 mb-4">
-                <span class="w-3 h-3 bg-purple-500 rounded-full"></span>
-                <p class="text-sm text-gray-600 font-semibold">Reach out to us</p>
+                <p class="text-2xl text-black-600 font-bold">Reach out to us</p>
             </div>
 
             <h1 class="text-4xl font-bold mb-4">Get in Touch</h1>
@@ -102,8 +100,8 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function ()
 
             <!-- PHONE -->
             <div class="flex items-center gap-5 mb-10">
-                <div class="w-20 h-20 border border-purple-300 rounded-3xl flex items-center justify-center shadow-md">
-                    <i class="fa-solid fa-phone text-purple-600 text-3xl"></i>
+                <div class="w-20 h-20 border border-[#B60C1E] rounded-3xl flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-phone text-[#B60C1E] text-3xl"></i>
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 font-semibold">Phone Number</p>
@@ -113,8 +111,8 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function ()
 
             <!-- EMAIL -->
             <div class="flex items-center gap-5 mb-10">
-                <div class="w-20 h-20 border border-purple-300 rounded-3xl flex items-center justify-center shadow-md">
-                    <i class="fa-solid fa-envelope text-purple-600 text-3xl"></i>
+                <div class="w-20 h-20 border border-[#B60C1E] rounded-3xl flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-envelope text-[#B60C1E] text-3xl"></i>
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 font-semibold">Email Address</p>
@@ -123,9 +121,9 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function ()
             </div>
 
             <!-- LOCATION -->
-            <div class="flex items-center gap-5">
-                <div class="w-20 h-20 border border-purple-300 rounded-3xl flex items-center justify-center shadow-md">
-                    <i class="fa-solid fa-location-dot text-purple-600 text-3xl"></i>
+            <!-- <div class="flex items-center gap-5 mb-10">
+                <div class="w-20 h-20 border border-[#B60C1E] rounded-3xl flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-location-dot text-[#B60C1E] text-3xl"></i>
                 </div>
                 <div>
                     <p class="text-sm text-gray-500 font-semibold">Office Address</p>
@@ -133,36 +131,33 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function ()
                         Marko HQ – 902 Digital Lane, San Francisco, CA 94110, USA
                     </p>
                 </div>
-            </div>
+            </div> -->
 
         </div>
 
         <!-- RIGHT SECTION -->
-        <div class="bg-gradient-to-br from-white via-purple-50 to-purple-200 border border-purple-300 rounded-3xl p-10 shadow-sm">
+        <div class="bg-gradient-to-br from-white via-[#FDDDE0]/20 to-[#B60C1E]/40 border border-red-300 rounded-3xl p-10 shadow-sm">
 
             <h1 class="text-4xl font-bold mb-8">Let's Talk About Your Next Project</h1>
 
-            <form class="space-y-5">
-
+            <form action="https://formspree.io/f/mrbjyjjw" method="POST" class="space-y-5">
                 <div class="grid grid-cols-2 gap-4">
-                    <input type="text" placeholder="First Name" class="p-4 rounded-full border border-purple-200">
-                    <input type="text" placeholder="Last Name" class="p-4 rounded-full border border-purple-200">
+                    <input type="text" name="firstName" placeholder="First Name" class="p-4 rounded-full border border-[#B60C1E]">
+                    <input type="text" name="lastName" placeholder="Last Name" class="p-4 rounded-full border border-[#B60C1E]">
                 </div>
 
-                <input type="email" placeholder="Email Address" class="w-full p-4 rounded-full border border-purple-200">
+                <input type="email" name="_replyto" placeholder="Email Address" class="w-full p-4 rounded-full border border-[#B60C1E]">
 
-                <input type="text" placeholder="Subject" class="w-full p-4 rounded-full border border-purple-200">
+                <input type="text" name="subject" placeholder="Subject" class="w-full p-4 rounded-full border border-[#B60C1E]">
 
-                <textarea placeholder="Message" rows="5" class="w-full p-4 rounded-3xl border border-purple-200"></textarea>
+                <textarea name="message" placeholder="Message" rows="5" class="w-full p-4 rounded-3xl border border-[#B60C1E]"></textarea>
 
-                <!-- BUTTON -->
-                <button class="group w-56 flex items-center justify-between px-6 py-4 bg-white border border-purple-500 rounded-full shadow-lg">
+                <button type="submit" class="group w-56 flex items-center justify-between px-6 py-4 bg-white border border-[#B60C1E] rounded-full shadow-lg">
                     <span class="font-semibold text-gray-800">Send a Message</span>
-                    <span class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-500 text-white text-xl">
+                    <span class="w-12 h-12 flex items-center justify-center rounded-full bg-[#B60C1E] text-white text-xl">
                         <i class="fa-solid fa-arrow-right"></i>
                     </span>
                 </button>
-
             </form>
         </div>
     </div>
@@ -177,18 +172,45 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function ()
 <!-- ========================================================= -->
 
 <div class="max-w-6xl mx-auto mt-10 mb-20 px-6 relative">
-    <h2 class="text-3xl font-bold mb-4">📍 Our Nairobi Office Location</h2>
+    <h2 class="text-3xl font-bold mb-4">Our Office Location</h2>
     <p class="text-gray-600 mb-6">
         Visit our Nairobi headquarters located at the heart of the Central Business District.
     </p>
 
-    <!-- Map container -->
-    <div
-        id="nairobiMap"
-        class="w-full h-96 rounded-3xl shadow-lg border border-purple-300 overflow-hidden"
-    ></div>
-</div>
+    <div id="mapid">
+        
+    </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+    // 1. Define the coordinates
+    // Latitude: -1.2646238 (Negative for South of Equator)
+    // Longitude: 36.8061789 (East)
+    const nairobiLocation = [-1.2646238, 36.8061789]; 
+    const initialZoom = 15; // A zoom level of 15 is good for a street view
+
+    // 2. Initialize the map and set its view (center and zoom)
+    // You are changing [51.505, -0.09] to nairobiLocation and the zoom.
+    const map = L.map('mapid').setView(nairobiLocation, initialZoom); 
+
+    // 3. Add the OpenStreetMap tiles (the actual map layer)
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        // ATTRIBUTION IS MANDATORY for OpenStreetMap tiles
+        attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+    }).addTo(map);
+
+    // 4. Add a marker at the specified location
+    // You are changing [51.5, -0.09] to nairobiLocation.
+    L.marker(nairobiLocation).addTo(map)
+        .bindPopup("<b>Our Nairobi Office</b><br>This is our official location.").openPopup();
+
+</script>
+
+</div>
+<!-- 
 <script>
     const nairobi = [-1.286389, 36.817223];
 
@@ -204,7 +226,7 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function ()
 
     const marker = L.marker(nairobi).addTo(map);
     marker.bindPopup("<b>Nairobi CBD</b><br>Kenya").openPopup();
-</script>
+</script> -->
 
 
 <!-- ========================================================= -->
@@ -214,12 +236,12 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function ()
 <footer class="w-full">
 
     <!-- Upper Footer -->
-    <div class="bg-blue-900 text-white">
+    <div class="bg-[#20175D] shadow-sm">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between p-10 gap-10">
 
             <!-- Left -->
-            <div class="flex-1">
-                <h3 class="text-2xl font-bold mb-4 border-b-4 border-pink-600 inline-block pb-2">
+            <div class="flex-1 flex-col md:flex-row justify-end">
+                <h3 class="text-2xl font-bold text-white mb-4 border-b-4 border-[#B60C1E] inline-block pb-2">
                     Driving Digital Growth with Innovation & Strategy
                 </h3>
                 <p class="text-gray-300 leading-relaxed">
@@ -227,53 +249,61 @@ document.getElementById("mobile-menu-btn").addEventListener("click", function ()
                 </p>
 
                 <div class="flex gap-4 mt-6">
-                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-pink-600 rounded-full flex items-center justify-center">
+                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-[#B60C1E] rounded-full flex items-center justify-center">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-pink-600 rounded-full flex items-center justify-center">
+                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-[#B60C1E] rounded-full flex items-center justify-center">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-pink-600 rounded-full flex items-center justify-center">
+                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-[#B60C1E] rounded-full flex items-center justify-center">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-pink-600 rounded-full flex items-center justify-center">
+                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-[#B60C1E] rounded-full flex items-center justify-center">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
                 </div>
             </div>
-
             <!-- Right Links -->
-            <div class="flex-1 flex flex-col md:flex-row justify-end gap-10">
+            <div class="flex-col md:flex-row justify-end flex-grow-[0.1]">
                 <div>
-                    <h3 class="text-xl font-semibold mb-4 border-b-4 border-pink-600 inline-block pb-2">Quick Links</h3>
+                   <h3 class="text-2xl font-bold text-white mb-4 border-b-4 border-[#B60C1E] inline-block pb-2">
+                  Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\index.html" class="hover:text-pink-600">Home</a></li>
-                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\about.html" class="hover:text-pink-600">About</a></li>
-                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\services.html" class="hover:text-pink-600">Services</a></li>
-                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\blog.html" class="hover:text-pink-600">Blog</a></li>
-                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\contact.html" class="hover:text-pink-600">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-semibold mb-4 border-b-4 border-pink-600 inline-block pb-2">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\index.html" class="hover:text-pink-600">Home</a></li>
-                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\about.html" class="hover:text-pink-600">About</a></li>
-                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\services.html" class="hover:text-pink-600">Services</a></li>
-                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\blog.html" class="hover:text-pink-600">Blog</a></li>
-                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\contact.html" class="hover:text-pink-600">Contact</a></li>
+                        <li><a href="index.html" class="text-white hover:text-[#B60C1E]">Home</a></li>
+                        <li><a href="about.html" class="text-white hover:text-[#B60C1E]">About</a></li>
+                        <li><a href="services.html" class="text-white hover:text-[#B60C1E]">Services</a></li>
+                        <li><a href="blog/blog.html" class="text-white hover:text-[#B60C1E]">Blog</a></li>
+                        <li><a href="contact.html" class="text-white hover:text-[#B60C1E]">Contact</a></li>
                     </ul>
                 </div>
             </div>
+             <!-- Right Links -->
+              
+            <div class="flex-col md:flex-row justify-end flex-grow-[0.1]">
+                <div>
+                   <h3 class="text-2xl font-bold text-white mb-4 border-b-4 border-[#B60C1E] inline-block pb-2">
+                  Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white hover:text-[#B60C1E]">Home</a></li>
+                        <li><a href="about.html" class="text-white hover:text-[#B60C1E]">About</a></li>
+                        <li><a href="services/services.html" class="text-white hover:text-[#B60C1E]">Services</a></li>
+                        <li><a href="blog/blog.html" class="text-white hover:text-[#B60C1E]">Blog</a></li>
+                        <li><a href="contact.html" class="text-white hover:text-[#B60C1E]">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
 
+            
         </div>
+        <div class="w-full text-center text-[#B60C1E] py-6 text-sm font-semibold">
+            &copy; 2025 Dealogic Africa All Rights Reserved.
+        </div>
+
     </div>
 
     <!-- Bottom Footer -->
-    <div class="w-full text-center py-6 bg-gradient-to-r from-white via-blue-500 to-blue-900 text-gray-900 text-sm font-semibold">
-        &copy; 2023 Digital Solutions Inc. All Rights Reserved.
-    </div>
+    
 
 </footer>
 
