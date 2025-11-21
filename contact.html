@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+ 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+    <style>
+    /* 1. The map container MUST have a height defined */
+    #mapid { 
+        height: 400px;
+        width: 100%;
+
+        /* Equivalent to rounded-3xl (a large radius) */
+        border-radius: 24px; 
+
+        
+    }
+    </style>
+
+</head>
+
+<body class="bg-white">
+
+<!-- ========================================================= -->
+<!-- FIXED HEADER -->
+<!-- ========================================================= -->
+<header id="navbar" class="fixed top-0 left-0 w-full bg-white shadow-md z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+
+        <!-- Logo -->
+        <div class="flex items-center space-x-2">
+            <img src="images/logo.jpeg" alt="Dealogic Logo" class="h-14 w-auto"
+                 onerror="this.onerror=null;this.src='https://placehold.co/150x40/20175D/ffffff?text=LOGO';">
+        </div>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex space-x-8 text-lg font-medium items-center">
+            <a href="index.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Home</a>
+            <a href="about.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">About Us</a>
+            <a href="services/services.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Services</a>
+            <a href="blog/blog.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Insights</a>
+            <a href="contact.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Contact</a>
+        </nav>
+
+
+        <!-- Mobile Button -->
+        <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-slate-100">
+            <i class="fa-solid fa-bars text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl absolute top-full left-0 w-full z-[10000]">
+        <nav class="flex flex-col space-y-1 p-4 text-center text-lg font-medium">
+            <a href="index.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Home</a>
+            <a href="about.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">About Us</a>
+            <a href="services/services.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Services</a>
+            <a href="blog/blog.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Insights</a>
+            <a href="contact.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<script>
+document.getElementById("mobile-menu-btn").addEventListener("click", function () {
+    const menu = document.getElementById("mobile-menu");
+    menu.classList.toggle("hidden");
+});
+</script>
+
+
+<!-- ========================================================= -->
+<!-- MAIN CONTACT CONTENT (PADDING FOR FIXED HEADER) -->
+<!-- ========================================================= -->
+
+<div class="pt-40 pb-20 px-6 md:px-12 lg:px-20">
+
+    <div class="max-w-6xl w-full mx-auto grid md:grid-cols-2 gap-10">
+
+        <!-- LEFT SECTION -->
+        <div class="bg-gradient-to-br from-white via-[#FDDDE0]/20 to-[#B60C1E]/40 border border-red-300 rounded-3xl p-10 shadow-sm">
+
+            <div class="flex items-center gap-3 mb-4">
+                <p class="text-2xl text-black-600 font-bold">Reach out to us</p>
+            </div>
+
+            <h1 class="text-4xl font-bold mb-4">Get in Touch</h1>
+
+            <p class="text-gray-600 mb-10">
+                Reach out to us for tailored digital solutions that drive results sollicitudin nec.
+            </p>
+
+            <!-- PHONE -->
+            <div class="flex items-center gap-5 mb-10">
+                <div class="w-20 h-20 border border-[#B60C1E] rounded-3xl flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-phone text-[#B60C1E] text-3xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 font-semibold">Phone Number</p>
+                    <p class="text-xl font-bold mt-1">+1 (62) 987 7543</p>
+                </div>
+            </div>
+
+            <!-- EMAIL -->
+            <div class="flex items-center gap-5 mb-10">
+                <div class="w-20 h-20 border border-[#B60C1E] rounded-3xl flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-envelope text-[#B60C1E] text-3xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 font-semibold">Email Address</p>
+                    <p class="text-xl font-bold mt-1">hello@markoagency.com</p>
+                </div>
+            </div>
+
+            <!-- LOCATION -->
+            <!-- <div class="flex items-center gap-5 mb-10">
+                <div class="w-20 h-20 border border-[#B60C1E] rounded-3xl flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-location-dot text-[#B60C1E] text-3xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 font-semibold">Office Address</p>
+                    <p class="text-xl font-bold mt-1 leading-relaxed">
+                        Marko HQ – 902 Digital Lane, San Francisco, CA 94110, USA
+                    </p>
+                </div>
+            </div> -->
+
+        </div>
+
+        <!-- RIGHT SECTION -->
+        <div class="bg-gradient-to-br from-white via-[#FDDDE0]/20 to-[#B60C1E]/40 border border-red-300 rounded-3xl p-10 shadow-sm">
+
+            <h1 class="text-4xl font-bold mb-8">Let's Talk About Your Next Project</h1>
+
+            <form action="https://formspree.io/f/mrbjyjjw" method="POST" class="space-y-5">
+                <div class="grid grid-cols-2 gap-4">
+                    <input type="text" name="firstName" placeholder="First Name" class="p-4 rounded-full border border-[#B60C1E]">
+                    <input type="text" name="lastName" placeholder="Last Name" class="p-4 rounded-full border border-[#B60C1E]">
+                </div>
+
+                <input type="email" name="_replyto" placeholder="Email Address" class="w-full p-4 rounded-full border border-[#B60C1E]">
+
+                <input type="text" name="subject" placeholder="Subject" class="w-full p-4 rounded-full border border-[#B60C1E]">
+
+                <textarea name="message" placeholder="Message" rows="5" class="w-full p-4 rounded-3xl border border-[#B60C1E]"></textarea>
+
+                <button type="submit" class="group w-56 flex items-center justify-between px-6 py-4 bg-white border border-[#B60C1E] rounded-full shadow-lg">
+                    <span class="font-semibold text-gray-800">Send a Message</span>
+                    <span class="w-12 h-12 flex items-center justify-center rounded-full bg-[#B60C1E] text-white text-xl">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- ========================================================= -->
+<!-- MAP SECTION – Nairobi CBD -->
+<!-- ========================================================= -->
+
+<!-- ========================================================= -->
+<!-- MAP SECTION – Nairobi CBD -->
+<!-- ========================================================= -->
+
+<div class="max-w-6xl mx-auto mt-10 mb-20 px-6 relative">
+    <h2 class="text-3xl font-bold mb-4">Our Office Location</h2>
+    <p class="text-gray-600 mb-6">
+        Visit our Nairobi headquarters located at the heart of the Central Business District.
+    </p>
+
+    <div id="mapid">
+        
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <script>
+    // 1. Define the coordinates
+    // Latitude: -1.2646238 (Negative for South of Equator)
+    // Longitude: 36.8061789 (East)
+    const nairobiLocation = [-1.2646238, 36.8061789]; 
+    const initialZoom = 15; // A zoom level of 15 is good for a street view
+
+    // 2. Initialize the map and set its view (center and zoom)
+    // You are changing [51.505, -0.09] to nairobiLocation and the zoom.
+    const map = L.map('mapid').setView(nairobiLocation, initialZoom); 
+
+    // 3. Add the OpenStreetMap tiles (the actual map layer)
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        // ATTRIBUTION IS MANDATORY for OpenStreetMap tiles
+        attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+    }).addTo(map);
+
+    // 4. Add a marker at the specified location
+    // You are changing [51.5, -0.09] to nairobiLocation.
+    L.marker(nairobiLocation).addTo(map)
+        .bindPopup("<b>Our Nairobi Office</b><br>This is our official location.").openPopup();
+
+</script>
+
+</div>
+<!-- 
+<script>
+    const nairobi = [-1.286389, 36.817223];
+
+    const map = L.map("nairobiMap", {
+        zoomControl: true,
+        scrollWheelZoom: true,
+    }).setView(nairobi, 15);
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap contributors",
+    }).addTo(map);
+
+    const marker = L.marker(nairobi).addTo(map);
+    marker.bindPopup("<b>Nairobi CBD</b><br>Kenya").openPopup();
+</script> -->
+
+
+<!-- ========================================================= -->
+<!-- FOOTER SECTION -->
+<!-- ========================================================= -->
+
+<footer class="w-full">
+
+    <!-- Upper Footer -->
+    <div class="bg-[#20175D] shadow-sm">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between p-10 gap-10">
+
+            <!-- Left -->
+            <div class="flex-1 flex-col md:flex-row justify-end">
+                <h3 class="text-2xl font-bold text-white mb-4 border-b-4 border-[#B60C1E] inline-block pb-2">
+                    Driving Digital Growth with Innovation & Strategy
+                </h3>
+                <p class="text-gray-300 leading-relaxed">
+                    Lorem ipsum dolor sit consectetur adipiscing elit ut elit tellus luctus nec ullamcorper mattis pulvinar dapibus.
+                </p>
+
+                <div class="flex gap-4 mt-6">
+                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-[#B60C1E] rounded-full flex items-center justify-center">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-[#B60C1E] rounded-full flex items-center justify-center">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-[#B60C1E] rounded-full flex items-center justify-center">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-blue-800 hover:bg-[#B60C1E] rounded-full flex items-center justify-center">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+            <!-- Right Links -->
+            <div class="flex-col md:flex-row justify-end flex-grow-[0.1]">
+                <div>
+                   <h3 class="text-2xl font-bold text-white mb-4 border-b-4 border-[#B60C1E] inline-block pb-2">
+                  Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\index.html" class="text-white hover:text-[#B60C1E]">Home</a></li>
+                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\about.html" class="text-white hover:text-[#B60C1E]">About</a></li>
+                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\services.html" class="text-white hover:text-[#B60C1E]">Services</a></li>
+                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\blog.html" class="text-white hover:text-[#B60C1E]">Blog</a></li>
+                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\contact.html" class="text-white hover:text-[#B60C1E]">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+             <!-- Right Links -->
+              
+            <div class="flex-col md:flex-row justify-end flex-grow-[0.1]">
+                <div>
+                   <h3 class="text-2xl font-bold text-white mb-4 border-b-4 border-[#B60C1E] inline-block pb-2">
+                  Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\index.html" class="text-white hover:text-[#B60C1E]">Home</a></li>
+                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\about.html" class="text-white hover:text-[#B60C1E]">About</a></li>
+                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\services.html" class="text-white hover:text-[#B60C1E]">Services</a></li>
+                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\blog.html" class="text-white hover:text-[#B60C1E]">Blog</a></li>
+                        <li><a href="C:\Users\david\OneDrive\Desktop\New folder (2)\pages\contact.html" class="text-white hover:text-[#B60C1E]">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+
+            
+        </div>
+        <div class="w-full text-center text-[#B60C1E] py-6 text-sm font-semibold">
+            &copy; 2025 Dealogic Africa All Rights Reserved.
+        </div>
+
+    </div>
+
+    <!-- Bottom Footer -->
+    
+
+</footer>
+
+</body>
+</html>
