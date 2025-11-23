@@ -3,521 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dealogic Microfinance - Empowering Growth</title>
-
+    <title>Dealogic Africa - Our Services</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <style>
-        /* Define color palette using CSS variables for easy updates */
+        /* Custom Tailwind Configuration (optional) */
         :root {
-            --color-primary: #20175D; /* Deep Navy Blue (Brand Blue) */
-            --color-accent: #B60C1E; /* Rich Red/Maroon (Brand Red) */
-            --color-light-bg: #f8f8fa; /* Subtle off-white background */
-        }
-        
-        /* Utility classes using variables */
-        .bg-primary { background-color: var(--color-primary); }
-        .text-primary { color: var(--color-primary); }
-        .bg-accent { background-color: var(--color-accent); }
-        .text-accent { color: var(--color-accent); }
-        
-        body { font-family: 'Inter', sans-serif; background-color: var(--color-light-bg); }
-
-        /* Custom Button Styling */
-        .btn-primary {
-            background-color: var(--color-accent);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 0.75rem;
-            font-weight: 700;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 4px 6px -1px rgba(182, 12, 30, 0.5), 0 2px 4px -2px rgba(182, 12, 30, 0.5);
-        }
-        .btn-primary:hover { background-color: #920918; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(182, 12, 30, 0.7), 0 4px 6px -4px rgba(182, 12, 30, 0.5); }
-
-        /* Custom Card Hover Effect */
-        .card-hover { transition: all 0.3s ease-in-out; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04); }
-
-        /* Navigation Active State (Accent color for active link) */
-        .nav-link.active { 
-            color: var(--color-accent) !important; 
-            font-weight: 700;
-            border-bottom: 3px solid var(--color-accent); 
-            padding-bottom: 4px; 
+            --color-primary: #851717; /* red-900 */
+            --color-secondary: #1e3a8a; /* blue-900 */
         }
 
-        /* Hero Canvas Styling - Full screen, low opacity for background effect */
-        #hero-canvas { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: 1; 
-            opacity: 0.4; /* Slightly increased opacity for visibility */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        /* UPDATED: Changed alignment logic for centered text on mobile, right on desktop */
-        .hero-content { 
-            position: relative; 
-            z-index: 10; 
-            padding-top: 15vh; 
-            padding-bottom: 15vh; 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            height: 100%;
-        } 
-        
-        /* Specific rounded corners for the Figma design */
-        .rounded-3xl-custom { border-radius: 1.5rem; }
-
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        /* Sticky header background on scroll */
+        .scrolled {
+            background-color: var(--color-primary); /* Red-900 */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="bg-white text-gray-900">
 
-    <script>
-        // Helper function to easily inject SVG icons (like Lucide icons)
-        function getIcon(name, classes = "w-6 h-6", stroke = "currentColor") {
-            const icons = {
-                home: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`,
-                dollarSign: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>`,
-                users: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
-                chartLine: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m18 10-6 6-4-4-5 4"/></svg>`,
-                target: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`,
-                calendar: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>`,
-                mail: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.83 1.83 0 0 1-2.06 0L2 7"/></svg>`,
-                checkCircle: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>`,
-                xCircle: `<svg xmlns="http://www.w3.org/2000/svg" class="${classes}" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`,
-            };
-            return icons[name] || '';
-        }
-    </script>
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-red-900/90 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0">
+                    <a href="../index.html" class="text-2xl font-bold text-white" id="logo">DEALOGIC AFRICA</a>
+                </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+                <div class="hidden md:flex space-x-8">
+                    <a href="../index.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Home</a>
+                    <a href="../about.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">About</a>
+                    <a href="services.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Services</a>
+                    <a href="../blog/blog.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Insights</a>
+                    <a href="../contact.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Contact</a>
+                </div>
 
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        let app, db, auth;
-
-        async function initializeFirebase() {
-            try {
-                if (firebaseConfig) {
-                    app = initializeApp(firebaseConfig);
-                    db = getFirestore(app);
-                    setLogLevel('Debug');
-                    auth = getAuth(app);
-
-                    if (initialAuthToken) {
-                        await signInWithCustomToken(auth, initialAuthToken);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } else {
-                    console.warn("Firebase config not found. Running application without persistent storage.");
-                }
-            } catch (error) {
-                console.error("Firebase initialization failed:", error);
-            }
-        }
-        initializeFirebase();
-        window.getFirestore = getFirestore;
-        // Mock navigate function for template buttons
-        window.navigate = (page) => {
-            console.log(`Navigating to ${page}. In a real app, this would change the content.`);
-            // You should implement your actual routing logic here
-        };
-    </script>
-
-    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-lg transition-all duration-300">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            
-            <div class="flex items-center space-x-2">
-                <img src="images/logo.jpeg" onerror="this.onerror=null; this.src='https://placehold.co/150x40/20175D/ffffff?text=LOGO';" alt="Dealogic Microfinance Logo" class="h-14 w-auto">
-                <span class="text-xl font-light text-accent hidden sm:inline">Microfinance</span>
+                <button id="menuBtn" class="md:hidden text-white">
+                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
-            
-            <nav class="hidden lg:flex space-x-8 text-lg font-medium h-full items-center ml-auto">
-                <a href="index.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Home</a>
-                <a href="about.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">About Us</a>
-                <a href="services/services.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Services</a>
-                <a href="blog/blog.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Insights</a>
-                <a href="contact.html" class="nav-link py-1 hover:text-accent transition duration-150 text-primary">Contact</a>
-            </nav>
-
-
-            <button id="mobile-menu-btn" class="lg:hidden text-primary focus:outline-none p-2 rounded-lg hover:bg-slate-100 transition duration-200">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
-            </button>
         </div>
 
-        <div id="mobile-menu" class="lg:hidden hidden bg-white shadow-xl transition-all duration-300 ease-in-out">
-        <nav class="flex flex-col space-y-1 p-4 text-center text-lg font-medium">
-            <a href="index.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Home</a>
-            <a href="about.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">About Us</a>
-            <a href="services/services.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Services</a>
-            <a href="blog/blog.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Insights</a>
-            <a href="contact.html" class="nav-link py-3 rounded-lg hover:bg-slate-50 transition duration-150 text-primary">Contact</a>
-
-        </nav>
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-4 py-6 space-y-4">
+                <a href="../index.html" class="block text-gray-700 hover:text-red-900 font-medium">Home</a>
+                <a href="../about.html" class="block text-gray-700 hover:text-red-900 font-medium">About</a>
+                <a href="services.html" class="block text-gray-700 hover:text-red-900 font-medium">Services</a>
+                <a href="../blog/blog.html" class="block text-gray-700 hover:text-red-900 font-medium">Insights</a>
+                <a href="../contact.html" class="block text-gray-700 hover:text-red-900 font-medium">Contact</a>
+            </div>
         </div>
+    </nav>
 
-    </header>
+    <section class="relative bg-gradient-to-br from-red-900 to-blue-900 text-white py-32 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center z-10 relative">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 animate-fade-in drop-shadow-lg">Our Comprehensive Services</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-light drop-shadow-md">
+                Delivering strategic financial advisory and capital solutions to empower businesses across Africa.
+            </p>
+        </div>
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.2\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E');"></div>
+    </section>
 
-    <main id="content-area" class="pt-24 min-h-screen">
-        <div id="page-content">
-            
-            <section class="relative bg-primary overflow-hidden h-screen -mt-24">
-                <canvas id="hero-canvas"></canvas>
+    <section id="services-grid" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
-                <div class="hero-content flex flex-col justify-center h-full relative z-10 container mx-auto px-4 text-center lg:text-right">
-                    <div class="max-w-4xl mx-auto lg:ml-auto lg:mr-0">
-                        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-snug tracking-tighter" data-aos="fade-left">
-                            <span class="text-accent block text-4xl lg:text-5xl">STRATEGIC FINANCE PARTNER</span>
-                            WE ENGINEER YOUR NEXT GROWTH STAGE.
-                        </h1>
-                        
-                        <div class="mt-8 pt-4 border-t border-white/20">
-                            <p class="max-w-3xl text-lg sm:text-xl text-slate-200 lg:ml-auto" data-aos="fade-left" data-aos-delay="200">
-                                If you're looking for expert **capital structuring** and advisory for your MSME, **you've found the market leader.**
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-red-900 hover-scale">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-red-100 text-red-900 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Strategy Formulation</h3>
+                    <p class="text-gray-600 mb-6">
+                        Developing robust and actionable strategies to guide your business towards sustainable growth and market leadership.
+                    </p>
+                    <a href="strategy.html" class="inline-flex items-center text-red-900 hover:text-red-700 font-semibold transition-colors">
+                        Learn More
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-blue-900 hover-scale">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 text-blue-900 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V3m0 9v3m0-8a6 6 0 00-6 6v12a3 3 0 003 3h7a3 3 0 003-3V9a6 6 0 00-6-6z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Debt and Equity Fundraising</h3>
+                    <p class="text-gray-600 mb-6">
+                        Connecting your business with the right capital partners through expertly structured debt and equity financing.
+                    </p>
+                    <a href="debt_equity.html" class="inline-flex items-center text-blue-900 hover:text-blue-700 font-semibold transition-colors">
+                        Learn More
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-gray-400 hover-scale">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 text-gray-700 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m-1 4h1m-2 2v.01M7 12h1m-1 4h1m-1 4h1m-2 2v.01M17 12h1m-1 4h1m-1 4h1m-2 2v.01"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Institutional Set-up and Support</h3>
+                    <p class="text-gray-600 mb-6">
+                        Guiding new and expanding institutions through regulatory, operational, and structural setup for compliance and efficiency.
+                    </p>
+                    <a href="institution.html" class="inline-flex items-center text-gray-700 hover:text-gray-500 font-semibold transition-colors">
+                        Learn More
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-green-700 hover-scale">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-700 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M12 20.646A8 8 0 015.354 12c0-1.077.34-2.129.988-3.056M12 20.646A8 8 0 0018.646 12c0-1.077-.34-2.129-.988-3.056m-7.5-1.5a4 4 0 100-5.292M12 12V3"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Creating Strategic Business Partnerships</h3>
+                    <p class="text-gray-600 mb-6">
+                        Facilitating powerful alliances and collaborations that drive mutual growth and expand market reach.
+                    </p>
+                    <a href="partnership.html" class="inline-flex items-center text-green-700 hover:text-green-500 font-semibold transition-colors">
+                        Learn More
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-purple-700 hover-scale">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-purple-100 text-purple-700 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.206 5 7.5 5A3.493 3.493 0 004 8.5c0 1.54.484 3.062 1.39 4.25M12 6.253C13.168 5.477 14.794 5 16.5 5A3.493 3.493 0 0020 8.5c0 1.54-.484 3.062-1.39 4.25M12 18.747a5.972 5.972 0 01-5.357-3H15.71a5.972 5.972 0 01-5.357 3z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Professional Coaching</h3>
+                    <p class="text-gray-600 mb-6">
+                        Empowering leaders and teams with tailored coaching programs to enhance skills, performance, and strategic thinking.
+                    </p>
+                    <a href="coaching.html" class="inline-flex items-center text-purple-700 hover:text-purple-500 font-semibold transition-colors">
+                        Learn More
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-yellow-700 hover-scale">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-yellow-100 text-yellow-700 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Audit and Tax Advisory</h3>
+                    <p class="text-gray-600 mb-6">
+                        Ensuring financial transparency and compliance with expert audit services and strategic tax planning solutions.
+                    </p>
+                    <a href="audit.html" class="inline-flex items-center text-yellow-700 hover:text-yellow-500 font-semibold transition-colors">
+                        Learn More
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 border-t-4 border-pink-700 hover-scale">
+                    <div class="flex items-center justify-center w-16 h-16 rounded-full bg-pink-100 text-pink-700 mb-6">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Mergers and Acquisitions</h3>
+                    <p class="text-gray-600 mb-6">
+                        Expert advisory through every stage of M&A transactions, from strategy to integration, maximizing value for all parties.
+                    </p>
+                    <a href="mergers.html" class="inline-flex items-center text-pink-700 hover:text-pink-500 font-semibold transition-colors">
+                        Learn More
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-cta" class="py-20 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="group bg-white p-8 md:p-12 lg:p-16 rounded-3xl shadow-2xl transition-all duration-500 hover:shadow-red-900/50 hover:scale-[1.01] border-t-8 border-red-900">
+                <div class="grid md:grid-cols-3 gap-10 items-center">
+                    <div class="md:col-span-2 text-center md:text-left">
+                        <h2 class="text-3xl font-extrabold text-gray-900 mb-4">
+                            Unlock Tailored Financial Solutions
+                        </h2>
+                        <p class="text-xl text-gray-600 mb-6 max-w-2xl">
+                            Your financial goals are unique. We offer a dedicated consultation process to understand your needs and align them with our bespoke capital strategies.
+                        </p>
+                        <div class="space-y-3 text-left inline-block md:block">
+                            <p class="flex items-center text-gray-700 font-medium">
+                                <svg class="w-5 h-5 mr-3 text-red-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                Personalized consultation slots
+                            </p>
+                            <p class="flex items-center text-gray-700 font-medium">
+                                <svg class="w-5 h-5 mr-3 text-red-900 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                Dedicated strategy discussions
                             </p>
                         </div>
-
-                        <div class="mt-10 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 justify-center lg:justify-end" data-aos="fade-left" data-aos-delay="400">
-                            <button onclick="navigate('contact')" class="btn-primary text-lg px-8 py-3 shadow-xl">Get a Free Valuation</button>
-                            <button onclick="navigate('services')" class="bg-white/10 text-white border border-white/30 hover:bg-white/20 transition duration-300 text-lg px-8 py-3 rounded-xl font-semibold shadow-md">Our Expertise &rarr;</button>
-                        </div>
+                    </div>
+                    <div class="md:col-span-1 flex justify-center md:justify-end">
+                        <a href="../contact.html" class="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 border border-transparent text-base font-semibold rounded-xl shadow-lg text-white bg-red-900 transition-all duration-300 transform group-hover:bg-red-800 group-hover:translate-y-[-2px] hover:shadow-xl">
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                            </svg>
+                            Reach out now
+                        </a>
                     </div>
                 </div>
-            </section>
-
-            <section class="py-20 bg-light-bg relative overflow-hidden">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 relative z-10">
-
-                        <div class="lg:col-span-2 lg:mr-[-100px] relative z-20">
-                            
-                            <div class="p-8 lg:p-12 bg-white rounded-3xl-custom shadow-xl border border-gray-100 
-                                        bg-gradient-to-br from-white via-white to-indigo-50/70" 
-                                 data-aos="fade-right" 
-                                 data-aos-delay="50">
-                                
-                                <p class="text-sm font-semibold text-accent uppercase mb-3">Who We Are</p>
-                                <h2 class="text-3xl lg:text-4xl font-extrabold text-primary mb-5">
-                                    Engineered Capital for Sustainable Growth
-                                </h2>
-                                <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                                    Dealogic Microfinance was founded in 20XX with the belief that <strong>MSMEs deserve Tier-1 financial strategy</strong>, not just standard loan products. We witnessed resilient businesses failing due to misaligned capital structures. Our mission: structure financing that truly supports long-term growth and ambitious entrepreneurs.
-                                </p>
-                                
-                                <div class="flex space-x-6 text-center mt-6">
-                                    <div>
-                                        <p class="text-3xl font-extrabold text-accent">10+</p>
-                                        <p class="text-sm text-gray-500">Years of Expertise</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-3xl font-extrabold text-accent">98%</p>
-                                        <p class="text-sm text-gray-500">Success Rate</p>
-                                    </div>
-                                </div>
-
-                                <button onclick="navigate('about')" class="btn-primary w-full sm:w-auto mt-8">
-                                    Read Our Full Story &rarr;
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-1 relative z-10 mt-10 lg:mt-0 lg:-ml-12" data-aos="fade-left" data-aos-delay="200">
-                            <div class="rounded-3xl-custom h-96 lg:h-full bg-primary overflow-hidden shadow-2xl relative">
-                                <img src="../images/meeting.jpg" 
-                                     onerror="this.onerror=null; this.src='https://placehold.co/400x600/20175D/ffffff?text=Company+meeting';" 
-                                     alt="Dealogic Microfinance meeting" 
-                                     class="w-full h-full object-cover object-center opacity-80" 
-                                     style="filter: grayscale(10%) contrast(1.1); transform: scale(1.05);">
-                                
-                                <div class="absolute inset-0 bg-primary/20 mix-blend-multiply"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="py-20 bg-color-light-bg">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <h2 class="text-4xl font-bold text-center text-primary mb-12" data-aos="fade-up">Our Services</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="p-8 bg-white rounded-3xl-custom shadow-xl card-hover" data-aos="zoom-in" data-aos-delay="100">
-                            <div class="text-accent mb-4">${getIcon('dollarSign', 'w-10 h-10')}</div>
-                            <h3 class="text-2xl font-semibold text-primary mb-3">Capital Raising</h3>
-                            <p class="text-gray-600">Accessing the right financing—debt, equity, or mezzanine—for sustainable growth.</p>
-                        </div>
-
-                        <div class="p-8 bg-white rounded-3xl-custom shadow-xl card-hover" data-aos="zoom-in" data-aos-delay="200">
-                            <div class="text-accent mb-4">${getIcon('users', 'w-10 h-10')}</div>
-                            <h3 class="text-2xl font-semibold text-primary mb-3">M&A Advisory</h3>
-                            <p class="text-gray-600">Expert guidance on mergers, acquisitions, and restructuring to maximize value.</p>
-                        </div>
-
-                        <div class="p-8 bg-white rounded-3xl-custom shadow-xl card-hover" data-aos="zoom-in" data-aos-delay="300">
-                            <div class="text-accent mb-4">${getIcon('target', 'w-10 h-10')}</div>
-                            <h3 class="text-2xl font-semibold text-primary mb-3">Strategy & Structuring</h3>
-                            <p class="text-gray-600">Developing robust capital structures and long-term financial strategies.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-20 bg-primary/95">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        
-                        <div class="space-y-6" data-aos="fade-right">
-                            <h2 class="text-4xl font-bold text-white mb-6">Our Strategy in Practice</h2>
-                            <div class="p-6 bg-white/10 text-white rounded-3xl-custom">
-                                <h3 class="text-2xl font-semibold mb-2">Risk Mitigation</h3>
-                                <p class="text-slate-200">Stress-testing models to ensure capital longevity in volatile market conditions.</p>
-                            </div>
-                            <div class="p-6 bg-white/10 text-white rounded-3xl-custom">
-                                <h3 class="text-2xl font-semibold mb-2">Regulatory Compliance</h3>
-                                <p class="text-slate-200">Ensuring all financial moves are compliant with international and local frameworks.</p>
-                            </div>
-                            <div class="p-6 bg-white/10 text-white rounded-3xl-custom">
-                                <h3 class="text-2xl font-semibold mb-2">Sustainable Growth Focus</h3>
-                                <p class="text-slate-200">Prioritizing investment that offers long-term, scalable returns over quick fixes.</p>
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6" data-aos="fade-left">
-                            <div class="col-span-1 sm:col-span-2 p-6 bg-accent rounded-3xl-custom text-white">
-                                <h3 class="text-xl font-bold mb-3">Customized Deal Structuring</h3>
-                                <p class="text-sm">Every client receives a capital structure engineered precisely for their operational profile and risk tolerance. We don't believe in one-size-fits-all financing.</p>
-                            </div>
-                            
-                            <div class="bg-gray-700 rounded-3xl-custom relative overflow-hidden">
-                                <img src="https://placehold.co/400x300/ef4444/ffffff?text=Strategy+Photo" alt="Strategy" class="w-full h-full object-cover opacity-80">
-                            </div>
-                            
-                            <div class="p-6 bg-primary rounded-3xl-custom text-white flex flex-col justify-between">
-                                <h4 class="text-2xl font-bold mb-4">Ready to Talk Strategy?</h4>
-                                <button onclick="navigate('contact')" class="bg-accent text-white font-bold py-3 px-6 rounded-xl hover:bg-accent/80 transition duration-300">Start Project &rarr;</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-20 bg-white">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="bg-gray-100 p-8 rounded-3xl-custom shadow-inner text-center" data-aos="fade-up">
-                        <h2 class="text-3xl font-bold text-primary mb-8">Who We Have Worked With</h2>
-                        <div class="flex flex-wrap justify-center items-center gap-6">
-                            <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">Client Name 1</div>
-                            <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">FinTech Partner</div>
-                            <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">Regional Bank X</div>
-                            <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">MSME Fund A</div>
-                            <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">Investment Firm</div>
-                            <div class="px-5 py-2 bg-white border border-gray-300 rounded-full text-gray-700 text-sm font-medium shadow-sm">Startup Z</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-20 bg-color-light-bg">
-                <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-                        
-                        <div class="lg:col-span-1 space-y-6" data-aos="fade-right">
-                            <h2 class="text-5xl font-extrabold text-primary leading-tight">Hear from our clients</h2>
-                            
-                            <div class="p-6 bg-green-600 rounded-3xl-custom text-white shadow-xl">
-                                <div class="text-4xl font-extrabold mb-1 counter" data-target="98" data-is-years="false">0%</div>
-                                <p class="text-sm font-medium">Client Success Rate</p>
-                            </div>
-
-                            <div class="p-6 bg-green-700 rounded-3xl-custom text-white shadow-xl">
-                                <div class="text-4xl font-extrabold mb-1 counter" data-target="150" data-is-years="false">0+</div>
-                                <p class="text-sm font-medium">Growth Projects Funded</p>
-                            </div>
-                        </div>
-
-                        <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-left">
-                            <div class="p-6 bg-white rounded-3xl-custom shadow-xl card-hover">
-                                <p class="text-gray-600 italic mb-4">"The team's M&A advice was instrumental in our successful exit. They handled the complexity flawlessly."</p>
-                                <p class="font-bold text-primary">- Jane D., Former CEO, RetailTech</p>
-                            </div>
-                            
-                            <div class="p-6 bg-white rounded-3xl-custom shadow-xl card-hover">
-                                <p class="text-gray-600 italic mb-4">"We received capital faster than expected, thanks to their investor network and structured approach."</p>
-                                <p class="font-bold text-primary">- Mike R., Founder, LogiSwift</p>
-                            </div>
-                            
-                            <div class="p-6 bg-white rounded-3xl-custom shadow-xl card-hover">
-                                <p class="text-gray-600 italic mb-4">"Truly bespoke financial engineering. Our new capital structure is perfect for our aggressive scaling plans."</p>
-                                <p class="font-bold text-primary">- Sarah K., CFO, Innovate Corp</p>
-                            </div>
-                            
-                            <div class="p-6 bg-white rounded-3xl-custom shadow-xl card-hover">
-                                <p class="text-gray-600 italic mb-4">"Exceptional clarity and transparency throughout the entire fundraising process."</p>
-                                <p class="font-bold text-primary">- Ben L., Investor</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <div id="toast-container"></div>
+    <footer class="bg-gradient-to-br from-red-900 via-red-900 to-blue-900 text-white pt-16 pb-8 border-t-8 border-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
 
-<footer id="footer" class="footer-section">
-  <div class="footer-container">
-    <nav class="footer-links">
-      <a href="#home" class="home-link">Home</a>
-      <ul class="sub-links">
-        <li><a href="#terms">Terms of Use</a></li>
-        <li><a href="#privacy">Data Privacy</a></li>
-        <li><a href="#cookies">Cookies Policy</a></li>
-        <li><a href="#legal">Legal/Ethics</a></li>
-        <li><a href="#investors">Investor Relations</a></li>
-      </ul>
-    </nav>
-    <div class="footer-bar">
-      <img src="${ASSET_PATH}/a3507b49202f307f3ab04551c0fb023144c44daa.png" alt="Dealogic Africa logo" class="footer-logo">
-    </div>
-  </div>
-</footer>
+                <div class="md:col-span-1">
+                    <div class="mb-4 border-b-2 border-white/50 pb-2 inline-block">
+                        <img src="../images/logo.jpeg" alt="Dealogic Africa Logo" class="h-20 w-auto filter brightness-150">
+                    </div>
+                    <p class="text-red-100 text-sm mb-4">
+                        Strategic financial advisory and capital solutions for businesses driving Africa's economic transformation. We partner with organizations to unlock growth potential.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-white hover:text-yellow-400 transition-colors" aria-label="LinkedIn">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.13-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.356 7 2.356v6.879z"/></svg>
+                        </a>
+                        <a href="#" class="text-white hover:text-yellow-400 transition-colors" aria-label="Twitter">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.799-1.574 2.164-2.722-.951.555-2.005.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-3.593 0-6.492 2.901-6.492 6.492 0 .511.054 1.011.161 1.493-5.409-.271-10.218-2.864-13.401-6.839-.567.973-.895 2.1-.895 3.328 0 2.251 1.149 4.249 2.895 5.421-1.001-.033-1.944-.309-2.75-.765v.083c0 3.153 2.24 5.766 5.207 6.368-.544.148-1.115.225-1.701.225-.418 0-.828-.042-1.227-.119.832 2.571 3.208 4.45 6.035 4.492-2.231 1.74-5.047 2.784-8.09 2.784-.52 0-1.036-.026-1.545-.09.117.986.386 1.944.801 2.854 3.069 5.378 7.234 8.643 12.023 8.643 13.684 0 21.142-11.391 21.142-21.142 0-.315-.011-.63-.03-.941.875-.63 1.637-1.42 2.245 2.245 2.245 2.245z"/></svg>
+                        </a>
+                        </div>
+                </div>
 
+                <div>
+                    <h3 class="text-xl font-bold mb-4 border-b border-white/50 pb-2">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="../about.html" class="text-red-200 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="services.html" class="text-red-200 hover:text-white transition-colors">Our Services</a></li>
+                        <li><a href="../blog/blog.html" class="text-red-200 hover:text-white transition-colors">Insights & News</a></li>
+                        <li><a href="../contact.html" class="text-red-200 hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4 border-b border-white/50 pb-2">Information</h3>
+                    <ul class="space-y-3">
+                        <li><a href="../careers.html" class="text-red-200 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="../privacy.html" class="text-red-200 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="../terms.html" class="text-red-200 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="../sitemap.html" class="text-red-200 hover:text-white transition-colors">Sitemap</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4 border-b border-white/50 pb-2">Get in Touch</h3>
+                    <address class="space-y-3 not-italic">
+                        <p class="flex items-start text-red-200">
+                            <svg class="w-5 h-5 mr-3 mt-1 flex-shrink-0 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.62V7z"/></svg>
+                            P.O Box 1234, Nairobi, Kenya
+                        </p>
+                        <p class="flex items-center text-red-200">
+                            <svg class="w-5 h-5 mr-3 flex-shrink-0 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <a href="mailto:info@dealogicafrica.com" class="hover:text-white transition-colors">info@dealogicafrica.com</a>
+                        </p>
+                        <p class="flex items-center text-red-200">
+                            <svg class="w-5 h-5 mr-3 flex-shrink-0 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20 15.5c-1.23 0-2.4-.2-3.5-.5a1.86 1.86 0 00-1.74.49l-2.07 2.07a15.82 15.82 0 01-6.1-6.1l2.07-2.07c.39-.39.58-.93.49-1.47a1.86 1.86 0 00-.49-1.74c-.3-.3-.6-.6-.9-.9a2.03 2.03 0 00-1.74-.49A15.82 15.82 0 013.5 4.5c0-.82.67-1.5 1.5-1.5h3c.83 0 1.5.67 1.5 1.5.01 1.48-.48 2.94-1.4 4.14l-2.2 2.2c.42.8.97 1.63 1.6 2.37l2.3 2.3c.74.63 1.57 1.18 2.37 1.6l2.2-2.2c1.2-1.2 2.66-1.7 4.14-1.7.82 0 1.5.67 1.5 1.5v3c0 .83-.67 1.5-1.5 1.5z"/></svg>
+                            <a href="tel:+254712345678" class="hover:text-white transition-colors">+254 712 345 678</a>
+                        </p>
+                    </address>
+                </div>
+
+            </div>
+
+            <div class="mt-16 pt-8 border-t border-white/30 text-center">
+                <p class="text-sm text-red-100">
+                    &copy; <span id="currentYear"></span> Dealogic Africa. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // Initialize AOS (Animate On Scroll)
-        AOS.init({
-            duration: 800,
-            once: true,
+        // Update current year in the footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+        const closeIcon = document.getElementById('closeIcon');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
         });
 
-        // Toggle Mobile Menu
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-        
-        // Counter Animation Logic (Only runs if elements exist)
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const counter = entry.target;
-                        const target = parseInt(counter.dataset.target);
-                        const isYears = counter.dataset.isYears === 'true';
-                        let current = 0;
-                        
-                        const updateCounter = () => {
-                            if (current < target) {
-                                current++;
-                                counter.textContent = current + (isYears ? '+' : '%');
-                                requestAnimationFrame(updateCounter);
-                            } else {
-                                counter.textContent = target + (isYears ? '+' : '%');
-                            }
-                        };
-                        updateCounter();
-                        observer.unobserve(counter);
-                    }
-                });
-            }, { threshold: 0.7 });
-
-            counters.forEach(counter => observer.observe(counter));
-        }
-        
-        // Custom JS for core values pop-in (re-added from original structure)
-        document.addEventListener('DOMContentLoaded', () => {
-            const coreValues = document.querySelectorAll('.core-value span');
-            const observerValues = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        coreValues.forEach((icon, index) => {
-                            setTimeout(() => {
-                                icon.classList.add('scale-100');
-                                icon.classList.remove('scale-0');
-                            }, index * 200);
-                        });
-                        observerValues.disconnect();
-                    }
-                });
-            }, { threshold: 0.5 });
-            coreValues.forEach(icon => observerValues.observe(icon.closest('.core-value').parentElement.parentElement)); // Observe parent container
-            
-            // Re-run counter animation once the page is fully loaded
-            animateCounters();
-        });
-
-
-        // --- Three.js Dynamic Flow Graphic (Minimal/Placeholder Logic) ---
-        function initThreeJS() {
-            const canvas = document.getElementById('hero-canvas');
-            if (!canvas) return;
-
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
-            
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            
-            // Simplified geometry (e.g., dynamic particles/dots)
-            const geometry = new THREE.SphereGeometry(0.1, 8, 8);
-            const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
-            const particles = [];
-
-            for (let i = 0; i < 50; i++) {
-                const particle = new THREE.Mesh(geometry, material);
-                particle.position.set(
-                    (Math.random() - 0.5) * 10,
-                    (Math.random() - 0.5) * 10,
-                    (Math.random() - 0.5) * 10
-                );
-                particles.push(particle);
-                scene.add(particle);
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                navbar.classList.remove('bg-red-900/90');
+                navbar.classList.add('bg-red-900');
+            } else {
+                navbar.classList.remove('scrolled');
+                navbar.classList.add('bg-red-900/90');
+                navbar.classList.remove('bg-red-900');
             }
-
-            camera.position.z = 5;
-
-            const animate = function (time) {
-                requestAnimationFrame(animate);
-                
-                particles.forEach(p => {
-                    p.rotation.x += 0.005;
-                    p.rotation.y += 0.005;
-                    // Minimal position change for 'flow'
-                    p.position.y += Math.sin(time * 0.0001 + p.position.x) * 0.0005;
-                    p.position.x += Math.cos(time * 0.0001 + p.position.y) * 0.0005;
-                });
-
-                renderer.render(scene, camera);
-            };
-
-            animate();
-            
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-        }
-        
-        // This is a minimal implementation, and might not look exactly like the "Dynamic Flow Graphic" you intended.
-        // initThreeJS(); 
-
+        });
     </script>
+
 </body>
 </html>
