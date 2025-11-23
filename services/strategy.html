@@ -13,13 +13,45 @@
         .scrolled { background-color: var(--color-primary); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
     </style>
 </head>
-<body class="bg-white text-gray-900 pt-20">
-    <nav class="fixed w-full z-50 bg-red-900/90 shadow-lg h-20 flex items-center">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex justify-between items-center">
-             <a href="../index.html" class="text-2xl font-bold text-white">DEALOGIC AFRICA</a>
-             <a href="../contact.html" class="px-4 py-2 text-white border border-white rounded-lg hover:bg-white hover:text-red-900 transition-colors hidden sm:inline-block">Get Started</a>
+<body class="bg-white text-gray-900">
+<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-red-900/90 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <div class="flex-shrink-0">
+                <a href="../index.html">
+                    <img id="logo-img" src="../images/logo.jpeg" alt="DEALOGIC AFRICA Logo" class="h-16 w-auto">
+                </a>
+            </div>
+            
+            <div class="hidden md:flex space-x-8">
+                <a href="../index.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Home</a>
+                <a href="../about.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">About</a>
+                <a href="services.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Services</a>
+                <a href="../blog/blog.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Insights</a>
+                <a href="../contact.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Contact</a>
+            </div>
+
+            <button id="menuBtn" class="md:hidden text-white">
+                <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+                <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
         </div>
-    </nav>
+    </div>
+
+    <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
+        <div class="px-4 py-6 space-y-4">
+            <a href="../index.html" class="block text-gray-700 hover:text-red-900 font-medium">Home</a>
+            <a href="../about.html" class="block text-gray-700 hover:text-red-900 font-medium">About</a>
+            <a href="services.html" class="block text-gray-700 hover:text-red-900 font-medium">Services</a>
+            <a href="../blog/blog.html" class="block text-gray-700 hover:text-red-900 font-medium">Insights</a>
+            <a href="../contact.html" class="block text-gray-700 hover:text-red-900 font-medium">Contact</a>
+        </div>
+    </div>
+</nav>
 
     <header class="bg-red-900 text-white py-24 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
@@ -77,5 +109,92 @@
             &copy; 2024 Dealogic Africa. All rights reserved. | <a href="../privacy.html" class="hover:text-red-200">Privacy Policy</a>
         </div>
     </footer>
+    <script>
+          // --- 🌐 NAVIGATION LOGIC ---
+        const navbar = document.getElementById('navbar');
+        const logo = document.getElementById('logo');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const menuIcon = document.getElementById('menuIcon');
+        const closeIcon = document.getElementById('closeIcon');
+
+ // Sticky Navbar Effect
+const handleScroll = () => {
+    // Select elements (assuming these are defined elsewhere in your script)
+    const navbar = document.getElementById('navbar');
+    // Using logo-img for the new logo element
+    const logo = document.getElementById('logo-img'); 
+    const navLinks = document.querySelectorAll('.nav-link');
+    const menuBtn = document.getElementById('menuBtn');
+
+    if (window.scrollY > 50) {
+        // --- Scrolled Down State: Navbar background white, Text Red, Hover Blue ---
+        
+        // 1. Change navbar background
+        navbar.classList.add('bg-white', 'shadow-xl');
+        navbar.classList.remove('bg-red-900/90');
+        
+        // 2. Change logo text/image color (assuming you want red)
+        // If logo is a text <h1>, use text-red-900
+        // If logo is an <img>, you'll need a different method (like swapping the image source or using CSS filter, which requires additional CSS/JS)
+        // For simplicity, if it's the logo image, we'll skip color change here, 
+        // but if it's the old <h1>, you would use: logo.classList.add('text-red-900');
+        
+        // 3. Change navigation links to text-red-900 (your primary red) and hover:text-blue-900 (your secondary blue)
+        navLinks.forEach(link => {
+            // Remove original classes (text-white, hover:text-red-200)
+            link.classList.remove('text-white', 'hover:text-red-200');
+            // Add new classes (text-red-900, hover:text-blue-900)
+            link.classList.add('text-red-900', 'hover:text-blue-900');
+        });
+        
+        // 4. Change menu button icon color (text-gray-700 works well on white background)
+        menuBtn.classList.remove('text-white');
+        menuBtn.classList.add('text-gray-700');
+        
+    } else {
+        // --- Original State (At the Top): Navbar background red, Text White, Hover Lighter Red ---
+
+        // 1. Restore navbar background
+        navbar.classList.remove('bg-white', 'shadow-xl');
+        navbar.classList.add('bg-red-900/90');
+        
+        // 2. Restore logo text/image color
+        // If logo is an <h1>, you would use: logo.classList.remove('text-red-900');
+        
+        // 3. Restore navigation links to text-white and hover:text-red-200
+        navLinks.forEach(link => {
+            // Remove scrolled classes (text-red-900, hover:text-blue-900)
+            link.classList.remove('text-red-900', 'hover:text-blue-900');
+            // Add original classes (text-white, hover:text-red-200)
+            link.classList.add('text-white', 'hover:text-red-200');
+        });
+
+        // 4. Restore menu button icon color
+        menuBtn.classList.remove('text-gray-700');
+        menuBtn.classList.add('text-white');
+    }
+};
+
+window.addEventListener('scroll', handleScroll);
+window.addEventListener('load', handleScroll); // Check on load
+        // Mobile Menu Toggle
+        menuBtn.addEventListener('click', () => {
+            const isExpanded = mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden', !isExpanded);
+            closeIcon.classList.toggle('hidden', isExpanded);
+
+            // If menu is closed, re-apply the correct nav bar colors based on scroll position
+            if (isExpanded) {
+                handleScroll();
+            } else {
+                // If menu is open, force white text/icons for better visibility over the mobile menu background
+                menuBtn.classList.add('text-red-700');
+                menuBtn.classList.remove('text-white');
+            }
+        });
+
+    </script>
 </body>
 </html>
