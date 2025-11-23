@@ -79,8 +79,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex-shrink-0">
-                    <h1 id="logo" class="text-2xl font-bold text-white">DEALOGIC AFRICA</h1>
-                </div>
+                    <a href="index.html">
+                        <img id="logo-img" src="images/logo.jpeg" alt="DEALOGIC AFRICA Logo" class="h-16 w-auto">
+                    </a>
+                    </div>
                 
                 <div class="hidden md:flex space-x-8">
                     <a href="index.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Home</a>
@@ -588,38 +590,66 @@
         const menuIcon = document.getElementById('menuIcon');
         const closeIcon = document.getElementById('closeIcon');
 
-        // Sticky Navbar Effect
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                // Change navbar appearance when scrolling down
-                navbar.classList.add('bg-white', 'shadow-xl');
-                navbar.classList.remove('bg-red-900/90');
-                logo.classList.remove('text-white');
-                logo.classList.add('text-red-900');
-                navLinks.forEach(link => {
-                    link.classList.remove('text-white', 'hover:text-red-200');
-                    link.classList.add('text-gray-700', 'hover:text-red-900');
-                });
-                menuBtn.classList.remove('text-white');
-                menuBtn.classList.add('text-gray-700');
-            } else {
-                // Restore original appearance at the top
-                navbar.classList.remove('bg-white', 'shadow-xl');
-                navbar.classList.add('bg-red-900/90');
-                logo.classList.remove('text-red-900');
-                logo.classList.add('text-white');
-                navLinks.forEach(link => {
-                    link.classList.remove('text-gray-700', 'hover:text-red-900');
-                    link.classList.add('text-white', 'hover:text-red-200');
-                });
-                menuBtn.classList.remove('text-gray-700');
-                menuBtn.classList.add('text-white');
-            }
-        };
+ // Sticky Navbar Effect
+const handleScroll = () => {
+    // Select elements (assuming these are defined elsewhere in your script)
+    const navbar = document.getElementById('navbar');
+    // Using logo-img for the new logo element
+    const logo = document.getElementById('logo-img'); 
+    const navLinks = document.querySelectorAll('.nav-link');
+    const menuBtn = document.getElementById('menuBtn');
 
-        window.addEventListener('scroll', handleScroll);
-        window.addEventListener('load', handleScroll); // Check on load
+    if (window.scrollY > 50) {
+        // --- Scrolled Down State: Navbar background white, Text Red, Hover Blue ---
+        
+        // 1. Change navbar background
+        navbar.classList.add('bg-white', 'shadow-xl');
+        navbar.classList.remove('bg-red-900/90');
+        
+        // 2. Change logo text/image color (assuming you want red)
+        // If logo is a text <h1>, use text-red-900
+        // If logo is an <img>, you'll need a different method (like swapping the image source or using CSS filter, which requires additional CSS/JS)
+        // For simplicity, if it's the logo image, we'll skip color change here, 
+        // but if it's the old <h1>, you would use: logo.classList.add('text-red-900');
+        
+        // 3. Change navigation links to text-red-900 (your primary red) and hover:text-blue-900 (your secondary blue)
+        navLinks.forEach(link => {
+            // Remove original classes (text-white, hover:text-red-200)
+            link.classList.remove('text-white', 'hover:text-red-200');
+            // Add new classes (text-red-900, hover:text-blue-900)
+            link.classList.add('text-red-900', 'hover:text-blue-900');
+        });
+        
+        // 4. Change menu button icon color (text-gray-700 works well on white background)
+        menuBtn.classList.remove('text-white');
+        menuBtn.classList.add('text-gray-700');
+        
+    } else {
+        // --- Original State (At the Top): Navbar background red, Text White, Hover Lighter Red ---
 
+        // 1. Restore navbar background
+        navbar.classList.remove('bg-white', 'shadow-xl');
+        navbar.classList.add('bg-red-900/90');
+        
+        // 2. Restore logo text/image color
+        // If logo is an <h1>, you would use: logo.classList.remove('text-red-900');
+        
+        // 3. Restore navigation links to text-white and hover:text-red-200
+        navLinks.forEach(link => {
+            // Remove scrolled classes (text-red-900, hover:text-blue-900)
+            link.classList.remove('text-red-900', 'hover:text-blue-900');
+            // Add original classes (text-white, hover:text-red-200)
+            link.classList.add('text-white', 'hover:text-red-200');
+        });
+
+        // 4. Restore menu button icon color
+        menuBtn.classList.remove('text-gray-700');
+        menuBtn.classList.add('text-white');
+    }
+};
+
+window.addEventListener('scroll', handleScroll);
+window.addEventListener('load', handleScroll); // Check on load
         // Mobile Menu Toggle
         menuBtn.addEventListener('click', () => {
             const isExpanded = mobileMenu.classList.toggle('hidden');
@@ -631,7 +661,7 @@
                 handleScroll();
             } else {
                 // If menu is open, force white text/icons for better visibility over the mobile menu background
-                menuBtn.classList.add('text-gray-700');
+                menuBtn.classList.add('text-red-700');
                 menuBtn.classList.remove('text-white');
             }
         });
