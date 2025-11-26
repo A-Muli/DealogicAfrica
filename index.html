@@ -74,7 +74,7 @@
     </style>
 </head>
 <body class="bg-white text-gray-900">
-    
+    <!--NAVBAR SECTION-->
     <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-red-900/90 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
@@ -113,7 +113,7 @@
             </div>
         </div>
     </nav>
-
+        <!--HERO SECTION -->
     <section id="home" class="relative h-screen flex items-center justify-center text-white overflow-hidden">
         
         <canvas id="hero-canvas"></canvas>
@@ -136,7 +136,7 @@
             </div>
         </div>
     </section>
-
+        <!--STATISTICS SECTION-->
     <section id="stats-section" class="py-16 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -163,16 +163,16 @@
         </div>
     </div>
 </section>
-
+        <!--ABOUT SECTION-->
 <section id="about" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         <div class="space-y-8 mb-12">
             <h3 class="text-3xl font-bold text-gray-900 mb-6 border-b pb-2">Why Dealogic Africa?</h3>
             
             <div class="grid md:grid-cols-3 gap-6">
                 
-                <div class="bg-red-50 p-6 rounded-xl shadow-lg border-t-4 border-red-900">
+                <div class="bg-red-50 p-6 rounded-xl shadow-lg border-t-4 border-red-900 scroll-animate-item opacity-0 transform translate-y-6 transition duration-700">
                     <span class="text-4xl font-extrabold text-red-900 block mb-2">01</span>
                     <h4 class="text-xl font-bold text-gray-900 mb-3">Client-Centric Approach</h4>
                     <p class="text-gray-700 text-sm">
@@ -180,7 +180,7 @@
                     </p>
                 </div>
 
-                <div class="bg-blue-50 p-6 rounded-xl shadow-lg border-t-4 border-blue-900">
+                <div class="bg-blue-50 p-6 rounded-xl shadow-lg border-t-4 border-blue-900 scroll-animate-item opacity-0 transform translate-y-6 transition duration-700">
                     <span class="text-4xl font-extrabold text-blue-900 block mb-2">02</span>
                     <h4 class="text-xl font-bold text-gray-900 mb-3">Expertise and Thought Leadership</h4>
                     <p class="text-gray-700 text-sm">
@@ -188,8 +188,8 @@
                     </p>
                 </div>
 
-                <div class="bg-gray-100 p-6 rounded-xl shadow-lg border-t-4 border-gray-400">
-                    <span class="text-4xl font-extrabold text-gray-700 block mb-2">03</span>
+                <div class="bg-red-50 p-6 rounded-xl shadow-lg border-t-4 border-red-900 scroll-animate-item opacity-0 transform translate-y-6 transition duration-700">
+                    <span class="text-4xl font-extrabold text-red-900 block mb-2">03</span>
                     <h4 class="text-xl font-bold text-gray-900 mb-3">Innovation and Digital Transformation</h4>
                     <p class="text-gray-700 text-sm">
                         Embracing the rapid pace of technological change, we prioritize <b> innovation and digital transformation </b>. We are experts in data analytics, artificial intelligence, and digital strategy to assist clients in staying ahead.
@@ -197,6 +197,8 @@
                 </div>
                 
             </div>
+        </div>
+        
         </div>
         <div class="grid lg:grid-cols-2 gap-12">
             
@@ -237,7 +239,7 @@
         </div>
         </div>
 </section>
-
+        <!--SERVICES SECTION-->
 <section id="services" class="py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
@@ -288,7 +290,7 @@
     </div>
 </section>
 
-
+        <!--TESTIMONIALS -->
 
     <section class="py-20 bg-gradient-to-r from-red-900 to-blue-900 text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -314,6 +316,7 @@
         </div>
     </section>
 
+        <!--OUR PARTNERS-->
     <section id="clients" class="py-12 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-gray-900 text-center mb-10">Our Trusted Partners</h2>
@@ -381,7 +384,7 @@
             </div>
         </div>
     </section>
-
+    <!--CONTACT CTA-->
 <section id="contact-cta" class="py-20 bg-gray-50">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="group bg-white p-8 md:p-12 lg:p-16 rounded-3xl shadow-2xl transition-all duration-500 hover:shadow-red-900/50 hover:scale-[1.01] border-t-8 border-red-900">
@@ -480,7 +483,7 @@
     </footer>
     <script type="module">
         
-        // --- 📊 STAT COUNTER LOGIC (FIXED) ---
+        // ---  STAT COUNTER LOGIC (FIXED) ---
         
         const counter = (element, target, prefix = '', suffix = '') => {
             const duration = 2000; // Animation duration in ms
@@ -812,6 +815,60 @@ window.addEventListener('load', handleScroll); // Check on load
         // Start the Canvas animation on load
         init();
         animate();
+
+        //why dealogic section
+        document.addEventListener('DOMContentLoaded', () => {
+        // 1. Target all elements with the animation class
+        const animatedElements = document.querySelectorAll('.scroll-animate-item');
+        
+        if ('IntersectionObserver' in window) {
+            
+            // 2. Observer settings: Trigger when 20% of the element is visible
+            const observerOptions = {
+                root: null, 
+                rootMargin: '0px',
+                threshold: 0.2 
+            };
+
+            // 3. Callback function when an element is observed
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        
+                        // Get the index of the element to determine the delay
+                        const index = Array.from(animatedElements).indexOf(element);
+
+                        // Calculate the staggered delay (e.g., 200ms * index)
+                        const delay = index * 600; 
+
+                        // Apply the animation after the calculated delay
+                        setTimeout(() => {
+                            // Remove hidden classes to reveal the element
+                            element.classList.remove('opacity-0', 'translate-y-6');
+                            element.classList.add('opacity-100');
+                        }, delay);
+
+                        // Stop observing the element once animated
+                        observer.unobserve(element);
+                    }
+                });
+            };
+
+            // 4. Create and attach the observer
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+            
+            animatedElements.forEach(element => {
+                observer.observe(element);
+            });
+
+        } else {
+            // Fallback: Ensure elements are visible if IntersectionObserver isn't supported
+            animatedElements.forEach(element => {
+                element.classList.remove('opacity-0', 'translate-y-6');
+            });
+        }
+    });
 
 
     </script>
