@@ -255,20 +255,19 @@
 </div>
 </section>
 
-     <!-- Your Photo Interstitial Section -->
     <section id="photo-interstitial" class="relative h-[80vh] bg-gray-900 overflow-hidden flex items-center justify-center">
+        
         <div id="floating-photo"
-             class="absolute inset-0 pointer-events-none opacity-0
-                    transition-all duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)]
-                    transform scale-95 translate-y-8
-                    flex items-center justify-center"
-             style="z-index: 10;">
+             class="fixed inset-0 pointer-events-none opacity-100 
+                    flex items-center justify-center"
+             style="z-index: 10;">
               
             <img 
                 src="images/Strategy.jpg" 
                 alt="Inspiring Dealogic Africa Moment" 
                 class="w-full h-full object-cover opacity-90"
             >
+            
             <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
                 <h2 class="text-4xl sm:text-6xl font-extrabold text-white text-center p-8 border-4 border-white">
                     Partnering for Growth?
@@ -712,34 +711,7 @@
 // 4. INTERSTITIAL PHOTO LOGIC (FINAL FIX)
 // =======================================================
 
-const interstitialSection = document.getElementById('photo-interstitial');
-const floatingPhoto = document.getElementById('floating-photo');
-
-if (interstitialSection && floatingPhoto && 'IntersectionObserver' in window) {
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-
-            if (entry.isIntersecting) {
-                floatingPhoto.classList.add("opacity-100", "scale-100", "translate-y-0");
-                floatingPhoto.classList.remove("opacity-0", "scale-95", "translate-y-8");
-
-                floatingPhoto.classList.add("fixed");
-                floatingPhoto.classList.remove("absolute");
-
-            } else {
-                floatingPhoto.classList.remove("opacity-100", "scale-100", "translate-y-0");
-                floatingPhoto.classList.add("opacity-0", "scale-95", "translate-y-8");
-
-                floatingPhoto.classList.remove("fixed");
-                floatingPhoto.classList.add("absolute");
-            }
-        });
-    }, { threshold: 0.15 });
-
-    observer.observe(interstitialSection);
-}
-
+ 
         // =======================================================
         // 5. INTERACTIVE CANVAS ANIMATION LOGIC (UNCHANGED)
         // =======================================================
