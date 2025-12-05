@@ -5,136 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Dealogic Africa</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         :root { --color-primary: #851717; --color-secondary: #1e3a8a; }
         html { scroll-behavior: smooth; }
-        /* Placeholder for your actual navbar CSS (optional if using Tailwind classes) */
         .header-spacer { padding-top: 5rem; /* Matches the h-20 (80px) height of the navbar */ }
+        /* Style for the fixed timeline markers to keep them visible when animating */
+        .relative.z-10 .w-12.h-12.absolute {
+            /* Ensure the marker's absolute position doesn't break due to animation transform */
+            transition: transform 0.5s ease;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900">
 
-        <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-red-900/90 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
-            <div class="flex-shrink-0">
-                <a href="index.html">
-                    <img id="logo-img" src="images/logo.jpeg" alt="DEALOGIC AFRICA Logo" class="h-16 w-auto">
-                </a>
-            </div>
-            
-            <div class="hidden md:flex space-x-8">
-                <a href="index.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Home</a>
-                <a href="about.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">About</a>
-                <a href="services/services.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Services</a>
-                <a href="blog/blog.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Insights</a>
-                <a href="contact.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Contact</a>
-            </div>
-
-            <button id="menuBtn" class="md:hidden text-white">
-                <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-                <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-    </div>
-
-    <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
-        <div class="px-4 py-6 space-y-4">
-            <a href="index.html" class="block text-gray-700 hover:text-red-900 font-medium">Home</a>
-            <a href="about.html" class="block text-gray-700 hover:text-red-900 font-medium">About</a>
-            <a href="services/services.html" class="block text-gray-700 hover:text-red-900 font-medium">Services</a>
-            <a href="blog/blog.html" class="block text-gray-700 hover:text-red-900 font-medium">Insights</a>
-            <a href="contact.html" class="block text-gray-700 hover:text-red-900 font-medium">Contact</a>
-        </div>
-    </div>
-</nav>
-    
-
-<section class="bg-white py-28 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-7xl mx-auto">
-
-        <!-- SECTION HEADING -->
-        <div class="mb-20" data-aos="fade-up" data-aos-duration="800">
-            <h1 class="text-5xl md:text-6xl font-black tracking-tight text-gray-900 mb-6">
-                About <span class="text-red-900">Dealogic Africa</span>
-            </h1>
-
-            <p class="text-xl md:text-2xl text-gray-600 max-w-4xl leading-relaxed">
-                A specialized financial and business advisory firm committed to supporting 
-                <b>Small and Micro Enterprises (SMEs)</b> across Africa and globally.  
-                We blend deep expertise with innovation to drive sustainable economic transformation.
-            </p>
-        </div>
-
-        <!-- MISSION & VISION GRID -->
-        <div class="grid md:grid-cols-2 gap-12">
-
-            <!-- MISSION CARD -->
-            <div 
-                class="p-10 bg-red-50 border-l-8 border-red-900 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300"
-                data-aos="fade-right"
-                data-aos-duration="900"
-            >
-                <div class="flex items-start mb-6">
-                    <svg class="w-12 h-12 text-red-900 mr-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                    </svg>
-                    <h2 class="text-3xl font-bold text-red-900">Our Mission</h2>
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-red-900/90 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0">
+                    <a href="index.html">
+                        <img id="logo-img" src="images/logo.jpeg" alt="DEALOGIC AFRICA Logo" class="h-16 w-auto">
+                    </a>
+                </div>
+                
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Home</a>
+                    <a href="about.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">About</a>
+                    <a href="services/services.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Services</a>
+                    <a href="blog/blog.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Insights</a>
+                    <a href="contact.html" class="nav-link text-white hover:text-red-200 font-medium transition-colors">Contact</a>
                 </div>
 
-                <p class="text-lg md:text-xl text-gray-800 font-semibold italic mb-4">
-                    To provide <b>innovative, fresh, and strategic financial & business advisory services</b> to SMEs.
-                </p>
+                <button id="menuBtn" class="md:hidden text-white">
+                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
 
-                <p class="text-gray-700 leading-relaxed">
+        <div id="mobileMenu" class="hidden md:hidden bg-white shadow-lg">
+            <div class="px-4 py-6 space-y-4">
+                <a href="index.html" class="block text-gray-700 hover:text-red-900 font-medium">Home</a>
+                <a href="about.html" class="block text-gray-700 hover:text-red-900 font-medium">About</a>
+                <a href="services/services.html" class="block text-gray-700 hover:text-red-900 font-medium">Services</a>
+                <a href="blog/blog.html" class="block text-gray-700 hover:text-red-900 font-medium">Insights</a>
+                <a href="contact.html" class="block text-gray-700 hover:text-red-900 font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <section class="relative bg-gradient-to-br from-red-900 to-blue-900 text-white py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto text-center z-10 relative mt-20" data-aos="fade-down" data-aos-duration="1000">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">About Dealogic Africa</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto font-light drop-shadow-md">
+                A specialized financial and business advisory firm committed to supporting 
+                <b>Small and Micro Enterprises (SMEs)</b> across Africa and globally.  
+            </p>
+        </div>
+        <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.2\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E');"></div>
+    </section>
+
+    <section class="bg-white py-5 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-7xl mx-auto text-center mb-10" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="text-4xl font-extrabold text-blue-900 mb-5 border-b-4 border-red-900 inline-block pb-2">Our Mission</h2>
+                <p class="text-xl text-gray-600 mb-5 max-w-3xl mx-auto">
+
+                    To provide <b>innovative, fresh, and strategic financial & business advisory services</b> to SMEs.    
+
+                </p>
+                <p class="text-xl text-gray-700 leading-relaxed">
                     We serve as a critical bridge between SMEs and development partners—MFIs, Banks, SACCOs, 
                     and other stakeholders—ensuring growth, accessibility, and top-tier professional support.
                 </p>
             </div>
+            <div class="max-w-7xl mx-auto text-center mb-5" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+                <h2 class="text-4xl font-extrabold text-blue-900 mb-5 border-b-4 border-red-900 inline-block pb-2">Our Vision</h2>
+                <p class="text-xl text-gray-600 mb-5 max-w-3xl mx-auto">
 
-            <!-- VISION CARD -->
-            <div 
-                class="p-10 bg-blue-50 border-l-8 border-blue-900 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300"
-                data-aos="fade-left"
-                data-aos-duration="900"
-            >
-                <div class="flex items-start mb-6">
-                    <svg class="w-12 h-12 text-blue-900 mr-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                    </svg>
-                    <h2 class="text-3xl font-bold text-blue-900">Our Vision</h2>
-                </div>
-
-                <p class="text-lg md:text-xl text-gray-800 font-semibold italic mb-4">
                     To <b>exceed client expectations</b> through unmatched customer experience and enhanced value.
-                </p>
 
-                <p class="text-gray-700 leading-relaxed">
-                    We aim to position our expert team as <b>industry thought leaders</b> driving Africa’s 
+                </p>
+                <p class="text-xl text-gray-700 leading-relaxed">
+
+                    We aim to position our expert team as <b>industry thought leaders</b> driving Africa’s
+
                     economic advancement while ensuring excellence and consistency throughout the advisory process.
+
                 </p>
             </div>
-
         </div>
+    </section>
 
-    </div>
-</section>
-
-        <!--MEET OUR TEAM-->
- <section class="bg-white py-20 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto text-center">
-            <h2 class="text-4xl font-extrabold text-blue-900 mb-12 border-b-4 border-red-900 inline-block pb-2">Meet Our Expert Team</h2>
+    <section class="bg-white px-4 sm:px-6 lg:px-8 py-10">
+        <div class="max-w-7xl mx-auto mb-5 text-center">
+            <h2 class="text-4xl font-extrabold text-blue-900 mb-5 border-b-4 border-red-900 inline-block pb-2" data-aos="fade-up">Meet Our Expert Team</h2>
             <p class="text-xl text-gray-600 mb-10 max-w-3xl mx-auto">
-                Our multi-talented team comprises seasoned consultants and specialists with **40 years of combined experience** across diverse sectors and global markets.
+
+                Our multi-talented team comprises seasoned consultants and specialists with <b> years of combined experience </b> across diverse sectors and global markets.
+
             </p>
             
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 
-                <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-4 border-red-900">
+                <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-4 border-red-900" data-aos="zoom-in" data-aos-delay="200">
                     <div class="w-32 h-32 mx-auto mb-4 bg-red-200 rounded-full flex items-center justify-center text-gray-700 font-bold text-2xl">
                         [Photo]
                     </div>
@@ -143,7 +124,7 @@
                     <p class="text-xs text-gray-500">Expert in Capital Raising and M&A Advisory. Leads cross-border institutional set-ups.</p>
                 </div>
 
-                <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-4 border-blue-900">
+                <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-4 border-blue-900" data-aos="zoom-in" data-aos-delay="300">
                     <div class="w-32 h-32 mx-auto mb-4 bg-blue-200 rounded-full flex items-center justify-center text-gray-700 font-bold text-2xl">
                         [Photo]
                     </div>
@@ -152,7 +133,7 @@
                     <p class="text-xs text-gray-500">Specializes in Digital Transformation and Strategy Formulation across emerging markets.</p>
                 </div>
 
-                <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-4 border-red-900">
+                <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-4 border-red-900" data-aos="zoom-in" data-aos-delay="400">
                     <div class="w-32 h-32 mx-auto mb-4 bg-red-200 rounded-full flex items-center justify-center text-gray-700 font-bold text-2xl">
                         [Photo]
                     </div>
@@ -161,7 +142,7 @@
                     <p class="text-xs text-gray-500">Ensures compliance and financial efficiency, mitigating risk across African tax regimes.</p>
                 </div>
                 
-                <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-4 border-blue-900">
+                <div class="p-6 bg-gray-50 rounded-xl shadow-xl border-t-4 border-blue-900" data-aos="zoom-in" data-aos-delay="500">
                     <div class="w-32 h-32 mx-auto mb-4 bg-blue-200 rounded-full flex items-center justify-center text-gray-700 font-bold text-2xl">
                         [Photo]
                     </div>
@@ -172,252 +153,335 @@
                 
             </div>
             
-            <a href="contact.html" class="mt-12 inline-block px-8 py-4 text-white bg-red-900 hover:bg-red-800 font-semibold rounded-full shadow-lg transition duration-300">
+            <a href="contact.html" class="mt-12 inline-block px-8 py-4 text-white bg-red-900 hover:bg-red-800 font-semibold rounded-full shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="600">
                 Contact Our Experts
             </a>
 
         </div>
     </section>
 
-
-    <section class="bg-gray-100 py-20 px-4 sm:px-6 lg:px-8">
+    <section class="bg-gray-100 py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl font-extrabold text-red-900 mb-12 text-center">Our Track Record In a Snap Shot</h2>
-            
-            <div class="grid lg:grid-cols-3 gap-10">
-                <div class="lg:col-span-1 space-y-6">
-                    <div class="p-8 bg-blue-900 text-white rounded-xl shadow-lg">
-                        <p class="text-sm font-light uppercase">Amounts in KES raised for our clients in the last 3 years</p>
-                        <p class="text-5xl font-extrabold mt-2">4.3 Billion</p>
-                        <p class="text-sm mt-4">**90%** of our fund raising deals take less than 2 months to close!</p>
+            <h2 class="text-4xl font-extrabold text-blue-900 mb-12 text-center" data-aos="fade-up">Our Track Record In a Snap Shot</h2>
+
+            <div class="space-y-10">
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    
+                    <div class="bg-gradient-to-br from-white via-[#FDDDE0]/20 to-[#B60C1E]/40 border border-red-300 rounded-3xl p-6 sm:p-10 shadow-sm" data-aos="fade-right" data-aos-delay="100">
+                        <div>
+                            <p class="text-5xl font-extrabold mt-2">4.3 Billion</p>
+                        </div>
+                        <p class="text-sm mt-4 ">Amounts in KES raised for our clients in the last 3 years</p>
                     </div>
-                    <div class="p-8 bg-yellow-600 text-white rounded-xl shadow-lg">
-                        <p class="text-sm font-light uppercase">Combined experience of the team</p>
-                        <p class="text-5xl font-extrabold mt-2">40 Years</p>
+                    
+                    <div class="bg-gradient-to-br from-white via-[#FDDDE0]/20 to-[#B60C1E]/40 border border-red-300 rounded-3xl p-6 sm:p-10 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                        <div>
+                            <p class="text-5xl font-extrabold mt-2">40 Years</p>
+                        </div>
+                        <p class="text-sm mt-4 ">Combined experience of the team</p>
+                        <div></div> 
                     </div>
-                    <div class="p-8 bg-green-700 text-white rounded-xl shadow-lg">
-                        <p class="text-sm font-light uppercase">Countries</p>
-                        <p class="text-5xl font-extrabold mt-2">9 Countries</p>
+                    
+                    <div class="bg-gradient-to-br from-white via-[#FDDDE0]/20 to-[#B60C1E]/40 border border-red-300 rounded-3xl p-6 sm:p-10 shadow-sm" data-aos="fade-left" data-aos-delay="100">
+                        <div>
+                            <p class="text-5xl font-extrabold mt-2">9 Countries</p>
+                        </div>
                         <p class="text-sm mt-4">Dealogic has helped clients in 9 countries.</p>
                     </div>
                 </div>
 
-                <div class="lg:col-span-2 bg-white p-10 rounded-xl shadow-xl">
-                    <h3 class="text-3xl font-bold text-blue-900 mb-6">Selected Transactions</h3>
+                <div class="bg-white p-6 sm:p-10 rounded-xl shadow-2xl border-t-4 border-red-900" 
+                    x-data="{ activeTab: 'debt' }" data-aos="fade-up" data-aos-delay="400">
+                    
+                    <h3 class="text-3xl font-bold text-blue-900 mb-6 border-b-2 pb-2">Selected Transactions</h3>
 
-                    <div class="mb-6">
-                        <h4 class="text-xl font-semibold text-red-900 mb-2">Debt Financings</h4>
-                        <ul class="list-disc list-inside space-y-1 text-gray-700">
-                            <li>Arranged Working Capital Facility ($10M)</li>
-                            <li>Arranged financing for Industrial park ($120M)</li>
-                            <li>Arranged receivables financing ($100M)</li>
-                            <li>Arranged revolving Line of Credit for Transport Company ($1.5M)</li>
-                            <li>Arranged financing for leasing company ($400M)</li>
-                            <li>Arranged Working Capital Facility ($7.5M)</li>
-                        </ul>
+                    <div class="mb-4 border border-gray-200 rounded-lg overflow-hidden">
+                        
+                        <button class="w-full text-left flex justify-between items-center text-xl font-bold text-red-900 p-4 transition duration-150"
+                                :class="activeTab === 'debt' ? 'bg-red-100' : 'bg-red-50 hover:bg-red-100'"
+                                @click="activeTab = (activeTab === 'debt' ? null : 'debt')">
+                            Debt Financings
+                            <span class="text-2xl transform transition duration-300"
+                                :class="{ 'rotate-45': activeTab === 'debt' }">+</span> 
+                        </button>
+
+                        <div class="p-4 bg-white" 
+                            x-show="activeTab === 'debt'" 
+                            x-collapse>
+                            <ul class="space-y-2">
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Arranged Working Capital Facility ($10M)</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Arranged financing for Industrial park ($120M)</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Arranged receivables financing ($100M)</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Arranged revolving Line of Credit for Transport Company ($1.5M)</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Arranged financing for leasing company ($400M)</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Arranged Working Capital Facility ($7.5M)</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div class="mb-6">
-                        <h4 class="text-xl font-semibold text-red-900 mb-2">Acquisitions</h4>
-                        <ul class="list-disc list-inside space-y-1 text-gray-700">
-                            <li>Acquisition of Hotel services Company ($40M)</li>
-                            <li>Acquisition of Commercial property ($12M)</li>
-                            <li>Acquisition of Computer Software Services Company ($5M)</li>
-                            <li>Acquisition of Banking / Financial Services Company ($35M)</li>
-                        </ul>
+                    <div class="mb-4 border border-gray-200 rounded-lg overflow-hidden">
+                        
+                        <button class="w-full text-left flex justify-between items-center text-xl font-bold text-red-900 p-4 transition duration-150"
+                                :class="activeTab === 'acquisitions' ? 'bg-red-100' : 'bg-red-50 hover:bg-red-100'"
+                                @click="activeTab = (activeTab === 'acquisitions' ? null : 'acquisitions')">
+                            Acquisitions
+                            <span class="text-2xl transform transition duration-300"
+                                :class="{ 'rotate-45': activeTab === 'acquisitions' }">+</span>
+                        </button>
+
+                        <div class="p-4 bg-white" 
+                            x-show="activeTab === 'acquisitions'"
+                            x-collapse>
+                            <ul class="space-y-2">
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Acquisition of Hotel services Company ($40M)</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Acquisition of Commercial property ($12M)</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Acquisition of Computer Software Services Company ($5M)</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Acquisition of Banking / Financial Services Company ($35M)</li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div>
-                        <h4 class="text-xl font-semibold text-red-900 mb-2">Financial Advisory Services</h4>
-                        <ul class="list-disc list-inside space-y-1 text-gray-700">
-                            <li>Financial & Strategic Advisory for Fortune Credit</li>
-                            <li>Financial & Strategic Advisory for Fincredit Uganda</li>
-                            <li>Financial & Strategic Advisory for LOLC Microfinance Kenya</li>
-                            <li>Financial & Strategic Advisory for Sumac Microfinance Bank</li>
-                        </ul>
+                    <div class="mb-4 border border-gray-200 rounded-lg overflow-hidden">
+                        
+                        <button class="w-full text-left flex justify-between items-center text-xl font-bold text-red-900 p-4 transition duration-150"
+                                :class="activeTab === 'advisory' ? 'bg-red-100' : 'bg-red-50 hover:bg-red-100'"
+                                @click="activeTab = (activeTab === 'advisory' ? null : 'advisory')">
+                            Financial Advisory Services
+                            <span class="text-2xl transform transition duration-300"
+                                :class="{ 'rotate-45': activeTab === 'advisory' }">+</span>
+                        </button>
+
+                        <div class="p-4 bg-white" 
+                            x-show="activeTab === 'advisory'"
+                            x-collapse>
+                            <ul class="space-y-2">
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Financial & Strategic Advisory for Fortune Credit</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Financial & Strategic Advisory for Fincredit Uganda</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Financial & Strategic Advisory for LOLC Microfinance Kenya</li>
+                                <li class="p-3 bg-gray-50 border-l-4 border-red-300 text-gray-700 rounded">Financial & Strategic Advisory for Sumac Microfinance Bank</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    ---
-
-    <section class="bg-white py-20 px-4 sm:px-6 lg:px-8">
+    <section class="bg-white py-10 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto text-center">
-            <h2 class="text-4xl font-extrabold text-blue-900 mb-12">Our Transaction Flow Timeline</h2>
-            <p class="text-lg text-gray-600 mb-10">
+            <h2 class="text-4xl font-extrabold text-blue-900 mb-5" data-aos="fade-up">Our Transaction Flow Timeline </h2>
+            <p class="text-lg text-gray-600 mb-10" data-aos="fade-up" data-aos-delay="100">
                 A summary of our proposed work plan for undertaking a typical advisory assignment, ensuring clarity and efficiency.
             </p>
             
-            <div class="flex justify-center items-center">
-                            </div>
+            <div class="relative">
+                
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gray-300 transform -translate-x-1/2 z-0"></div>
 
-            <div class="mt-12 grid md:grid-cols-3 gap-8 text-left">
-                <div class="p-6 border-l-4 border-red-900 shadow-md">
-                    <span class="text-xl font-bold text-red-900 block mb-2">Step 1 (WK 1)</span>
-                    <p class="text-gray-700">Initial client consultation, preparation and refinement of NDA and Mandates.</p>
-                </div>
-                <div class="p-6 border-l-4 border-blue-900 shadow-md">
-                    <span class="text-xl font-bold text-blue-900 block mb-2">Step 2 (WK 2) & 3</span>
-                    <p class="text-gray-700">Review of company information documents and Analysis of financials, distribution/roadshows.</p>
-                </div>
-                <div class="p-6 border-l-4 border-red-900 shadow-md">
-                    <span class="text-xl font-bold text-red-900 block mb-2">Step 4, 5, & 6</span>
-                    <p class="text-gray-700">Submission of draft term sheets, finalization of term sheets/due diligence, and validation of documents/drawdown.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-y-12 md:gap-x-12">
+                    
+                    <div class="flex md:justify-end" data-aos="fade-right">
+                        <div class="flex flex-col items-center md:items-end w-full md:w-11/12 relative z-10 text-center md:text-right">
+                            <div class="w-12 h-12 bg-red-900 rounded-full flex items-center justify-center text-white text-xl font-bold mb-4 flex-shrink-0 absolute md:right-[-45px] top-0 shadow-lg">1</div>
+                             <div class="p-6 bg-red-50 border-t-4 border-red-900 shadow-xl rounded-lg h-full w-full">
+
+                                <span class="text-xl font-bold text-red-900 block mb-2">Initial client consultation and preparation of NDA and Mandates</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div></div>
+
+                    <div></div>
+                    <div class="flex md:justify-start" data-aos="fade-left">
+                        <div class="flex flex-col items-center md:items-start w-full md:w-11/12 relative z-10 text-center md:text-left">
+                            <div class="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center text-white text-xl font-bold mb-4 flex-shrink-0 absolute md:left-[-45px] top-0 shadow-lg">2</div>
+                            <div class="p-6 bg-blue-50 border-t-4 border-blue-900 shadow-xl rounded-lg h-full w-full">
+
+                                <span class="text-xl font-bold text-blue-900 block mb-2">Review of all company information documents for readiness and completeness.</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex md:justify-end" data-aos="fade-right">
+                        <div class="flex flex-col items-center md:items-end w-full md:w-11/12 relative z-10 text-center md:text-right">
+                            <div class="w-12 h-12 bg-red-900 rounded-full flex items-center justify-center text-white text-xl font-bold mb-4 flex-shrink-0 absolute md:right-[-45px] top-0 shadow-lg">3</div>
+                           <div class="p-6 bg-red-50 border-t-4 border-red-900 shadow-xl rounded-lg h-full w-full">
+
+                                <span class="text-xl font-bold text-red-900 block mb-2">Thorough analysis of financials to prepare investment documents for distribution</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div></div>
+                    
+                    <div></div>
+                    <div class="flex md:justify-start" data-aos="fade-left">
+                        <div class="flex flex-col items-center md:items-start w-full md:w-11/12 relative z-10 text-center md:text-left">
+                            <div class="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center text-white text-xl font-bold mb-4 flex-shrink-0 absolute md:left-[-45px] top-0 shadow-lg">4</div>
+                            <div class="p-6 bg-blue-50 border-t-4 border-blue-900 shadow-xl rounded-lg h-full w-full">
+
+                                <span class="text-xl font-bold text-blue-900 block mb-2">Submission of draft term sheets to prospective financiers/investors.</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex md:justify-end" data-aos="fade-right">
+                        <div class="flex flex-col items-center md:items-end w-full md:w-11/12 relative z-10 text-center md:text-right">
+                            <div class="w-12 h-12 bg-red-900 rounded-full flex items-center justify-center text-white text-xl font-bold mb-4 flex-shrink-0 absolute md:right-[-45px] top-0 shadow-lg">5</div>
+                            <div class="p-6 bg-red-50 border-t-4 border-red-900 shadow-xl rounded-lg h-full w-full">
+
+                                <span class="text-xl font-bold text-red-900 block mb-2">Finalization of term sheets and execution of due diligence processes.</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div></div>
+
+                    <div></div>
+                    <div class="flex md:justify-start" data-aos="fade-left">
+                        <div class="flex flex-col items-center md:items-start w-full md:w-11/12 relative z-10 text-center md:text-left">
+                            <div class="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center text-white text-xl font-bold mb-4 flex-shrink-0 absolute md:left-[-45px] top-0 shadow-lg">6</div>
+                            <div class="p-6 bg-blue-50 border-t-4 border-blue-900 shadow-xl rounded-lg h-full w-full">
+
+                                <span class="text-xl font-bold text-blue-900 block mb-2">Validation of final documents leading to drawdown of funds and closing</span>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
 
 <footer class="bg-gradient-to-br from-red-900 via-red-900 to-blue-900 text-white pt-16 pb-8 border-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
 
-            <div class="md:col-span-1">
-                <div class="mb-4 border-b-2 border-white/50 pb-2 inline-block">
-                    <img src="images/logo.jpeg" alt="Dealogic Africa Logo" class="h-20 w-auto filter brightness-150">
-                </div>
-                <p class="text-red-100 text-sm mb-4">
-                    Strategic financial advisory and capital solutions for businesses driving Africa's economic transformation. We partner with organizations to unlock growth potential.
-                </p>
-                <div class="flex space-x-4">
-                    <a href="#" class="text-white hover:text-yellow-400 transition-colors">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.13-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.356 7 2.356v6.879z"/></svg>
-                    </a>
-                    <a href="#" class="text-white hover:text-yellow-400 transition-colors">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.799-1.574 2.164-2.722-.951.555-2.005.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-3.593 0-6.492 2.901-6.492 6.492 0 .511.054 1.011.161 1.493-5.409-.271-10.218-2.864-13.401-6.839-.567.973-.895 2.1-.895 3.328 0 2.251 1.149 4.249 2.895 5.421-1.001-.033-1.944-.309-2.75-.765v.083c0 3.153 2.24 5.766 5.207 6.368-.544.148-1.115.225-1.701.225-.418 0-.828-.042-1.227-.119.832 2.571 3.208 4.45 6.035 4.492-2.231 1.74-5.047 2.784-8.09 2.784-.52 0-1.036-.026-1.545-.09.117.986.386 1.944.801 2.854 3.069 5.378 7.234 8.643 12.023 8.643 13.684 0 21.142-11.391 21.142-21.142 0-.315-.011-.63-.03-.941.875-.63 1.637-1.42 2.245-2.316z"/></svg>
-                    </a>
-                </div>
+        <div class="md:col-span-1">
+            <div class="mb-4 border-b-2 border-white/50 pb-2 inline-block">
+                <img src="images/logo.jpeg" alt="Dealogic Africa Logo" class="h-20 w-auto filter brightness-150">
             </div>
-
-                <div>
-                    <h3 class="text-xl font-semibold text-white mb-6 border-b-2 border-white/50 pb-2">Quick Links</h3>
-                    <ul class="space-y-3">
-                        <li><a href="index.html" class="text-red-100 hover:text-yellow-400 transition-colors">Home</a></li>
-                        <li><a href="about.html" class="text-red-100 hover:text-yellow-400 transition-colors">About Us</a></li>
-                        <li><a href="contact.html" class="text-red-100 hover:text-yellow-400 transition-colors">Contact</a></li>
-                       
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-semibold text-white mb-6 border-b-2 border-white/50 pb-2">Our Core Services</h3>
-                    <ul class="space-y-3">
-                        <li><a href="services/auditing.html" class="text-red-100 hover:text-yellow-400 transition-colors">Audit and Tax Advisory</a></li>
-                        <li><a href="services/coaching.html" class="text-red-100 hover:text-yellow-400 transition-colors">Professional Coaching</a></li>
-                        <li><a href="services/strategy.html" class="text-red-100 hover:text-yellow-400 transition-colors">Strategy Formulation</a></li>
-                        <li><a href="services/debt_equity.html" class="text-red-100 hover:text-yellow-400 transition-colors">Debt and Equity Fundraising</a></li>
-                        <li><a href="services/institution.html" class="text-red-100 hover:text-yellow-400 transition-colors">Institutional Set-up and Support</a></li>
-                        <li><a href="services/partnership.html" class="text-red-100 hover:text-yellow-400 transition-colors">Creating Strategic Business Partnerships</a></li>
-                        <li><a href="services/mergers.html" class="text-red-100 hover:text-yellow-400 transition-colors">Mergers and Acquisitions</a></li>
-                        <li><a href="services/services.html" class="text-red-100 hover:text-yellow-400 transition-colors">All Services</a></li>
-
-                    </ul>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-semibold text-white mb-6 border-b-2 border-white/50 pb-2">Insights & Resources</h3>
-                    <ul class="space-y-3">
-                        <li><a href="blog/blog.html" class="text-red-100 hover:text-yellow-400 transition-colors">Blog</a></li>
-                        <li><a href="blog/article1.html" class="text-red-100 hover:text-yellow-400 transition-colors">Latest Article</a></li>
-                       </ul>
-                </div>
-            </div>
-
-            <div class="mt-16 border-t border-red-800 pt-8">
-                <p class="text-center text-red-100 text-sm">
-                    &copy; 2025 Dealogic Africa. All rights reserved. | Empowering African Growth.
-                </p>
+            <p class="text-red-100 text-sm mb-4">
+                Strategic financial advisory and capital solutions for businesses driving Africa's economic transformation. We partner with organizations to unlock growth potential.
+            </p>
+            <div class="flex space-x-4">
+                <a href="#" class="text-white hover:text-yellow-400 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.13-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.356 7 2.356v6.879z"/></svg>
+                </a>
+                <a href="#" class="text-white hover:text-yellow-400 transition-colors">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.799-1.574 2.164-2.722-.951.555-2.005.959-3.127 1.184-.897-.957-2.178-1.555-3.594-1.555-3.593 0-6.492 2.901-6.492 6.492 0 .511.054 1.011.161 1.493-5.409-.271-10.218-2.864-13.401-6.839-.567.973-.895 2.1-.895 3.328 0 2.251 1.149 4.249 2.895 5.421-1.001-.033-1.944-.309-2.75-.765v.083c0 3.153 2.24 5.766 5.207 6.368-.544.148-1.115.225-1.701.225-.418 0-.828-.042-1.227-.119.832 2.571 3.208 4.45 6.035 4.492-2.231 1.74-5.047 2.784-8.09 2.784-.52 0-1.036-.026-1.545-.09.117.986.386 1.944.801 2.854 3.069 5.378 7.234 8.643 12.023 8.643 13.684 0 21.142-11.391 21.142-21.142 0-.315-.011-.63-.03-.941.875-.63 1.637-1.42 2.245-2.316z"/></svg>
+                </a>
             </div>
         </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-6 border-b-2 border-white/50 pb-2">Quick Links</h3>
+                <ul class="space-y-3">
+                    <li><a href="index.html" class="text-red-100 hover:text-yellow-400 transition-colors">Home</a></li>
+                    <li><a href="about.html" class="text-red-100 hover:text-yellow-400 transition-colors">About Us</a></li>
+                    <li><a href="contact.html" class="text-red-100 hover:text-yellow-400 transition-colors">Contact</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-6 border-b-2 border-white/50 pb-2">Our Core Services</h3>
+                <ul class="space-y-3">
+                    <li><a href="services/auditing.html" class="text-red-100 hover:text-yellow-400 transition-colors">Audit and Tax Advisory</a></li>
+                    <li><a href="services/coaching.html" class="text-red-100 hover:text-yellow-400 transition-colors">Professional Coaching</a></li>
+                    <li><a href="services/strategy.html" class="text-red-100 hover:text-yellow-400 transition-colors">Strategy Formulation</a></li>
+                    <li><a href="services/debt_equity.html" class="text-red-100 hover:text-yellow-400 transition-colors">Debt and Equity Fundraising</a></li>
+                    <li><a href="services/institution.html" class="text-red-100 hover:text-yellow-400 transition-colors">Institutional Set-up and Support</a></li>
+                    <li><a href="services/partnership.html" class="text-red-100 hover:text-yellow-400 transition-colors">Creating Strategic Business Partnerships</a></li>
+                    <li><a href="services/mergers.html" class="text-red-100 hover:text-yellow-400 transition-colors">Mergers and Acquisitions</a></li>
+                    <li><a href="services/services.html" class="text-red-100 hover:text-yellow-400 transition-colors">All Services</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-semibold text-white mb-6 border-b-2 border-white/50 pb-2">Insights & Resources</h3>
+                <ul class="space-y-3">
+                    <li><a href="blog/blog.html" class="text-red-100 hover:text-yellow-400 transition-colors">Blog</a></li>
+                    <li><a href="blog/article1.html" class="text-red-100 hover:text-yellow-400 transition-colors">Latest Article</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-16 border-t border-red-800 pt-8">
+            <p class="text-center text-red-100 text-sm">
+                &copy; 2025 Dealogic Africa. All rights reserved. | Empowering African Growth.
+            </p>
+        </div>
+    </div>
 </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
-          // --- 🌐 NAVIGATION LOGIC ---
+        // --- 🌐 NAVIGATION LOGIC (Existing) ---
         const navbar = document.getElementById('navbar');
-        const logo = document.getElementById('logo');
+        const logo = document.getElementById('logo-img'); 
         const navLinks = document.querySelectorAll('.nav-link');
         const menuBtn = document.getElementById('menuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         const menuIcon = document.getElementById('menuIcon');
         const closeIcon = document.getElementById('closeIcon');
 
- // Sticky Navbar Effect
-const handleScroll = () => {
-    // Select elements (assuming these are defined elsewhere in your script)
-    const navbar = document.getElementById('navbar');
-    // Using logo-img for the new logo element
-    const logo = document.getElementById('logo-img'); 
-    const navLinks = document.querySelectorAll('.nav-link');
-    const menuBtn = document.getElementById('menuBtn');
+        // Sticky Navbar Effect
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                // --- Scrolled Down State: Navbar background white, Text Red, Hover Blue ---
+                navbar.classList.add('bg-white', 'shadow-xl');
+                navbar.classList.remove('bg-red-900/90');
+                
+                // Change link text color (assuming you want red/blue links on white)
+                navLinks.forEach(link => {
+                    link.classList.add('text-red-900');
+                    link.classList.remove('text-white');
+                    link.classList.add('hover:text-blue-900');
+                    link.classList.remove('hover:text-red-200');
+                });
 
-    if (window.scrollY > 50) {
-        // --- Scrolled Down State: Navbar background white, Text Red, Hover Blue ---
-        
-        // 1. Change navbar background
-        navbar.classList.add('bg-white', 'shadow-xl');
-        navbar.classList.remove('bg-red-900/90');
-        
-        // 2. Change logo text/image color (assuming you want red)
-        // If logo is a text <h1>, use text-red-900
-        // If logo is an <img>, you'll need a different method (like swapping the image source or using CSS filter, which requires additional CSS/JS)
-        // For simplicity, if it's the logo image, we'll skip color change here, 
-        // but if it's the old <h1>, you would use: logo.classList.add('text-red-900');
-        
-        // 3. Change navigation links to text-red-900 (your primary red) and hover:text-blue-900 (your secondary blue)
-        navLinks.forEach(link => {
-            // Remove original classes (text-white, hover:text-red-200)
-            link.classList.remove('text-white', 'hover:text-red-200');
-            // Add new classes (text-red-900, hover:text-blue-900)
-            link.classList.add('text-red-900', 'hover:text-blue-900');
-        });
-        
-        // 4. Change menu button icon color (text-gray-700 works well on white background)
-        menuBtn.classList.remove('text-white');
-        menuBtn.classList.add('text-gray-700');
-        
-    } else {
-        // --- Original State (At the Top): Navbar background red, Text White, Hover Lighter Red ---
+                // Change menu button color (to red-900)
+                menuBtn.classList.add('text-red-900');
+                menuBtn.classList.remove('text-white');
+            } else {
+                // --- Top of Page State: Navbar background red-900/90, Text White, Hover Red-200 ---
+                navbar.classList.remove('bg-white', 'shadow-xl');
+                navbar.classList.add('bg-red-900/90');
 
-        // 1. Restore navbar background
-        navbar.classList.remove('bg-white', 'shadow-xl');
-        navbar.classList.add('bg-red-900/90');
-        
-        // 2. Restore logo text/image color
-        // If logo is an <h1>, you would use: logo.classList.remove('text-red-900');
-        
-        // 3. Restore navigation links to text-white and hover:text-red-200
-        navLinks.forEach(link => {
-            // Remove scrolled classes (text-red-900, hover:text-blue-900)
-            link.classList.remove('text-red-900', 'hover:text-blue-900');
-            // Add original classes (text-white, hover:text-red-200)
-            link.classList.add('text-white', 'hover:text-red-200');
-        });
+                // Change link text color
+                navLinks.forEach(link => {
+                    link.classList.remove('text-red-900');
+                    link.classList.add('text-white');
+                    link.classList.remove('hover:text-blue-900');
+                    link.classList.add('hover:text-red-200');
+                });
+                
+                // Change menu button color (to white)
+                menuBtn.classList.remove('text-red-900');
+                menuBtn.classList.add('text-white');
+            }
+        };
 
-        // 4. Restore menu button icon color
-        menuBtn.classList.remove('text-gray-700');
-        menuBtn.classList.add('text-white');
-    }
-};
-
-window.addEventListener('scroll', handleScroll);
-window.addEventListener('load', handleScroll); // Check on load
+        window.addEventListener('scroll', handleScroll);
+        
         // Mobile Menu Toggle
         menuBtn.addEventListener('click', () => {
-            const isExpanded = mobileMenu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden', !isExpanded);
-            closeIcon.classList.toggle('hidden', isExpanded);
-
-            // If menu is closed, re-apply the correct nav bar colors based on scroll position
-            if (isExpanded) {
-                handleScroll();
-            } else {
-                // If menu is open, force white text/icons for better visibility over the mobile menu background
-                menuBtn.classList.add('text-red-700');
-                menuBtn.classList.remove('text-white');
-            }
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
         });
 
+        // 3. Initialize AOS
+        AOS.init({
+            duration: 700, // global duration of the animation
+            once: true,     // whether animation should happen only once - default is false
+        });
     </script>
 </body>
 </html>
